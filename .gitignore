@@ -1,0 +1,30 @@
+# Python temporary files
+*.pyc
+.coverage
+.eggs
+.ipynb_checkpoints
+.pytest_cache/
+__pycache__
+pycompwa.egg-info
+
+# Python virtual environments
+venv/
+
+# I/O files
+*.client*
+*.dat
+*.log
+*.out
+*.pdf
+*.root
+*.server
+
+# Build files
+*.[aod]
+*.so
+bin/
+lib/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
