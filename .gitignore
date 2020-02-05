@@ -19,6 +19,9 @@ venv/
 *.root
 *.server
 
+# Unit testing
+htmlcov/
+
 # Build files
 *.[aod]
 *.so
