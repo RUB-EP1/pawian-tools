@@ -35,3 +35,17 @@ Next steps are:
 You can see that you are in a 'virtual environment' by typing `which python` or `python --version`—you are now using a Python interpreter of the environment.
 
 Note that you can easily switch back with `conda deactivate`. And if you want to trash this environment, just run `conda remove --name pawian --all`.
+
+
+## Contribute
+
+Welcome to fork and submit pull/merge requests!
+
+### Some recommended packages for Python development
+
+- [`pytest`](https://docs.pytest.org/en/latest/): Run `pytest` in the pyPawian folder to run all `test_*.py` files
+- [`autopep8`](https://pypi.org/project/autopep8/0.8/): Auto-format your Python code
+- [`pylint`](https://www.pylint.org/): Scan your code for naming conventions and proper use of Python
+- [`rope`](https://github.com/python-rope/rope): Python refactoring tools
+
+All can be installed with Conda (`conda install <package>`) if you have added Conda-Forge as a channel. Of course, they are also available through `pip install`.
