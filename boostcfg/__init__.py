@@ -12,7 +12,7 @@ __author__ = "Remco de Boer"
 __institution__ = "Ruhr-Universität Bochum"
 
 
-__all__ = ["lineparser", "BoostConfigParser"]
+__all__ = ["BoostConfigParser", "lineparser"]
 
 
 from . import lineparser
