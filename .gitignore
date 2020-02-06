@@ -25,6 +25,7 @@ htmlcov/
 # Build files
 *.[aod]
 *.so
+*build/
 bin/
 lib/
 

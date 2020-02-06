@@ -47,6 +47,8 @@ Welcome to fork and submit pull/merge requests! Alternatively, you can [request 
 - [`autopep8`](https://pypi.org/project/autopep8/0.8/): Auto-format your Python code
 - [`pylint`](https://www.pylint.org/): Scan your code for naming conventions and proper use of Python
 - [`rope`](https://github.com/python-rope/rope): Python refactoring tools
+- [`sphinx`](https://www.sphinx-doc.org/): Generate documentation of your Python package
+- [`doc8`](https://pypi.org/project/doc8/): A style checker for [reStructuredText](https://docutils.sourceforge.io/docs/ref/rst/introduction.html)
 
 If you have added Conda-Forge as a channel, all can be installed in one go:
 
