@@ -9,7 +9,8 @@ __author__ = "Meike Küßner, Remco de Boer"
 __institution__ = "Ruhr-Universität Bochum"
 
 
-__all__ = ["qa"]
+__all__ = ['latex', 'qa']
 
 
 from . import qa
+from . import latex
