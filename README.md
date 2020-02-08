@@ -14,22 +14,22 @@ The easiest way to work with these packages is to use [Anaconda/Conda](https://w
 
 Next steps are:
 1. Add [Conda-Forge](https://conda-forge.org/) as a channel to your Conda installation:
-   ```bash
+   ```
    conda config --add channels conda-forge
    conda config --set channel_priority strict
    ```
 
 2. Create a Conda environment named `pawian` (or whatever you want) and initialize it with the necessary packages. The required dependencies are listed in the [`requirements.txt`](./requirements.txt) file:
-   ```bash
+   ```
    conda create --name pawian --file requirements.txt
    ```
 
 3. Activate the environment using:
-   ```bash
+   ```
    conda activate pawian
    ```
 
-4. Now the most important step! Activate the pyPawianTools directory as a Conda ['development mode'](https://docs.conda.io/projects/conda-build/en/latest/resources/commands/conda-develop.html) directory by running [`conda develop .`] from the pyPawianTools directory. This means that all packages located within this folder are available in the Python interpreter (and Jupyter notebook!), so you can can then just run `import pawian` or `import boostcfg` from any other directory.
+4. Now the most important step! Activate the pyPawianTools directory as a Conda ['development mode'](https://docs.conda.io/projects/conda-build/en/latest/resources/commands/conda-develop.html) directory by running `conda develop .` from the pyPawianTools directory. This means that all packages located within this folder are available in the Python interpreter (and Jupyter notebook!), so you can can then just run `import pawian` or `import boostcfg` from any other directory.
    (Note: `conda develop` is equivalent to [editable installs](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs) in [PyPI](https://pypi.org/), so that would be  `pip install -e .` if you prefer that.)
 
 You can see that you are in a 'virtual environment' by typing `which python` and/or `python --version`—you are now using a Python interpreter of the environment.
@@ -40,6 +40,17 @@ Note that you can easily switch back with `conda deactivate`. And if you want to
 ## Contribute
 
 Welcome to fork and submit pull/merge requests! Alternatively, you can [request access](https://jollyj.ep1.rub.de/redeboer1/pyPawianTools/-/project_members/request_access).
+
+### Conventions
+
+* Please use [conventional commit messages](https://www.conventionalcommits.org/): start the commit with a semantic keyword (see e.g. [Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type) or [these examples](https://seesparkbox.com/foundry/semantic_commit_messages), followed by [a column](https://git-scm.com/docs/git-interpret-trailers), then the message. The message itself should be in imperative mood—just imagine the commit to give a command to the code framework. So for instance: `feat: add coverage report tools` or `fix: remove `.
+* In the master branch, each commit should compile and be tested. In your own branches, it is recommended to commit frequently (WIP keyword), but squash those commits upon submitting a merge request.
+* Try to keep test coverage high. You can test current coverage by running
+  ```
+  pytest --cov-config=.coveragerc --cov=./ --cov-report html
+  ```
+  from the main directory and opening the resulting file `htmlcov/index.html`.
+
 
 ### Some recommended packages for Python development
 
@@ -52,12 +63,12 @@ Welcome to fork and submit pull/merge requests! Alternatively, you can [request 
 
 If you have added Conda-Forge as a channel, all can be installed in one go:
 
-```bash
+```
 conda install --file requirements_dev.txt
 ```
 
 Of course, these packages are also available through `pip install`:
 
-```bash
+```
 pip install -r requirements_dev.txt
 ```
