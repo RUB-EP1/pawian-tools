@@ -1,3 +1,6 @@
+[![pipeline status](https://jollyj.ep1.rub.de/redeboer/pyPawianTools/badges/master/pipeline.svg)](https://jollyj.ep1.rub.de/redeboer/pyPawianTools/commits/master)
+[![coverage report](https://jollyj.ep1.rub.de/redeboer/pyPawianTools/badges/master/coverage.svg)](https://jollyj.ep1.rub.de/redeboer/pyPawianTools/commits/master)
+
 # Python Tools for Pawian
 
 This repository serves as a collection of Python tools to complement [Pawian](https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware). There are currently two Python packages:
