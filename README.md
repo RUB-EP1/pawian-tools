@@ -10,6 +10,9 @@ To bring it all together, the folder [Notebooks](./Notebooks) provides some hand
 
 ## Installation
 
+As this repository is developmental (see [Contribute](#contribute)), there is no setup procedure. Instead, it is easiest to work in a virtual Python environment and have this repository added as a development directory. In that sense, the instructions here are useful in general if you want to experiment with Python development! Now, after cloning this repository and moving into it, you can opt to use either Conda or PyPI.
+
+### Option 1: Conda
 The easiest way to work with these packages is to use [Anaconda/Conda](https://www.anaconda.com/). This allows you to contain all dependencies you need for this project within a virtual environment that you can easily throw away or replace later on if you run into trouble. You can download Conda [here](https://www.anaconda.com/distribution/#download-section). It can be installed without admin rights on any system!
 
 Next steps are:
@@ -19,7 +22,7 @@ Next steps are:
    conda config --set channel_priority strict
    ```
 
-2. Create a Conda environment named `pawian` (or whatever you want) and initialize it with the necessary packages. The required dependencies are listed in the [`requirements.txt`](./requirements.txt) file, apart from python itself:
+2. Create a Conda environment named `pawian` (or whatever you want) and initialize it with the necessary packages. The required dependencies are listed in the [`requirements.txt`](./requirements.txt) file, apart from Python itself:
    ```
    conda create --name pawian python --file requirements.txt
    ```
@@ -28,9 +31,38 @@ Next steps are:
    ```
    conda activate pawian
    ```
+   You can see that you are in a 'virtual environment' by typing `which python` and/or `python --version`—you are now using a Python interpreter of the environment.
 
 4. Now the most important step! Activate the pyPawianTools directory as a Conda ['development mode'](https://docs.conda.io/projects/conda-build/en/latest/resources/commands/conda-develop.html) directory by running `conda develop .` from the pyPawianTools directory. This means that all packages located within this folder are available in the Python interpreter (and Jupyter notebook!), so you can can then just run `import pawian` or `import boostcfg` from any other directory.
-   (Note: `conda develop` is equivalent to [editable installs](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs) in [PyPI](https://pypi.org/), so that would be  `pip install -e .` if you prefer that.)
+
+Note that you can easily switch back with `conda deactivate`. And if you want to trash this environment to start all over if you messed up something, just run `conda remove --name pawian --all`.
+
+### Option 2: Python Package Index
+If Conda is not available on your system, you can go the conventional route: using [PyPI](https://pypi.org/) (`pip`). In order to make the pyPawianTools packages known to your Python interpreter, you will have to use [`virtualenvwrapper`](https://virtualenvwrapper.readthedocs.io/en/latest/) (just like `conda develop`). Again, it is safest if you do this by working in a virtual environment. So before you get going, make sure you have Python3's [`venv`](https://docs.python.org/3/library/venv.html) installed on your system.
+
+Now, let's go:
+1. Create a virtual environment (and call it `venv`):
+   ```
+   python3 -m venv venv
+   ```
+   Note that we append `python3 -m` to ensure that we use the `venv` module of Python3.
+
+2. Activate the virtual environment:
+   ```
+   source venv/bin/activate
+   ```
+   If this went correctly, you should see `(venv)` on your command line and `which python3` should point to `venv/bin`.
+
+3. Set the directory of this repository as a development path. For this you need to install and activate `virtualenvwrapper`, then you can use the command `add2virtualenv`:
+   ```
+   python3 -m pip install virtualenvwrapper
+   source venv/bin/virtualenvwrapper.shF
+   add2virtualenv .
+   ```
+   where we assume you run `add2virtualenv` from the pyPawianTools directory. You can use `add2virtualenv -d .` to unregister the path again.
+
+Now, as with Conda, the nice thing is that if you run into trouble with conflicting packages or so, just trash the `venv` folder and start over!
+
 
 You can see that you are in a 'virtual environment' by typing `which python` and/or `python --version`—you are now using a Python interpreter of the environment.
 
@@ -39,10 +71,9 @@ Note that you can easily switch back with `conda deactivate`. And if you want to
 
 ## Contribute
 
-Welcome to fork and submit pull/merge requests! Alternatively, you can [request access](https://jollyj.ep1.rub.de/redeboer1/pyPawianTools/-/project_members/request_access).
+This repository is meant for development within the RUB EP1 group, so you're welcome to fork and submit pull/merge requests! Alternatively, you can [request access](https://jollyj.ep1.rub.de/redeboer1/pyPawianTools/-/project_members/request_access).
 
 ### Conventions
-
 * Please use [conventional commit messages](https://www.conventionalcommits.org/): start the commit with a semantic keyword (see e.g. [Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type) or [these examples](https://seesparkbox.com/foundry/semantic_commit_messages), followed by [a column](https://git-scm.com/docs/git-interpret-trailers), then the message. The message itself should be in imperative mood—just imagine the commit to give a command to the code framework. So for instance: `feat: add coverage report tools` or `fix: remove `.
 * In the master branch, each commit should compile and be tested. In your own branches, it is recommended to commit frequently (WIP keyword), but squash those commits upon submitting a merge request.
 * Try to keep test coverage high. You can test current coverage by running
@@ -53,7 +84,6 @@ Welcome to fork and submit pull/merge requests! Alternatively, you can [request 
 
 
 ### Some recommended packages for Python development
-
 - [`pytest`](https://docs.pytest.org/en/latest/): Run `pytest` in the pyPawian folder to run all `test_*.py` files
 - [`autopep8`](https://pypi.org/project/autopep8/0.8/): Auto-format your Python code
 - [`pylint`](https://www.pylint.org/): Scan your code for naming conventions and proper use of Python
