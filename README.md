@@ -19,9 +19,9 @@ Next steps are:
    conda config --set channel_priority strict
    ```
 
-2. Create a Conda environment named `pawian` (or whatever you want) and initialize it with the necessary packages. The required dependencies are listed in the [`requirements.txt`](./requirements.txt) file:
+2. Create a Conda environment named `pawian` (or whatever you want) and initialize it with the necessary packages. The required dependencies are listed in the [`requirements.txt`](./requirements.txt) file, apart from python itself:
    ```
-   conda create --name pawian --file requirements.txt
+   conda create --name pawian python --file requirements.txt
    ```
 
 3. Activate the environment using:
