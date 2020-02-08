@@ -1,6 +1,4 @@
-ROOT
 matplotlib
 numpy
 python
-root_numpy
 uproot

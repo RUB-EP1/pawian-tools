@@ -15,12 +15,9 @@ __all__ = ['PawianHists', 'EventSet']
 from os.path import dirname, realpath
 import math
 import numpy as np
-import matplotlib.pyplot as plt
 from matplotlib.pyplot import hist
 import uproot
-from ROOT import TFile, TIter, TH1
-
-from root_numpy import hist2array
+from uproot_methods.classes import TH1
 
 _WEIGHT_TAG = 'weight'
 _4VEC_BRANCH_TAG = 'Fourvecs'
@@ -34,20 +31,32 @@ class PawianHists:
 
     def import_file(self, filename):
         """Set data member by importing a ``pawianHists.root`` file"""
-        self.__file_uproot = uproot.open(filename)
-        self.__file_root = TFile(filename)
-        self.__data = EventSet(self.__file_uproot, 'data')
-        self.__fit = EventSet(self.__file_uproot, 'fit')
+        self.__file = uproot.open(filename)
+        self.__data = EventSet(self.__file, 'data')
+        self.__fit = EventSet(self.__file, 'fit')
 
     def get_histogram(self, name):
         """Get a TH1F from the pawianHists.root file and convert to a numpy histogram"""
-        obj = self.__file_root.Get(name)
-        if isinstance(obj, TH1):
-            values, edges = hist2array(obj, return_edges=True)
-            edges = edges[0][:-1]
+        try:
+            obj = self.__file[name]
+        except KeyError:
+            return None
+        if isinstance(obj, TH1.Methods):
+            values = obj.values
+            edges = obj.edges[:-1]
             return hist(
                 edges, weights=values, bins=len(values))
         return None
+
+    @property
+    def histogram_names(self):
+        """Get a list of histograms in the pawianHists.root file"""
+        names = []
+        for name in self.__file.keys():
+            obj = self.__file[name]
+            if isinstance(obj, TH1.Methods):
+                names.append(obj.name.decode())
+        return names
 
     @property
     def particles(self):

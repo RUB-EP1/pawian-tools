@@ -6,6 +6,7 @@ import uproot
 
 from pawian.qa import PawianHists, EventSet
 
+import matplotlib.pyplot as plt
 
 SCRIPT_DIR = dirname(realpath(__file__))
 FILENAME = f'{SCRIPT_DIR}/pawianHists_epem.root'
@@ -18,17 +19,27 @@ def test_faulty_import():
         PawianHists(__file__)
 
 
-def test_correct_import():
+def test_histograms():
     pawian_hists = PawianHists(FILENAME)
+
     assert pawian_hists.get_histogram('non-existent') is None
-    assert len(pawian_hists.get_histogram('DataD0Dm')[0]) == 100
+    assert pawian_hists.get_histogram('_fittedFourvecs') is None
+
+    hist = pawian_hists.get_histogram('DataD0Dm')
+    assert len(hist[0]) == 100
+    assert hist[0][40] == 3.3119699954986572
+
     particles = ['pion+', 'D0', 'D-']
     assert pawian_hists.particles == particles
     assert pawian_hists.data.particles == particles
     assert pawian_hists.fit.particles == particles
     assert pawian_hists.fit.keys() == particles
+
     assert len(pawian_hists.data.weights) == 701
     assert len(pawian_hists.fit.weights) == 7010
+
+    assert pawian_hists.histogram_names[-4:] == [
+        'FitpionpDm', 'DataD0Dm', 'MCD0Dm', 'FitD0Dm']
 
     with pytest.raises(Exception):
         uproot_tile = uproot.open(FILENAME)
