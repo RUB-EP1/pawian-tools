@@ -64,9 +64,14 @@ Now, let's go:
 Now, as with Conda, the nice thing is that if you run into trouble with conflicting packages or so, just trash the `venv` folder and start over!
 
 
-You can see that you are in a 'virtual environment' by typing `which python` and/or `python --version`—you are now using a Python interpreter of the environment.
+## Documentation
 
-Note that you can easily switch back with `conda deactivate`. And if you want to trash this environment to start all over if you messed up something, just run `conda remove --name pawian --all`.
+Want to have a nice overview of the modules in pyPawianTools? If you have followed the [installation instructions](#installation), just do the following:
+
+1. Navigate into the [`docs`](./docs) folder.
+2. Install the required packages (either `conda install --file requirements.txt` or `pip install -r requirements.txt`).
+3. Run `make html` and/or `make pdflatex`.
+4. See the output in the `_build` folder!
 
 
 ## Contribute
