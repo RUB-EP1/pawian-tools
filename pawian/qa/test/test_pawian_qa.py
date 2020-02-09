@@ -22,24 +22,28 @@ def test_faulty_import():
 def test_histograms():
     pawian_hists = PawianHists(FILENAME)
 
-    assert pawian_hists.get_histogram('non-existent') is None
-    assert pawian_hists.get_histogram('_fittedFourvecs') is None
+    assert pawian_hists.get_uproot_histogram('non-existent') is None
+    assert pawian_hists.get_uproot_histogram('_fittedFourvecs') is None
 
-    hist = pawian_hists.get_histogram('DataD0Dm')
-    assert len(hist[0]) == 100
-    assert hist[0][40] == 3.3119699954986572
+    failure = pawian_hists.get_histogram_content('non-existent')
+    assert failure is None
+    edges, values = pawian_hists.get_histogram_content('DataD0Dm')
+    assert len(edges) == 100
+    assert len(values) == 100
+    assert values[40] == 3.3119699954986572
 
     particles = ['pion+', 'D0', 'D-']
     assert pawian_hists.particles == particles
     assert pawian_hists.data.particles == particles
     assert pawian_hists.fit.particles == particles
-    assert pawian_hists.fit.keys() == particles
 
     assert len(pawian_hists.data.weights) == 701
     assert len(pawian_hists.fit.weights) == 7010
 
     assert pawian_hists.histogram_names[-4:] == [
         'FitpionpDm', 'DataD0Dm', 'MCD0Dm', 'FitD0Dm']
+    assert pawian_hists.unique_histogram_names[-4:] == [
+        'PhiGJ_D0_FromD0Dm', 'pionpD0', 'pionpDm', 'D0Dm']
 
     with pytest.raises(Exception):
         uproot_tile = uproot.open(FILENAME)

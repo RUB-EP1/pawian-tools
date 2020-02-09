@@ -12,12 +12,9 @@ __institution__ = "Ruhr-Universität Bochum"
 __all__ = ['PawianHists', 'EventSet']
 
 
-from os.path import dirname, realpath
-import math
-import numpy as np
-from matplotlib.pyplot import hist
 import uproot
 from uproot_methods.classes import TH1
+
 
 _WEIGHT_TAG = 'weight'
 _4VEC_BRANCH_TAG = 'Fourvecs'
@@ -35,22 +32,44 @@ class PawianHists:
         self.__data = EventSet(self.__file, 'data')
         self.__fit = EventSet(self.__file, 'fit')
 
-    def get_histogram(self, name):
-        """Get a TH1F from the pawianHists.root file and convert to a numpy histogram"""
+    def get_uproot_histogram(self, name):
+        """Get an uproot ``TH1``, ``TH2``, or ``TH3`` from the ``pawianHists.root`` file. See `here
+        <https://github.com/scikit-hep/uproot-methods/blob/master/uproot_methods/classes/TH1.py>`__
+        which methods you can call on these classes or have a look at the ``QA_Histograms.ipynb``
+        Jupyter notebook."""
         try:
             obj = self.__file[name]
         except KeyError:
             return None
         if isinstance(obj, TH1.Methods):
-            values = obj.values
-            edges = obj.edges[:-1]
-            return hist(
-                edges, weights=values, bins=len(values))
+            return obj
         return None
+
+    def get_histogram_content(self, name: str) -> (list, list):
+        """
+        Get an array of lower edges and an array of values for the histogram. You can then for
+        instance use
+        `matplotlib.pyplot.hist <https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html>`__
+        to plot it like so (note the ``bins`` argument!):
+
+        .. code-block:: python
+
+            from pawian.qa import PawianHists
+            import matplotlib.pyplot as plt
+            hist_file = PawianHists(FILENAME)
+            edges, values = hist_file.get_histogram_content(HISTOGRAM_NAME)
+            plt.hist(edges, weights=values, bins=len(values))
+        """
+        histogram = self.get_uproot_histogram(name)
+        if histogram is None:
+            return None
+        edges = histogram.edges[:-1]
+        values = histogram.values
+        return (edges, values)
 
     @property
     def histogram_names(self):
-        """Get a list of histograms in the pawianHists.root file"""
+        """Get a list of **all** histogram names in the ``pawianHists.root`` file"""
         names = []
         for name in self.__file.keys():
             obj = self.__file[name]
@@ -59,24 +78,40 @@ class PawianHists:
         return names
 
     @property
+    def unique_histogram_names(self):
+        """Get a list of histograms in the ``pawianHists.root`` file of which the keywords ``Data``,
+        ``MC``, or ``Fit`` have been removed"""
+        names = []
+        for name in self.__file.keys():
+            obj = self.__file[name]
+            if isinstance(obj, TH1.Methods):
+                hist_name = obj.name.decode()
+                if hist_name.startswith('Data'):
+                    hist_name = hist_name[4:]
+                    names.append(hist_name)
+        return names
+
+    @property
     def particles(self):
         """Get particle names contained in the file"""
         return self.data.particles
 
     @property
-    def fit(self):
-        """Get :func:`EventSet <EventSet>` object of fit data, see
-        :func:`data <pawian.qa.PawianHists.data>`"""
-        return self.__fit
+    def data(self):
+        """Get :func:`EventSet <EventSet>` object for data. This contains
+        :func:`weights <EventSet.weights>` and a :func:`dictionary of particles`, the entries of
+        which are arrays of
+        `TLorentzVectors <https://root.cern.ch/doc/master/classTLorentzVector.html>`__. 
+
+        .. seealso:: :func:`fit <pawian.qa.PawianHists.fit>`"""
+        return self.__data
 
     @property
-    def data(self):
-        """Get :func:`EventSet <EventSet>` object. This contains :func:`weights <EventSet.weights>`
-        and a :func:`dictionary of particles`, the entries of which are arrays of
-        `TLorentzVectors <https://root.cern.ch/doc/master/classTLorentzVector.html>`__.\n
-        See :func:`fit <pawian.qa.PawianHists.fit>`
-        """
-        return self.__data
+    def fit(self):
+        """Get :func:`EventSet <EventSet>` object of fit data.
+
+        .. seealso:: :func:`data <pawian.qa.PawianHists.data>`"""
+        return self.__fit
 
 
 class EventSet:
@@ -108,10 +143,6 @@ class EventSet:
     @property
     def particles(self):
         """Get particle names contained in the file"""
-        return self.__particles
-
-    def keys(self):
-        """Modulate dictionary behavior by returning the keys for __getitem__"""
         return self.__particles
 
     @property
