@@ -18,6 +18,8 @@ import uproot
 from uproot_methods.classes import TH1
 import matplotlib.pyplot as plt
 
+from pawian.latex import convert
+
 
 _WEIGHT_TAG = 'weight'
 _4VEC_BRANCH_TAG = 'Fourvecs'
@@ -86,7 +88,7 @@ class PawianHists:
         edges, values = self.get_histogram_content(name)
         return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)
 
-    def draw_combined_histogram(self, name, plot_on=plt,
+    def draw_combined_histogram(self, name, plot_on=plt.figure().add_subplot(),
                                 data=True, fit=True, mc=True, **kwargs):
         """Combine the three types of histograms in one plot.
 
@@ -117,6 +119,7 @@ class PawianHists:
             result = self.draw_histogram(
                 hist_name, plot_on, label=label, **kwargs)
             hists[label] = result
+        plot_on.set_title(f'${convert(name)}$')
         return hists
 
     def draw_histograms(self, plot_on=plt.figure(), legend=True, **kwargs):
