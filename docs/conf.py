@@ -18,6 +18,17 @@ copyright = '2020, Remco de Boer'
 author = 'Remco de Boer'
 
 
+# -- Include constructors ----------------------------------------------------
+def skip(app, what, name, obj, would_skip, options):
+    if name == "__init__":
+        return False
+    return would_skip
+
+
+def setup(app):
+    app.connect("autodoc-skip-member", skip)
+
+
 # -- General configuration ---------------------------------------------------
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 exclude_patterns = ['*build', 'test', 'tests']
