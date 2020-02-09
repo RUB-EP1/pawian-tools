@@ -2,12 +2,9 @@ Welcome to pyPawianTools's documentation!
 =========================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 4
 
    modules
-
-Indices and tables
 
 
 Indices and tables
