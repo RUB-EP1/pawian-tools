@@ -19,6 +19,7 @@ pygments_style = 'sphinx'
 todo_include_todos = False
 add_module_names = False
 viewcode_follow_imported_members = True
+autodoc_member_order = 'bysource'
 
 
 # -- Options for HTML output -------------------------------------------------
