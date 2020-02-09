@@ -12,6 +12,7 @@ __institution__ = "Ruhr-Universität Bochum"
 __all__ = ['PawianHists', 'EventSet']
 
 
+from math import ceil, sqrt
 import re  # regex
 import uproot
 from uproot_methods.classes import TH1
@@ -117,6 +118,23 @@ class PawianHists:
                 hist_name, plot_on, label=label, **kwargs)
             hists[label] = result
         return hists
+
+    def draw_histograms(self, plot_on=plt.figure(), legend=True, **kwargs):
+        """Draw a comparative overview of all histograms
+
+        .. seealso:: :func:`draw_combined_histogram`
+        """
+        names = self.unique_histogram_names
+        n_hists = len(names)
+        n_x = ceil(sqrt(len(names)))
+        n_y = ceil(n_hists / n_x)
+
+        grid = plot_on.add_gridspec(n_x, n_y)
+        for idx, name in enumerate(names):
+            sub = plot_on.add_subplot(grid[idx % n_x, idx//n_x])
+            self.draw_combined_histogram(name, sub, **kwargs)
+            if legend:
+                sub.legend()
 
     @property
     def histogram_names(self):

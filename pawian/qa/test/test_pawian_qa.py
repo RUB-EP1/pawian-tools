@@ -62,6 +62,13 @@ def test_draw_histogram():
     assert patch[-5].get_height() == values[-5]
 
 
+@pytest.mark.slow
+def test_draw_histograms():
+    hists = PawianHists(FILENAME)
+    hists.draw_histograms()
+    assert len(plt.gcf().get_axes()) == 20
+
+
 def test_draw_combined_histogram():
     hists = PawianHists(FILENAME)
     assert hists.draw_combined_histogram('non-existent') is None
