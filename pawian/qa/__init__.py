@@ -213,7 +213,7 @@ class EventSet:
         self.__tuples = dict()
         for particle in self.__particles:
             self.__tuples[particle] = uproot_file[f'{tree_name}/{particle}'].array()
-        self.__weights = uproot_file[f'{tree_name}/{_WEIGHT_TAG}']
+        self.__weights = uproot_file[f'{tree_name}/{_WEIGHT_TAG}'].array()
 
     @property
     def particles(self):
@@ -230,3 +230,18 @@ class EventSet:
         `TLorentzVector <https://root.cern.ch/doc/master/classTLorentzVector.html>`__s
         for one of the particles"""
         return self.__tuples[particle_name]
+
+    def __len__(self):
+        return len(self.__weights)
+
+    def __iter__(self):
+        return self.__tuples.__iter__()
+
+    def items(self):
+        return self.__tuples.items()
+
+    def keys(self):
+        return self.__tuples.keys()
+
+    def values(self):
+        return self.__tuples.values()
