@@ -4,6 +4,13 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import subprocess
+
+# Generate indices for the Python modules in the folder above
+subprocess.call(
+    'sphinx-apidoc -f -M -o . ..',
+    shell=True)
+
 # -- Project information -----------------------------------------------------
 
 project = 'pyPawianTools'

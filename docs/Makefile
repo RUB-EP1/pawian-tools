@@ -14,11 +14,7 @@ help:
 
 .PHONY: help Makefile
 
-# Generate indices for the Python modules in the folder above
-rst:
-	sphinx-apidoc -f -M -o . ..
-
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: rst Makefile
+%: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O) -W
