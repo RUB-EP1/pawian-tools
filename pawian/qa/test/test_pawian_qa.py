@@ -19,7 +19,7 @@ def test_faulty_import():
         PawianHists(__file__)
 
 
-def test_histograms():
+def test_data_model():
     pawian_hists = PawianHists(FILENAME)
 
     assert pawian_hists.get_uproot_histogram('non-existent') is None
@@ -49,6 +49,17 @@ def test_histograms():
         uproot_tile = uproot.open(FILENAME)
         EventSet(uproot_tile, 'wrong type')
 
+    assert len(pawian_hists.data) == 701
+    assert len(pawian_hists.fit) == 7010
+    assert pawian_hists.fit.particles == list(pawian_hists.fit.keys())
+    for particle, vectors in pawian_hists.data.items():
+        assert len(pawian_hists.data[particle]), len(vectors)
+    for item, particle in zip(pawian_hists.data, particles):
+        assert item == particle
+    for particle, vectors in zip(particles, pawian_hists.data.values()):
+        assert isclose(
+            pawian_hists.data[particle].mass.mean(), mean(vectors.mass), rel_tol=1e-07)
+
 
 def test_draw_histogram():
     hists = PawianHists(FILENAME)
@@ -69,6 +80,7 @@ def test_draw_all_histograms():
     assert len(plt.gcf().get_axes()) == 20
 
 
+@pytest.mark.slow
 def test_draw_combined_histogram():
     hists = PawianHists(FILENAME)
     assert hists.draw_combined_histogram('non-existent') is None
