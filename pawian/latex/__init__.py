@@ -10,22 +10,37 @@ __institution__ = "Ruhr-Universität Bochum"
 __all__ = ["convert"]
 
 
-__CONVERT_DICT = {
-    "+": "^{+}",
-    "-": "^{-}",
-    "0": "^{0}",
-    "pion": R"\pi",
-    "etaprime": R"\eta'",
-    "eta": R"\eta",
-    "phi": R"\phi",
-    "rho": R"\rho",
-    "pbar": R"\bar{p}",
-    "nbar": R"\bar{n}"
+import re  # regex
+
+
+__PARTICLES = [
+    'D', 'pi', 'pion', 'eta', 'rho'
+]
+
+
+__LATEX_COMMANDS = [
+    'pion', 'eta', 'rho',
+    'theta', 'Theta',
+    'phi', 'Phi'
+]
+
+
+__OTHER_REPLACEMENTS = {
+    r"(GJ|Heli)_": r"_{\1}: ",
+    r"_From": r"\\mathrm{~from~}",
+    r"\\pion": r"\\pi",
+    f"({'|'.join(__PARTICLES)}) *[m-]": R"\1^- ",
+    f"({'|'.join(__PARTICLES)}) *[p+]": R"\1^+ ",
+    f"({'|'.join(__PARTICLES)}) *0": R"\1^0 ",
+    r'[ ]+([_\^\{\[])': r'\1',
+    r'(^\s+|\s+$)': '',  # leading or trailing spaces
+    r'\s\s+': ' ',  # double spaces
 }
 
 
 def convert(phrase):
     """Convert particle names to Latex code which can be used for plot labels etc."""
-    for key, value in __CONVERT_DICT.items():
-        phrase = phrase.replace(key, value)
+    phrase = re.sub(f"({'|'.join(__LATEX_COMMANDS)})", r" \\\1 ", phrase)
+    for pattern, repl in __OTHER_REPLACEMENTS.items():
+        phrase = re.sub(pattern, repl, phrase)
     return phrase
