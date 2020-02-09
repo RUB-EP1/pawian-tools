@@ -12,6 +12,7 @@ __institution__ = "Ruhr-Universität Bochum"
 __all__ = ['PawianHists', 'EventSet']
 
 
+import re  # regex
 import uproot
 from uproot_methods.classes import TH1
 import matplotlib.pyplot as plt
@@ -84,6 +85,39 @@ class PawianHists:
         edges, values = self.get_histogram_content(name)
         return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)
 
+    def draw_combined_histogram(self, name, plot_on=plt,
+                                data=True, fit=True, mc=True, **kwargs):
+        """Combine the three types of histograms in one plot.
+
+        :param name:
+            The name of the histogram in the ``pawianHists.root`` file that you want to plot, **but
+            without the prepended Data, Fit, or MC**.
+
+        .. seealso:: :func:`draw_histogram`
+        """
+        if name not in self.unique_histogram_names:
+            return None
+        re_match = []
+        labels = []
+        if data:
+            re_match.append('Data')
+            labels.append('data')
+        if fit:
+            re_match.append('Fit')
+            labels.append('fit')
+        if mc:
+            re_match.append('Mc|MC')
+            labels.append('mc')
+        re_match = '|'.join(re_match)
+        names = [k for k in self.histogram_names
+                 if re.fullmatch(f'({re_match}){name}', k)]
+        hists = dict()
+        for hist_name, label in zip(names, labels):
+            result = self.draw_histogram(
+                hist_name, plot_on, label=label, **kwargs)
+            hists[label] = result
+        return hists
+
     @property
     def histogram_names(self):
         """Get a list of **all** histogram names in the ``pawianHists.root`` file"""
@@ -118,7 +152,7 @@ class PawianHists:
         """Get :func:`EventSet <EventSet>` object for data. This contains
         :func:`weights <EventSet.weights>` and a :func:`dictionary of particles`, the entries of
         which are arrays of
-        `TLorentzVectors <https://root.cern.ch/doc/master/classTLorentzVector.html>`__. 
+        `TLorentzVectors <https://root.cern.ch/doc/master/classTLorentzVector.html>`__.
 
         .. seealso:: :func:`fit <pawian.qa.PawianHists.fit>`"""
         return self.__data

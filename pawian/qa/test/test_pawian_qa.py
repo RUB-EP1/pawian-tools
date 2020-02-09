@@ -62,6 +62,23 @@ def test_draw_histogram():
     assert patch[-5].get_height() == values[-5]
 
 
+def test_draw_combined_histogram():
+    hists = PawianHists(FILENAME)
+    assert hists.draw_combined_histogram('non-existent') is None
+    name = 'pionpDm'
+    assert list(hists.draw_combined_histogram(
+        name, data=False).keys()) == ['fit', 'mc']
+    assert list(hists.draw_combined_histogram(
+        name, fit=False).keys()) == ['data', 'mc']
+    assert list(hists.draw_combined_histogram(
+        name, mc=False).keys()) == ['data', 'fit']
+    result = hists.draw_combined_histogram(name)
+    values, edges, patch = result['data']
+    assert values[10] == 0.6596219539642334
+    assert mean(edges) == 2.1605122581
+    assert patch[5].get_height() == values[5]
+
+
 def test_lorentz_vectors():
     """
     Example to show to get arrays from the array of TLorentzVectors. See uproot-methods
