@@ -12,11 +12,12 @@ __institution__ = "Ruhr-Universität Bochum"
 __all__ = ['PawianHists', 'EventSet']
 
 
+import logging
 from math import ceil, sqrt
+import matplotlib.pyplot as plt
 import re  # regex
 import uproot
 from uproot_methods.classes import TH1
-import matplotlib.pyplot as plt
 
 from pawian.latex import convert
 
@@ -127,6 +128,8 @@ class PawianHists:
 
         .. seealso:: :func:`draw_combined_histogram`
         """
+        logging.info(
+            'Drawing all histograms for file %s ...', self.__file.name.decode())
         names = self.unique_histogram_names
         n_hists = len(names)
         n_x = ceil(sqrt(len(names)))
