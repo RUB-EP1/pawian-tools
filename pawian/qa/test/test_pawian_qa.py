@@ -50,6 +50,18 @@ def test_histograms():
         EventSet(uproot_tile, 'wrong type')
 
 
+def test_draw_histogram():
+    hists = PawianHists(FILENAME)
+    assert hists.draw_histogram('non-existent') is None
+    values, edges, patch = hists.draw_histogram(
+        'FitThetaHeli_pionp_FrompionpD0Dm')
+    assert len(values) == 100
+    assert values[0] == 0.9994157552719116
+    assert len(edges) == 101
+    assert edges[0] == -1.0
+    assert patch[-5].get_height() == values[-5]
+
+
 def test_lorentz_vectors():
     """
     Example to show to get arrays from the array of TLorentzVectors. See uproot-methods

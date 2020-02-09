@@ -14,6 +14,7 @@ __all__ = ['PawianHists', 'EventSet']
 
 import uproot
 from uproot_methods.classes import TH1
+import matplotlib.pyplot as plt
 
 
 _WEIGHT_TAG = 'weight'
@@ -66,6 +67,22 @@ class PawianHists:
         edges = histogram.edges[:-1]
         values = histogram.values
         return (edges, values)
+
+    def draw_histogram(self, name, plot_on=plt, **kwargs):
+        """Plot a histogram in a matplotlib figure.
+
+        :param plot_on:
+            Feed a matplotlib class with a hist method, such as `matplotlib.axes.Axes
+            <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.hist.html>`__
+            to draw the histogram on it.
+        :param kwargs:
+            see `matplotlib.pyplot.hist arguments
+            <https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html>`__
+        """
+        if name not in self.histogram_names:
+            return None
+        edges, values = self.get_histogram_content(name)
+        return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)
 
     @property
     def histogram_names(self):
