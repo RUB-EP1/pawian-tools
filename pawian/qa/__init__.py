@@ -89,7 +89,7 @@ class PawianHists:
         edges, values = self.get_histogram_content(name)
         return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)
 
-    def draw_combined_histogram(self, name, plot_on=plt.figure().add_subplot(),
+    def draw_combined_histogram(self, name, plot_on=plt,
                                 data=True, fit=True, mc=True, **kwargs):
         """Combine the three types of histograms in one plot.
 
@@ -120,10 +120,9 @@ class PawianHists:
             result = self.draw_histogram(
                 hist_name, plot_on, label=label, **kwargs)
             hists[label] = result
-        plot_on.set_title(f'${convert(name)}$')
         return hists
 
-    def draw_histograms(self, plot_on=plt.figure(), legend=True, **kwargs):
+    def draw_all_histograms(self, plot_on=plt.figure(), legend=True, **kwargs):
         """Draw a comparative overview of all histograms
 
         .. seealso:: :func:`draw_combined_histogram`
@@ -139,6 +138,7 @@ class PawianHists:
         for idx, name in enumerate(names):
             sub = plot_on.add_subplot(grid[idx % n_x, idx//n_x])
             self.draw_combined_histogram(name, sub, **kwargs)
+            sub.set_title(f'${convert(name)}$')
             if legend:
                 sub.legend()
 

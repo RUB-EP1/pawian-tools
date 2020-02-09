@@ -63,9 +63,9 @@ def test_draw_histogram():
 
 
 @pytest.mark.slow
-def test_draw_histograms():
+def test_draw_all_histograms():
     hists = PawianHists(FILENAME)
-    hists.draw_histograms()
+    hists.draw_all_histograms()
     assert len(plt.gcf().get_axes()) == 20
 
 
