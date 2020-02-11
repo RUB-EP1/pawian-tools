@@ -36,7 +36,11 @@ Next steps are:
    ```
    You can see that you are in a 'virtual environment' by typing `which python` and/or `python --version`—you are now using a Python interpreter of the environment.
 
-4. Now the most important step! Activate the pyPawianTools directory as a Conda ['development mode'](https://docs.conda.io/projects/conda-build/en/latest/resources/commands/conda-develop.html) directory by running `conda develop .` from the pyPawianTools directory. This means that all packages located within this folder are available in the Python interpreter (and Jupyter notebook!), so you can can then just run `import pawian` or `import boostcfg` from any other directory.
+4. Now the most important step! Activate the pyPawianTools directory as a Conda ['development mode'](https://docs.conda.io/projects/conda-build/en/latest/resources/commands/conda-develop.html) directory by running
+   ```
+   conda develop .
+   ```
+   **from the pyPawianTools directory.** This means that all packages located within this folder are available in the Python interpreter (and Jupyter notebook!), so you can can then just run `import pawian` or `import boostcfg` from any other directory.
 
 Note that you can easily switch back with `conda deactivate`. And if you want to trash this environment to start all over if you messed up something, just run `conda remove --name pawian --all`.
 
@@ -46,13 +50,13 @@ If Conda is not available on your system, you can go the conventional route: usi
 Now, let's go:
 1. Create a virtual environment (and call it `venv`):
    ```
-   python3 -m venv venv
+   python3 -m venv ./venv
    ```
    Note that we append `python3 -m` to ensure that we use the `venv` module of Python3.
 
 2. Activate the virtual environment:
    ```
-   source venv/bin/activate
+   source ./venv/bin/activate
    ```
    If this went correctly, you should see `(venv)` on your command line and `which python3` should point to `venv/bin`.
 
