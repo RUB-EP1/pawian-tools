@@ -20,6 +20,7 @@ __PARTICLES = [
 
 __LATEX_COMMANDS = [
     'pion', 'eta', 'rho',
+    'pi',
     'theta', 'Theta',
     'phi', 'Phi'
 ]

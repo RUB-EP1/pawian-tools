@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 
 @pytest.mark.parametrize("test_input,expected", [
     (
-        "testpion+pion+",
-        R"test \pi^+ \pi^+"
+        "testpi+pion-pion+",
+        R"test \pi^+ \pi^- \pi^+"
     ), (
         "testpion+pion+",
         R"test \pi^+ \pi^+"
