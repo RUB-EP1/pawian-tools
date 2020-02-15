@@ -95,31 +95,34 @@ class PawianHists:
 
         :param name:
             The name of the histogram in the ``pawianHists.root`` file that you want to plot, **but
-            without the prepended Data, Fit, or MC**.
+            without the prepended ``Data``, ``Fit``, or ``MC/Mc``**.
 
         .. seealso:: :func:`draw_histogram`
         """
         if name not in self.unique_histogram_names:
             return None
+        # Construct regular expression
         re_match = []
-        labels = []
         if data:
             re_match.append('Data')
-            labels.append('data')
         if fit:
             re_match.append('Fit')
-            labels.append('fit')
         if mc:
-            re_match.append('Mc|MC')
-            labels.append('mc')
+            re_match.append('MC')
+            re_match.append('Mc')
         re_match = '|'.join(re_match)
+        re_match = f'({re_match}){name}'
+        # Makes selection of names plus corresponding labels
         names = [k for k in self.histogram_names
-                 if re.fullmatch(f'({re_match}){name}', k)]
+                 if re.fullmatch(re_match, k)]
+        labels = [re.match(re_match, k)[1].lower()
+                  for k in names]
+        # Create histograms
         hists = dict()
         for hist_name, label in zip(names, labels):
-            result = self.draw_histogram(
+            histogram = self.draw_histogram(
                 hist_name, plot_on, label=label, **kwargs)
-            hists[label] = result
+            hists[label] = histogram
         return hists
 
     def draw_all_histograms(self, plot_on=plt.figure(), legend=True, **kwargs):

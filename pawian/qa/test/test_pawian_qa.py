@@ -86,7 +86,7 @@ def test_draw_combined_histogram():
     assert hists.draw_combined_histogram('non-existent') is None
     name = 'pionpDm'
     assert list(hists.draw_combined_histogram(
-        name, data=False).keys()) == ['fit', 'mc']
+        name, data=False).keys()) == ['mc', 'fit']
     assert list(hists.draw_combined_histogram(
         name, fit=False).keys()) == ['data', 'mc']
     assert list(hists.draw_combined_histogram(
