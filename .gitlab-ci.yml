@@ -1,6 +1,11 @@
 variables:
   GIT_STRATEGY: clone
 
+.only-default: &only-default
+  only:
+    - merge_requests
+    - master
+
 before_script:
   - python3 -m venv venv
   - source venv/bin/activate
@@ -10,6 +15,7 @@ before_script:
   - python3 -m pip install -r requirements.txt
 
 test sphinx documentation:
+  <<: *only-default
   script:
     - which python3
     - python3 -m pip install -r docs/requirements.txt
@@ -17,6 +23,7 @@ test sphinx documentation:
     - make html
 
 pytest:
+  <<: *only-default
   script:
     - python3 -m pip install pytest pytest-cov
     - python3 -m pip install -r requirements.txt
