@@ -1,5 +1,22 @@
 """
-Parser(s) for Pawian data files.
+This module allows you to parse and analyse ASCII data files of momentum tuples. The files have the
+following form:
+
+.. code-block::
+
+    0.99407
+    -0.00357645   0.0962561   0.0181079    0.170545
+       0.224019    0.623156    0.215051     1.99057
+      -0.174404   -0.719412   -0.233159      2.0243
+    0.990748
+     -0.0328198   0.0524406   0.0310079    0.155783
+      -0.619592    0.141315     0.32135     1.99619
+       0.698477   -0.193756   -0.352357     2.03593
+
+The lines with single values are weights, but do not have to be present. Whitespaces are arbitrary.
+
+The allows you to import the ASCII file to a nicely formatted ``pandas.DataFrame`` that has
+additional PWA methods in the form of ``pandas.DataFrame`` accessors.
 """
 
 
@@ -12,7 +29,8 @@ import numpy as np
 import pandas as pd
 
 
-_MOMENTUM_LABELS = ['p_x', 'p_y', 'p_z', 'E']
+_ENERGY_LABEL = 'E'
+_MOMENTUM_LABELS = ['p_x', 'p_y', 'p_z', _ENERGY_LABEL]
 _WEIGHT_LABEL = 'weight'
 
 
@@ -32,22 +50,37 @@ class PawianAccessor:
 
     @staticmethod
     def _validate(obj):
-        columns = obj.columns.levels
-        if len(columns) != 2:
-            raise AttributeError(
-                "Not a Pawian data object!\n"
-                "pandas.DataFrame must have multicolumns of 2 levels:\n"
-                " - 1st level are particles\n"
-                f" - 2nd level are define the 4-momentum: {_MOMENTUM_LABELS}"
-            )
-        for mom in _MOMENTUM_LABELS:
-            if mom not in obj.columns.levels[1]:
-                raise AttributeError(f"Must have subcolumn {mom}")
+        columns = obj.columns
+        if isinstance(columns, pd.MultiIndex):
+            # if multicolumn, test if 2 levels
+            columns = columns.levels
+            if len(obj.columns.levels) != 2:
+                raise AttributeError(
+                    "Not a Pawian data object!\n"
+                    "pandas.DataFrame must have multicolumns of 2 levels:\n"
+                    " - 1st level are particles\n"
+                    f" - 2nd level are define the 4-momentum: {_MOMENTUM_LABELS}"
+                )
+            # then select 2nd columns only
+            columns = columns[1]
+        # Check if (sub)column names are same as momentum labels
+        if not set(_MOMENTUM_LABELS) <= set(columns):
+            raise AttributeError(f"Columns must be {_MOMENTUM_LABELS}")
 
     @property
     def has_weights(self):
         """Check if dataframe contains weights"""
-        return _WEIGHT_LABEL in self._obj.columns.levels[0]
+        return _WEIGHT_LABEL in self._obj.columns
+
+    @property
+    def has_particles(self):
+        """Check if dataframe contains a main column with particles"""
+        return isinstance(self._obj.columns, pd.MultiIndex)
+
+    @property
+    def weights(self):
+        """Get list of weights, if available"""
+        return self._obj[_WEIGHT_LABEL]
 
     @property
     def particles(self):
@@ -64,6 +97,40 @@ class PawianAccessor:
         if self.has_weights:
             momentum_labels = momentum_labels[:-1]
         return momentum_labels.to_list()
+
+    @property
+    def energy(self):
+        """Get a dataframe containing only the energies"""
+        if self.has_particles:
+            return self._obj.xs(_ENERGY_LABEL, level=1, axis=1)
+        return self._obj[_ENERGY_LABEL]
+
+    @property
+    def p_xyz(self):
+        """Get a dataframe containing only the 3-momenta"""
+        return self._obj.filter(regex=('p_[xyz]'))  # ! may conflict with _MOMENTUM_LABELS
+
+    @property
+    def rho2(self):
+        """**Compute** a dataframe containing the square sum of the 3-momenta"""
+        if self.has_particles:
+            return (self.p_xyz**2).sum(axis=1, level=0)
+        return (self.p_xyz**2).sum(axis=1)
+
+    @property
+    def rho(self):
+        """**Compute** a dataframe containing the absolute value of the 3-momenta"""
+        return np.sqrt(self.rho2)
+
+    @property
+    def mass2(self):
+        """**Compute** the square of the invariant masses"""
+        return self.energy**2 - self.rho2
+
+    @property
+    def mass(self):
+        """**Compute** the invariant masses"""
+        return np.sqrt(self.mass2)
 
     def write_ascii(self, filename, **kwargs):
         """Write to Pawian-like ASCII file
@@ -101,7 +168,7 @@ def read_ascii(filename, particles=None, **kwargs):
         sep=R'\s+',
         skip_blank_lines=True,
         dtype='float64',
-    )
+        **kwargs)
 
     # Determine if ascii file contains weights
     py_values = full_table[_MOMENTUM_LABELS[1]]
