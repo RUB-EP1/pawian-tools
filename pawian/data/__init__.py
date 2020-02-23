@@ -25,8 +25,9 @@ __all__ = ['DataParserError', 'PawianAccessor', 'read_ascii']
 
 import math
 import re
-import numpy as np
+from numpy import sqrt, isclose
 import pandas as pd
+import uproot
 
 
 _ENERGY_LABEL = 'E'
@@ -80,11 +81,21 @@ class PawianAccessor:
     @property
     def weights(self):
         """Get list of weights, if available"""
+        if not self.has_weights:
+            raise Exception("Dataframe doesn't contain weights")
         return self._obj[_WEIGHT_LABEL]
+
+    @property
+    def intensities(self):
+        """Alias for :func:`weights` in the case of a fit intensity sample"""
+        return self.weights
 
     @property
     def particles(self):
         """Get list of particles contained in the data frame"""
+        if not self.has_particles:
+            raise Exception(
+                "This dataframe is single-level and does not contain particles")
         particles = self._obj.columns.droplevel(1).unique()
         if self.has_weights:
             particles = particles.drop(_WEIGHT_LABEL)
@@ -120,7 +131,7 @@ class PawianAccessor:
     @property
     def rho(self):
         """**Compute** a dataframe containing the absolute value of the 3-momenta"""
-        return np.sqrt(self.rho2)
+        return sqrt(self.rho2)
 
     @property
     def mass2(self):
@@ -130,7 +141,7 @@ class PawianAccessor:
     @property
     def mass(self):
         """**Compute** the invariant masses"""
-        return np.sqrt(self.mass2)
+        return sqrt(self.mass2)
 
     def write_ascii(self, filename, **kwargs):
         """Write to Pawian-like ASCII file
@@ -149,6 +160,31 @@ class PawianAccessor:
             ))
         interleaved = pd.concat(new_dict).sort_index(kind="mergesort")
         interleaved.to_csv(filename, header=False, index=False, **kwargs)
+
+
+def create_skeleton_frame(particle_names=None, number_of_rows=None):
+    """
+    Create an empty ``pandas.DataFrame`` that complies with the standards of the registered
+    ``pawian`` accessor
+    """
+    index = None
+    if not number_of_rows is None:
+        index = pd.RangeIndex(number_of_rows)
+    if particle_names is None:
+        return pd.DataFrame(
+            index=index,
+            columns=_MOMENTUM_LABELS,
+        )
+    else:
+        cols = [(par, mom)
+                for par in particle_names
+                for mom in _MOMENTUM_LABELS]
+        multi_column = pd.MultiIndex.from_tuples(
+            tuples=cols, names=['Particle', 'Momentum'])
+        return pd.DataFrame(
+            index=index,
+            columns=multi_column,
+        )
 
 
 def read_ascii(filename, particles=None, **kwargs):
@@ -202,22 +238,70 @@ def read_ascii(filename, particles=None, **kwargs):
         nrows += 1
 
     # Create multi-column pandas.DataFrame
-    cols = [(par, mom)
-            for par in particles
-            for mom in _MOMENTUM_LABELS]
-    multi_index = pd.MultiIndex.from_tuples(
-        tuples=cols, names=['Particle', 'Momentum'])
-    frame = pd.DataFrame(
-        index=pd.RangeIndex(len(full_table)/nrows),
-        columns=multi_index)
+    frame = create_skeleton_frame(
+        particle_names=particles,
+        number_of_rows=len(full_table) // nrows,
+    )
 
     # Convert imported table to the multi-column one
     if has_weights:
-        frame[_WEIGHT_LABEL] = \
-            full_table[_MOMENTUM_LABELS[0]][0::nrows].reset_index(drop=True)
+        frame[_WEIGHT_LABEL] = full_table[_MOMENTUM_LABELS[0]
+                                          ][0:: nrows].reset_index(drop=True)
     for start_row, par in enumerate(particles, first_momentum_row):
         for mom in _MOMENTUM_LABELS:
-            frame[par, mom]\
-                = full_table[mom][start_row::nrows].reset_index(drop=True)
+            frame[par, mom] = full_table[mom][start_row:: nrows].reset_index(
+                drop=True)
 
+    return frame
+
+
+def read_pawian_hists(filename, type_name='data'):
+    """
+    Import one of the momentum tuple branches of a ``pawianHists.root`` file.
+
+    :param type_name: data or fitted
+    :type type_name: string
+    """
+
+    # Determine tree name
+    if 'dat' in type_name.lower():
+        type_name = 'data'
+    elif 'fit' in type_name.lower():
+        type_name = 'fitted'
+    else:
+        raise Exception(
+            f'Wrong type_name: should be either data or fitted')
+    tree_name = f'_{type_name}Fourvecs'
+
+    # Get particle names
+    uproot_file = uproot.open(filename)
+    tree = uproot_file[tree_name]
+    particles = [particle.decode() for particle in tree.keys()
+                 if particle.decode() != _WEIGHT_LABEL]
+
+    # Import tuples as dataframe
+    weights = uproot_file[f'{tree_name}/{_WEIGHT_LABEL}'].array()
+    frame = create_skeleton_frame(
+        particle_names=particles,
+        number_of_rows=len(weights),
+    )
+    if weights.max() != 1.0 and weights.min() != 1.0:
+        frame[_WEIGHT_LABEL] = weights
+    try:  # ROOT >= 6
+        for particle in particles:
+            vectors = uproot_file[f'{tree_name}/{particle}'].array()
+            frame[particle, _MOMENTUM_LABELS[0]] = vectors.x
+            frame[particle, _MOMENTUM_LABELS[1]] = vectors.y
+            frame[particle, _MOMENTUM_LABELS[2]] = vectors.z
+            frame[particle, _MOMENTUM_LABELS[3]] = vectors.E
+    except ValueError:  # ROOT <= 5
+        for particle in particles:
+            frame[particle, _MOMENTUM_LABELS[0]] = \
+                uproot_file[f'{tree_name}/{particle}/fE'].array()
+            frame[particle, _MOMENTUM_LABELS[1]] = \
+                uproot_file[f'{tree_name}/{particle}/fP/fP.fX'].array()
+            frame[particle, _MOMENTUM_LABELS[2]] = \
+                uproot_file[f'{tree_name}/{particle}/fP/fP.fY'].array()
+            frame[particle, _MOMENTUM_LABELS[3]] = \
+                uproot_file[f'{tree_name}/{particle}/fP/fP.fZ'].array()
     return frame

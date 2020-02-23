@@ -1,3 +1,5 @@
+"""Test :func:`pawian.data.read_ascii`"""
+
 from os.path import dirname, realpath
 from numpy import allclose, isclose
 import pytest
@@ -10,6 +12,7 @@ INPUT_FILE_MC = f'{SCRIPT_DIR}/momentum_tuples_mc.dat'
 
 
 def test_read_with_weight():
+    """Read a file that contains weights"""
     frame = read_ascii(INPUT_FILE_DATA)
     assert len(frame) == 1000
     assert len(frame.columns.levels[0]) == 4
@@ -40,14 +43,13 @@ def test_read_with_weight():
         rtol=tol)
 
 
-
-
 @pytest.mark.parametrize("particles", [
     ['pi+', 'D0', 'D-'],
     3,
     [1, 2, 3],
 ])
 def test_read_no_weights(particles):
+    """Read a file without weights"""
     frame = read_ascii(
         INPUT_FILE_MC, particles=particles)
     assert len(frame) == 1000
@@ -78,10 +80,8 @@ def test_read_no_weights(particles):
 
 
 def test_read_with_weights_wrong_particles():
+    """Test whether exceptions are raised"""
     with pytest.raises(DataParserError):
         read_ascii(INPUT_FILE_DATA, 4)
-
-
-def test_read_no_weights_missing_particles():
     with pytest.raises(DataParserError):
         read_ascii(INPUT_FILE_MC)

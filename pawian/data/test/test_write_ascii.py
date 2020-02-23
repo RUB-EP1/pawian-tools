@@ -1,3 +1,5 @@
+"""Test :func:`pawian.data.write_ascii`"""
+
 from os import remove
 from os.path import dirname, realpath
 from pandas.testing import assert_frame_equal
@@ -16,7 +18,8 @@ OUTPUT_FILE = f'{SCRIPT_DIR}/temp_output.dat'
     INPUT_FILE_DATA,
     INPUT_FILE_MC,
 ])
-def test_write_no_weights(input_file):
+def test_write_ascii(input_file):
+    """Write, then read an ASCII file"""
     particles = ['pi+', 'D0', 'D-']
     frame_in = read_ascii(input_file, particles=particles).loc[:9]
     frame_in.pawian.write_ascii(OUTPUT_FILE)

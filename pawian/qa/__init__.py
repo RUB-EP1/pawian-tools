@@ -9,16 +9,19 @@ __author__ = "Meike Küßner, Remco de Boer"
 __institution__ = "Ruhr-Universität Bochum"
 
 
-__all__ = ['PawianHists', 'EventSet']
+__all__ = ['PawianHists']
 
 
 import logging
 from math import ceil, sqrt
-import matplotlib.pyplot as plt
 import re  # regex
+import pandas as pd
+import matplotlib.pyplot as plt
 import uproot
 from uproot_methods.classes import TH1
+from uproot_methods import TLorentzVector
 
+from pawian.data import read_pawian_hists
 from pawian.latex import convert
 
 
@@ -35,8 +38,8 @@ class PawianHists:
     def import_file(self, filename):
         """Set data member by importing a ``pawianHists.root`` file"""
         self.__file = uproot.open(filename)
-        self.__data = EventSet(self.__file, 'data')
-        self.__fit = EventSet(self.__file, 'fit')
+        self.__data = read_pawian_hists(filename, type_name='data')
+        self.__fit = read_pawian_hists(filename, type_name='fit')
 
     def get_uproot_histogram(self, name):
         """Get an uproot ``TH1``, ``TH2``, or ``TH3`` from the ``pawianHists.root`` file. See `here
@@ -85,7 +88,7 @@ class PawianHists:
             <https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html>`__
         """
         if name not in self.histogram_names:
-            return None
+            raise Exception(f'Histogram \"{name}\" does not exist')
         edges, values = self.get_histogram_content(name)
         return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)
 
@@ -100,7 +103,7 @@ class PawianHists:
         .. seealso:: :func:`draw_histogram`
         """
         if name not in self.unique_histogram_names:
-            return None
+            raise Exception(f'Histogram of type \"{name}\" does not exist')
         # Construct regular expression
         re_match = []
         if data:
@@ -172,79 +175,26 @@ class PawianHists:
     @property
     def particles(self):
         """Get particle names contained in the file"""
-        return self.data.particles
+        return self.data.pawian.particles
 
     @property
     def data(self):
-        """Get :func:`EventSet <EventSet>` object for data. This contains
-        :func:`weights <EventSet.weights>` and a :func:`dictionary of particles`, the entries of
-        which are arrays of
-        `TLorentzVectors <https://root.cern.ch/doc/master/classTLorentzVector.html>`__.
+        """
+        Get a `pandas.DataFrame
+        <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__
+        of the **data events** contained in the ``pawianHists.root`` file.
 
-        .. seealso:: :func:`fit <pawian.qa.PawianHists.fit>`"""
+        .. seealso:: :func:`fit <pawian.qa.PawianHists.fit>`
+        """
         return self.__data
 
     @property
     def fit(self):
-        """Get :func:`EventSet <EventSet>` object of fit data.
+        """
+        Get a `pandas.DataFrame
+        <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__
+        of the **fit intensity sample** contained in the ``pawianHists.root`` file.
 
-        .. seealso:: :func:`data <pawian.qa.PawianHists.data>`"""
+        .. seealso:: :func:`data <pawian.qa.PawianHists.data>`
+        """
         return self.__fit
-
-
-class EventSet:
-    """
-    An array collection: one array for the weights and one for each of the particles
-    """
-
-    def __init__(self, uproot_file, type_name='data'):
-        """
-        :param type_name: data or fitted
-        :type type_name: string
-        """
-        if 'dat' in type_name:
-            type_name = 'data'
-        elif 'fit' in type_name:
-            type_name = 'fitted'
-        else:
-            raise Exception(
-                f'Wrong type_name: should be either data or fitted')
-        tree_name = f'_{type_name}{_4VEC_BRANCH_TAG}'
-        tree = uproot_file[tree_name]
-        self.__particles = [particle.decode() for particle in tree.keys()
-                            if particle.decode() != _WEIGHT_TAG]
-        self.__tuples = dict()
-        for particle in self.__particles:
-            self.__tuples[particle] = uproot_file[f'{tree_name}/{particle}'].array()
-        self.__weights = uproot_file[f'{tree_name}/{_WEIGHT_TAG}'].array()
-
-    @property
-    def particles(self):
-        """Get particle names contained in the file"""
-        return self.__particles
-
-    @property
-    def weights(self):
-        """Get array of event weights"""
-        return self.__weights
-
-    def __getitem__(self, particle_name):
-        """Get array of
-        `TLorentzVector <https://root.cern.ch/doc/master/classTLorentzVector.html>`__s
-        for one of the particles"""
-        return self.__tuples[particle_name]
-
-    def __len__(self):
-        return len(self.__weights)
-
-    def __iter__(self):
-        return self.__tuples.__iter__()
-
-    def items(self):
-        return self.__tuples.items()
-
-    def keys(self):
-        return self.__tuples.keys()
-
-    def values(self):
-        return self.__tuples.values()
