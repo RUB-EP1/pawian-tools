@@ -122,7 +122,7 @@ def test_draw_combined_histogram():
 
 
 @pytest.mark.parametrize('filename, energy', [
-    (FILENAME_ROOT5, 0.004492828703895122),
+    (FILENAME_ROOT5, 1.338907402473968),
     (FILENAME_ROOT6, 0.20740474665355302),
 ])
 def test_lorentz_vectors(filename, energy):

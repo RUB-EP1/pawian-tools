@@ -297,11 +297,11 @@ def read_pawian_hists(filename, type_name='data'):
     except ValueError:  # ROOT <= 5
         for particle in particles:
             frame[particle, _MOMENTUM_LABELS[0]] = \
-                uproot_file[f'{tree_name}/{particle}/fE'].array()
-            frame[particle, _MOMENTUM_LABELS[1]] = \
                 uproot_file[f'{tree_name}/{particle}/fP/fP.fX'].array()
-            frame[particle, _MOMENTUM_LABELS[2]] = \
+            frame[particle, _MOMENTUM_LABELS[1]] = \
                 uproot_file[f'{tree_name}/{particle}/fP/fP.fY'].array()
-            frame[particle, _MOMENTUM_LABELS[3]] = \
+            frame[particle, _MOMENTUM_LABELS[2]] = \
                 uproot_file[f'{tree_name}/{particle}/fP/fP.fZ'].array()
+            frame[particle, _MOMENTUM_LABELS[3]] = \
+                uproot_file[f'{tree_name}/{particle}/fE'].array()
     return frame

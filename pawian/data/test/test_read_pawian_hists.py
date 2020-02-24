@@ -15,7 +15,7 @@ QA_TEST_DIR = dirname(realpath(pawian.qa.__file__))
         f'{QA_TEST_DIR}/test/pawianHists_ROOT5_SigmaKp.root',
         False,
         ['Sigmaplus', 'antiproton', 'K0'],
-        0.004492828703895122,
+        1.338907402473968,
     ),
     (
         f'{QA_TEST_DIR}/test/pawianHists_ROOT6_DDpi.root',
