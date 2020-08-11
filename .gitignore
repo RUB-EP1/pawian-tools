@@ -6,7 +6,7 @@
 .ipynb_checkpoints
 .pytest_cache/
 __pycache__
-pycompwa.egg-info
+**.egg-info
 
 # Python virtual environments
 venv/
@@ -24,7 +24,6 @@ venv/
 htmlcov/
 
 # Build files
-*.[aod]
 *.so
 *build/
 bin/

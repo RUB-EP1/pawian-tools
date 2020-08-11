@@ -8,7 +8,7 @@ import subprocess
 
 # Generate indices for the Python modules in the folder above
 subprocess.call(
-    'sphinx-apidoc -f -M -o . ..',
+    'sphinx-apidoc -f -M -o . .. ../setup.py',
     shell=True)
 
 # -- Project information -----------------------------------------------------
