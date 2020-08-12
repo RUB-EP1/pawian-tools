@@ -1,5 +1,6 @@
 [![pipeline status](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/pipeline.svg)](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/commits/master)
 [![coverage report](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/coverage.svg)](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/commits/master)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # Python Tools for Pawian
 

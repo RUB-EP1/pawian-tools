@@ -9,7 +9,7 @@ __author__ = "Meike Küßner, Remco de Boer"
 __institution__ = "Ruhr-Universität Bochum"
 
 
-__all__ = ['PawianHists']
+__all__ = ["PawianHists"]
 
 
 import logging
@@ -25,8 +25,8 @@ from pawian.data import read_pawian_hists
 from pawian.latex import convert
 
 
-_WEIGHT_TAG = 'weight'
-_4VEC_BRANCH_TAG = 'Fourvecs'
+_WEIGHT_TAG = "weight"
+_4VEC_BRANCH_TAG = "Fourvecs"
 
 
 class PawianHists:
@@ -38,8 +38,8 @@ class PawianHists:
     def import_file(self, filename):
         """Set data member by importing a ``pawianHists.root`` file"""
         self.__file = uproot.open(filename)
-        self.__data = read_pawian_hists(filename, type_name='data')
-        self.__fit = read_pawian_hists(filename, type_name='fit')
+        self.__data = read_pawian_hists(filename, type_name="data")
+        self.__fit = read_pawian_hists(filename, type_name="fit")
 
     def get_uproot_histogram(self, name):
         """Get an uproot ``TH1``, ``TH2``, or ``TH3`` from the ``pawianHists.root`` file. See `here
@@ -88,12 +88,13 @@ class PawianHists:
             <https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html>`__
         """
         if name not in self.histogram_names:
-            raise Exception(f'Histogram \"{name}\" does not exist')
+            raise Exception(f'Histogram "{name}" does not exist')
         edges, values = self.get_histogram_content(name)
         return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)
 
-    def draw_combined_histogram(self, name, plot_on=plt,
-                                data=True, fit=True, mc=True, **kwargs):
+    def draw_combined_histogram(
+        self, name, plot_on=plt, data=True, fit=True, mc=True, **kwargs
+    ):
         """Combine the three types of histograms in one plot.
 
         :param name:
@@ -103,28 +104,27 @@ class PawianHists:
         .. seealso:: :func:`draw_histogram`
         """
         if name not in self.unique_histogram_names:
-            raise Exception(f'Histogram of type \"{name}\" does not exist')
+            raise Exception(f'Histogram of type "{name}" does not exist')
         # Construct regular expression
         re_match = []
         if data:
-            re_match.append('Data')
+            re_match.append("Data")
         if fit:
-            re_match.append('Fit')
+            re_match.append("Fit")
         if mc:
-            re_match.append('MC')
-            re_match.append('Mc')
-        re_match = '|'.join(re_match)
-        re_match = f'({re_match}){name}'
+            re_match.append("MC")
+            re_match.append("Mc")
+        re_match = "|".join(re_match)
+        re_match = f"({re_match}){name}"
         # Makes selection of names plus corresponding labels
-        names = [k for k in self.histogram_names
-                 if re.fullmatch(re_match, k)]
-        labels = [re.match(re_match, k)[1].lower()
-                  for k in names]
+        names = [k for k in self.histogram_names if re.fullmatch(re_match, k)]
+        labels = [re.match(re_match, k)[1].lower() for k in names]
         # Create histograms
         hists = dict()
         for hist_name, label in zip(names, labels):
             histogram = self.draw_histogram(
-                hist_name, plot_on, label=label, **kwargs)
+                hist_name, plot_on, label=label, **kwargs
+            )
             hists[label] = histogram
         return hists
 
@@ -134,7 +134,8 @@ class PawianHists:
         .. seealso:: :func:`draw_combined_histogram`
         """
         logging.info(
-            'Drawing all histograms for file %s ...', self.__file.name.decode())
+            "Drawing all histograms for file %s ...", self.__file.name.decode()
+        )
         names = self.unique_histogram_names
         n_hists = len(names)
         n_x = ceil(sqrt(len(names)))
@@ -142,9 +143,9 @@ class PawianHists:
 
         grid = plot_on.add_gridspec(n_x, n_y)
         for idx, name in enumerate(names):
-            sub = plot_on.add_subplot(grid[idx % n_x, idx//n_x])
+            sub = plot_on.add_subplot(grid[idx % n_x, idx // n_x])
             self.draw_combined_histogram(name, sub, **kwargs)
-            sub.set_title(f'${convert(name)}$')
+            sub.set_title(f"${convert(name)}$")
             if legend:
                 sub.legend()
 
@@ -167,7 +168,7 @@ class PawianHists:
             obj = self.__file[name]
             if isinstance(obj, TH1.Methods):
                 hist_name = obj.name.decode()
-                if hist_name.startswith('Data'):
+                if hist_name.startswith("Data"):
                     hist_name = hist_name[4:]
                     names.append(hist_name)
         return names

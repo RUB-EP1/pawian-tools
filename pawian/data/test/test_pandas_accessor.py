@@ -8,20 +8,22 @@ from pawian.data import create_skeleton_frame, read_ascii
 
 
 SCRIPT_DIR = dirname(realpath(__file__))
-INPUT_FILE_DATA = f'{SCRIPT_DIR}/momentum_tuples_data.dat'
-INPUT_FILE_MC = f'{SCRIPT_DIR}/momentum_tuples_mc.dat'
+INPUT_FILE_DATA = f"{SCRIPT_DIR}/momentum_tuples_data.dat"
+INPUT_FILE_MC = f"{SCRIPT_DIR}/momentum_tuples_mc.dat"
 
 
-@pytest.mark.parametrize("particles,number_of_rows", [
-    (['pi+', 'D0', 'D-'], 100),
-    # (['gamma', 'pi+', 'pi-'], None),
-    (None, 50),
-])
+@pytest.mark.parametrize(
+    "particles,number_of_rows",
+    [
+        (["pi+", "D0", "D-"], 100),
+        # (['gamma', 'pi+', 'pi-'], None),
+        (None, 50),
+    ],
+)
 def test_create_skeleton(particles, number_of_rows):
     """Test creating an empty pawian dataframe"""
     frame = create_skeleton_frame(
-        particle_names=particles,
-        number_of_rows=number_of_rows,
+        particle_names=particles, number_of_rows=number_of_rows,
     )
     if number_of_rows is None:
         number_of_rows = 0
@@ -31,20 +33,19 @@ def test_create_skeleton(particles, number_of_rows):
         assert frame.pawian.particles == particles
 
 
-@pytest.mark.parametrize("columns,names", [
-    (  # wrong number of column LEVELS
-        [
-            ('A'), ('B'), ('C'),
-        ],
-        ['Particles'],
-    ), (   # wrong momentum labels
-        [
-            ('A', 'px'), ('A', 'b'),
-            ('B', 'px'), ('B', 'b'),
-        ],
-        ['Particles', 'Momentum'],
-    )
-])
+@pytest.mark.parametrize(
+    "columns,names",
+    [
+        (  # wrong number of column LEVELS
+            [("A"), ("B"), ("C"),],
+            ["Particles"],
+        ),
+        (  # wrong momentum labels
+            [("A", "px"), ("A", "b"), ("B", "px"), ("B", "b"),],
+            ["Particles", "Momentum"],
+        ),
+    ],
+)
 def test_raise_validate(columns, names):
     """Test exception upon validate"""
     multi_index = pd.MultiIndex.from_tuples(columns, names=names)
@@ -55,7 +56,7 @@ def test_raise_validate(columns, names):
 
 def test_properties_multicolumn():
     """Test whether properties work for multicolumn dataframe"""
-    particles = ['pi+', 'D0', 'D-']
+    particles = ["pi+", "D0", "D-"]
     frame_data = read_ascii(INPUT_FILE_DATA, particles=particles)
     frame_mc = read_ascii(INPUT_FILE_MC, particles=particles)
 
@@ -71,31 +72,27 @@ def test_properties_multicolumn():
     assert frame_mc.pawian.particles == particles
     assert frame_data.pawian.particles == particles
 
-    momentum_labels = ['p_x', 'p_y', 'p_z', 'E']
+    momentum_labels = ["p_x", "p_y", "p_z", "E"]
     assert frame_mc.pawian.momentum_labels == momentum_labels
     assert frame_data.pawian.momentum_labels == momentum_labels
 
     assert np.allclose(
         frame_data.pawian.mass.mean().tolist(),
-        [
-            0.13957,
-            1.86484,
-            1.86961,
-        ], atol=1e-5)
+        [0.13957, 1.86484, 1.86961,],
+        atol=1e-5,
+    )
     assert np.allclose(
         frame_data.pawian.rho.mean().tolist(),
-        [
-            0.14209,
-            0.64765,
-            0.69154,
-        ], atol=1e-5)
+        [0.14209, 0.64765, 0.69154,],
+        atol=1e-5,
+    )
 
 
 def test_properties_single_column():
     """Test whether properties work for single column dataframe"""
-    particles = ['pi+', 'D0', 'D-']
-    pi_data = read_ascii(INPUT_FILE_DATA, particles=particles)['pi+']
-    pi_mc = read_ascii(INPUT_FILE_MC, particles=particles)['pi+']
+    particles = ["pi+", "D0", "D-"]
+    pi_data = read_ascii(INPUT_FILE_DATA, particles=particles)["pi+"]
+    pi_mc = read_ascii(INPUT_FILE_MC, particles=particles)["pi+"]
 
     assert pi_data.pawian.energy.iloc[-1] == 0.152749
     assert pi_mc.pawian.energy.iloc[-1] == 0.257006

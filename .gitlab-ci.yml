@@ -23,7 +23,7 @@ before_script:
   - *activate-venv
   - python3 -m pip install .
 
-test sphinx documentation:
+Documentation:
   <<: *only-default
   before_script:
     - *print-system-info
@@ -33,7 +33,7 @@ test sphinx documentation:
     - cd docs
     - make html
 
-pytest:
+Tests:
   <<: *only-default
   before_script:
     - *print-system-info
@@ -41,3 +41,12 @@ pytest:
     - python3 -m pip install .[test]
   script:
     - python3 -m pytest --durations=0 --cov-config=.coveragerc --cov=./
+
+Style:
+  <<: *only-default
+  before_script:
+    - *print-system-info
+    - *activate-venv
+    - python3 -m pip install .[dev]
+  script:
+    - black .

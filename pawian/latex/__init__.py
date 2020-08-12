@@ -13,29 +13,22 @@ __all__ = ["convert"]
 import re  # regex
 
 
-__PARTICLES = [
-    'D', 'pi', 'pion', 'eta', 'rho'
-]
+__PARTICLES = ["D", "pi", "pion", "eta", "rho"]
 
 
-__LATEX_COMMANDS = [
-    'pion', 'eta', 'rho',
-    'pi',
-    'theta', 'Theta',
-    'phi', 'Phi'
-]
+__LATEX_COMMANDS = ["pion", "eta", "rho", "pi", "theta", "Theta", "phi", "Phi"]
 
 
 __OTHER_REPLACEMENTS = {
     r"(GJ|Heli)_": r"_{\1}: ",
     r"_From": r"\\mathrm{~from~}",
     r"\\pion": r"\\pi",
-    f"({'|'.join(__PARTICLES)}) *[m-]": R"\1^- ",
-    f"({'|'.join(__PARTICLES)}) *[p+]": R"\1^+ ",
-    f"({'|'.join(__PARTICLES)}) *0": R"\1^0 ",
-    r'[ ]+([_\^\{\[])': r'\1',
-    r'(^\s+|\s+$)': '',  # leading or trailing spaces
-    r'\s\s+': ' ',  # double spaces
+    f"({'|'.join(__PARTICLES)}) *[m-]": r"\1^- ",
+    f"({'|'.join(__PARTICLES)}) *[p+]": r"\1^+ ",
+    f"({'|'.join(__PARTICLES)}) *0": r"\1^0 ",
+    r"[ ]+([_\^\{\[])": r"\1",
+    r"(^\s+|\s+$)": "",  # leading or trailing spaces
+    r"\s\s+": " ",  # double spaces
 }
 
 

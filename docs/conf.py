@@ -7,15 +7,13 @@
 import subprocess
 
 # Generate indices for the Python modules in the folder above
-subprocess.call(
-    'sphinx-apidoc -f -M -o . .. ../setup.py',
-    shell=True)
+subprocess.call("sphinx-apidoc -f -M -o . .. ../setup.py", shell=True)
 
 # -- Project information -----------------------------------------------------
 
-project = 'pyPawianTools'
-copyright = '2020, Remco de Boer'
-author = 'Remco de Boer'
+project = "pyPawianTools"
+copyright = "2020, Remco de Boer"
+author = "Remco de Boer"
 
 
 # -- Include constructors ----------------------------------------------------
@@ -30,16 +28,16 @@ def setup(app):
 
 
 # -- General configuration ---------------------------------------------------
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
-exclude_patterns = ['*build', 'test', 'tests']
-pygments_style = 'sphinx'
+extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode"]
+exclude_patterns = ["*build", "test", "tests"]
+pygments_style = "sphinx"
 
 todo_include_todos = False
 add_module_names = False
 viewcode_follow_imported_members = True
-autodoc_member_order = 'bysource'
+autodoc_member_order = "bysource"
 
 
 # -- Options for HTML output -------------------------------------------------
-html_theme = 'nature'
+html_theme = "nature"
 html_show_sourcelink = False
