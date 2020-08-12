@@ -7,7 +7,6 @@ variables:
     - master
 
 .print-system-info: &print-system-info
-  - inxi
   - lsb_release -a
   - pwd
   - python3 --version
@@ -36,7 +35,9 @@ test sphinx documentation:
 
 pytest:
   <<: *only-default
+  before_script:
+    - *print-system-info
+    - *activate-venv
+    - python3 -m pip install .[test]
   script:
-    - python3 -m pip install pytest pytest-cov
-    - python3 -m pip install -r requirements.txt
     - python3 -m pytest --durations=0 --cov-config=.coveragerc --cov=./
