@@ -7,6 +7,15 @@ Welcome to pyPawianTools's documentation!
    modules
 
 
+Usage examples
+==============
+
+.. toctree::
+   :glob:
+
+   _examples/*
+
+
 Indices and tables
 ==================
 

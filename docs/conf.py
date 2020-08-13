@@ -9,6 +9,13 @@ import subprocess
 # Generate indices for the Python modules in the folder above
 subprocess.call("sphinx-apidoc -f -M -o . .. ../setup.py", shell=True)
 
+subprocess.call(
+    "jupyter nbconvert --to rst ../examples/*.ipynb; "
+    "mkdir _examples; "
+    "mv ../examples/*.rst _examples",
+    shell=True,
+)
+
 # -- Project information -----------------------------------------------------
 
 project = "pyPawianTools"
@@ -29,7 +36,12 @@ def setup(app):
 
 # -- General configuration ---------------------------------------------------
 extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode"]
-exclude_patterns = ["*build", "test", "tests"]
+exclude_patterns = [
+    "**.ipynb_checkpoints",
+    "*build",
+    "test",
+    "tests",
+]
 pygments_style = "sphinx"
 
 todo_include_todos = False
