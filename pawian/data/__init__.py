@@ -175,15 +175,12 @@ def create_skeleton_frame(particle_names=None, number_of_rows=None):
     if number_of_rows is not None:
         index = pd.RangeIndex(number_of_rows)
     if particle_names is None:
-        return pd.DataFrame(index=index, columns=_MOMENTUM_LABELS,)
-    else:
-        cols = [
-            (par, mom) for par in particle_names for mom in _MOMENTUM_LABELS
-        ]
-        multi_column = pd.MultiIndex.from_tuples(
-            tuples=cols, names=["Particle", "Momentum"]
-        )
-        return pd.DataFrame(index=index, columns=multi_column,)
+        return pd.DataFrame(index=index, columns=_MOMENTUM_LABELS)
+    cols = [(par, mom) for par in particle_names for mom in _MOMENTUM_LABELS]
+    multi_column = pd.MultiIndex.from_tuples(
+        tuples=cols, names=["Particle", "Momentum"]
+    )
+    return pd.DataFrame(index=index, columns=multi_column)
 
 
 def read_ascii(filename, particles=None, **kwargs):

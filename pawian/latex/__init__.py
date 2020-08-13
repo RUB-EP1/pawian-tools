@@ -3,13 +3,6 @@ Functions that help converting strings to LaTeX syntax.
 """
 
 
-__author__ = "Meike Küßner, Remco de Boer"
-__institution__ = "Ruhr-Universität Bochum"
-
-
-__all__ = ["convert"]
-
-
 import re  # regex
 
 

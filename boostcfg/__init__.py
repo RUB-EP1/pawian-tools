@@ -8,13 +8,6 @@ BoostConfigParser was especially designed for
 `Pawian <https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware>`__.
 """
 
-__author__ = "Remco de Boer"
-__institution__ = "Ruhr-Universität Bochum"
-
-
-__all__ = ["BoostConfigParser", "lineparser"]
-
-
 from . import lineparser
 
 

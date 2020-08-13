@@ -5,11 +5,11 @@ output. Note that the tools here **are specific to Pawian**. Any tools that are
 more general in usage should be extracted to a separate module.
 """
 
-__author__ = "Meike Küßner, Remco de Boer"
-__institution__ = "Ruhr-Universität Bochum"
-
-
-__all__ = ["data", "latex", "qa"]
+__all__ = [
+    "data",
+    "latex",
+    "qa",
+]
 
 
 from . import data

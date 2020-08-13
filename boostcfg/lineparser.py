@@ -2,10 +2,6 @@
 A collection of tools to parse lines in a Boost config file
 """
 
-__author__ = "Remco de Boer"
-__institution__ = "Ruhr-Universität Bochum"
-
-
 __all__ = [
     "get_key_value_pair",
     "is_commented",
