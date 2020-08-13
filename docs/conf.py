@@ -1,26 +1,57 @@
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
+"""Configuration file for the Sphinx documentation builder.
 
+This file only contains a selection of the most common options. For a full
+list see the documentation:
+https://www.sphinx-doc.org/en/master/usage/configuration.html
+"""
+
+import os
+import shutil
 import subprocess
 
-# Generate indices for the Python modules in the folder above
-subprocess.call("sphinx-apidoc -f -M -o . .. ../setup.py", shell=True)
 
+# -- Copy example notebooks ---------------------------------------------------
+print("Copy example notebook and data files")
+PATH_SOURCE = "../examples"
+PATH_TARGET = "usage"
+FILES_TO_COPY = [
+    "ASCII_Data.ipynb",
+    "QA_Histograms.ipynb",
+]
+shutil.rmtree(PATH_TARGET, ignore_errors=True)
+os.makedirs(PATH_TARGET, exist_ok=True)
+for file_to_copy in FILES_TO_COPY:
+    path_from = os.path.join(PATH_SOURCE, file_to_copy)
+    path_to = os.path.join(PATH_TARGET, file_to_copy)
+    print("  copy", path_from, "to", path_to)
+    shutil.copyfile(path_from, path_to, follow_symlinks=True)
+
+# -- Generate API skeleton ----------------------------------------------------
+shutil.rmtree("api", ignore_errors=True)
 subprocess.call(
-    "jupyter nbconvert --to rst ../examples/*.ipynb; "
-    "mkdir _examples; "
-    "mv ../examples/*.rst _examples",
+    "sphinx-apidoc "
+    "--force "
+    "--no-toc "
+    "--templatedir _templates "
+    "--separate "
+    "-o api/ ../boostcfg/; ",
+    shell=True,
+)
+subprocess.call(
+    "sphinx-apidoc "
+    "--force "
+    "--no-toc "
+    "--templatedir _templates "
+    "--separate "
+    "-o api/ ../pawian/; ",
     shell=True,
 )
 
-# -- Project information -----------------------------------------------------
 
+# -- Project information -----------------------------------------------------
 project = "pyPawianTools"
-copyright = "2020, Remco de Boer"
-author = "Remco de Boer"
+copyright = "2020, RUB EP1"
+author = "Meike Küßner, Remco de Boer"
 
 
 # -- Include constructors ----------------------------------------------------
@@ -35,7 +66,16 @@ def setup(app):
 
 
 # -- General configuration ---------------------------------------------------
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.viewcode"]
+extensions = [
+    "nbsphinx",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.ifconfig",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+    "sphinx_copybutton",
+]
 exclude_patterns = [
     "**.ipynb_checkpoints",
     "*build",
@@ -51,5 +91,17 @@ autodoc_member_order = "bysource"
 
 
 # -- Options for HTML output -------------------------------------------------
-html_theme = "nature"
+html_theme = "sphinx_rtd_theme"
 html_show_sourcelink = False
+
+# Settings for nbsphinx
+if "NBSPHINX_EXECUTE" in os.environ:
+    print("\033[93;1mWill run Jupyter notebooks!\033[0m")
+    nbsphinx_execute = "always"
+else:
+    nbsphinx_execute = "never"
+nbsphinx_timeout = -1
+nbsphinx_execute_arguments = [
+    "--InlineBackend.figure_formats={'svg', 'pdf'}",
+    "--InlineBackend.rc={'figure.dpi': 96}",
+]

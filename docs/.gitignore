@@ -1,1 +1,4 @@
-*.rst
+*.doctree
+*.ipynb
+*build/
+api/
