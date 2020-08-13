@@ -23,10 +23,10 @@ additional PWA methods in the form of ``pandas.DataFrame`` accessors.
 __all__ = ["DataParserError", "PawianAccessor", "read_ascii"]
 
 
-import math
-import re
-from numpy import sqrt, isclose
+from numpy import sqrt
+
 import pandas as pd
+
 import uproot
 
 
@@ -172,7 +172,7 @@ def create_skeleton_frame(particle_names=None, number_of_rows=None):
     ``pawian`` accessor
     """
     index = None
-    if not number_of_rows is None:
+    if number_of_rows is not None:
         index = pd.RangeIndex(number_of_rows)
     if particle_names is None:
         return pd.DataFrame(index=index, columns=_MOMENTUM_LABELS,)
@@ -271,7 +271,7 @@ def read_pawian_hists(filename, type_name="data"):
     elif "fit" in type_name.lower():
         type_name = "fitted"
     else:
-        raise Exception(f"Wrong type_name: should be either data or fitted")
+        raise Exception('Wrong type_name: should be either "data" or "fitted"')
     tree_name = f"_{type_name}Fourvecs"
 
     # Get particle names

@@ -1,9 +1,13 @@
 """Test the ``pawian`` namespace added to the ``pandas.DataFrame``"""
 
 from os.path import dirname, realpath
-import pandas as pd
-import pytest
+
 import numpy as np
+
+import pandas as pd
+
+import pytest
+
 from pawian.data import create_skeleton_frame, read_ascii
 
 

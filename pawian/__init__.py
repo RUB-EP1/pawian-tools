@@ -13,5 +13,5 @@ __all__ = ["data", "latex", "qa"]
 
 
 from . import data
-from . import qa
 from . import latex
+from . import qa

@@ -1,9 +1,15 @@
 """Test :func:`pawian.data.read_ascii`"""
 
 from os.path import dirname, realpath
+
 from numpy import allclose, isclose
+
 import pytest
-from pawian.data import read_ascii, DataParserError
+
+from pawian.data import (
+    DataParserError,
+    read_ascii,
+)
 
 
 SCRIPT_DIR = dirname(realpath(__file__))

@@ -1,10 +1,11 @@
 """Test :func:`pawian.data.read_pawian_hists`"""
 
 from os.path import dirname, realpath
+
 import pytest
-from pawian.data import read_pawian_hists
 
 import pawian.qa
+from pawian.data import read_pawian_hists
 
 
 QA_TEST_DIR = dirname(realpath(pawian.qa.__file__))

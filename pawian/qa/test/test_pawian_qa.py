@@ -1,12 +1,13 @@
 """Test `pawian.qa` module"""
 
-from os.path import dirname, realpath
 from math import isclose
+from os.path import dirname, realpath
 from statistics import mean
+
 import matplotlib.pyplot as plt
+
 import pytest
 
-# import pawian.data
 from pawian.qa import PawianHists
 
 

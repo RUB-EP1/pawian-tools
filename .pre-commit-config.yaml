@@ -35,3 +35,18 @@ repos:
     hooks:
       - id: prettier
         language_version: 12.18.2 # prettier does not specify node correctly
+
+  - repo: local
+    hooks:
+      - id: flake8
+        name: flake8
+        entry: flake8
+        language: system
+        types:
+          - python
+
+      - id: rstcheck
+        name: rstcheck
+        entry: rstcheck
+        language: system
+        files: \.(inc|rst)$

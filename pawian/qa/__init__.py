@@ -13,13 +13,14 @@ __all__ = ["PawianHists"]
 
 
 import logging
-from math import ceil, sqrt
 import re  # regex
-import pandas as pd
+from math import ceil, sqrt
+
 import matplotlib.pyplot as plt
+
 import uproot
+
 from uproot_methods.classes import TH1
-from uproot_methods import TLorentzVector
 
 from pawian.data import read_pawian_hists
 from pawian.latex import convert

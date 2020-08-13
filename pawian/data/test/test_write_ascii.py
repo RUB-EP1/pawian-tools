@@ -2,7 +2,9 @@
 
 from os import remove
 from os.path import dirname, realpath
+
 from pandas.testing import assert_frame_equal
+
 import pytest
 
 from pawian.data import read_ascii

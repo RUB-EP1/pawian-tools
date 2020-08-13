@@ -1,6 +1,6 @@
-import pawian.latex as latex
 import pytest
-import matplotlib.pyplot as plt
+
+import pawian.latex as latex
 
 
 @pytest.mark.parametrize(
