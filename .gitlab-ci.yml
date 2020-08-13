@@ -16,6 +16,7 @@ variables:
   - python3 -m venv venv
   - source venv/bin/activate
   - python3 -m pip install --upgrade pip
+  - python3 -m pip install wheel
   - which python3
 
 before_script:
@@ -49,4 +50,4 @@ Style:
     - *activate-venv
     - python3 -m pip install .[dev]
   script:
-    - black .
+    - pre-commit run -a
