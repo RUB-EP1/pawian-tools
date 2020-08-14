@@ -32,7 +32,7 @@ Documentation:
     - python3 -m pip install .[doc]
   script:
     - cd docs
-    - make html
+    - NBSPHINX_EXECUTE= make html
 
 Tests:
   <<: *only-default
