@@ -8,12 +8,14 @@ import matplotlib.pyplot as plt
 
 import pytest
 
+import pawian
 from pawian.qa import PawianHists
 
 
-SCRIPT_DIR = dirname(realpath(__file__))
-FILENAME_ROOT5 = f"{SCRIPT_DIR}/pawianHists_ROOT5_SigmaKp.root"
-FILENAME_ROOT6 = f"{SCRIPT_DIR}/pawianHists_ROOT6_DDpi.root"
+PAWIAN_DIR = dirname(realpath(pawian.__file__))
+SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
+FILENAME_ROOT5 = f"{SAMPLE_DIR}/pawianHists_ROOT5_SigmaKp.root"
+FILENAME_ROOT6 = f"{SAMPLE_DIR}/pawianHists_ROOT6_DDpi.root"
 
 
 def test_faulty_import():

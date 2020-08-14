@@ -8,12 +8,14 @@ import pandas as pd
 
 import pytest
 
+import pawian
 from pawian.data import create_skeleton_frame, read_ascii
 
 
-SCRIPT_DIR = dirname(realpath(__file__))
-INPUT_FILE_DATA = f"{SCRIPT_DIR}/momentum_tuples_data.dat"
-INPUT_FILE_MC = f"{SCRIPT_DIR}/momentum_tuples_mc.dat"
+PAWIAN_DIR = dirname(realpath(pawian.__file__))
+SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
+INPUT_FILE_DATA = f"{SAMPLE_DIR}/momentum_tuples_data.dat"
+INPUT_FILE_MC = f"{SAMPLE_DIR}/momentum_tuples_mc.dat"
 
 
 @pytest.mark.parametrize(

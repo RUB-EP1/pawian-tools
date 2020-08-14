@@ -4,24 +4,25 @@ from os.path import dirname, realpath
 
 import pytest
 
-import pawian.qa
+import pawian
 from pawian.data import read_pawian_hists
 
 
-QA_TEST_DIR = dirname(realpath(pawian.qa.__file__))
+PAWIAN_DIR = dirname(realpath(pawian.__file__))
+SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
 
 
 @pytest.mark.parametrize(
     "input_file, has_weights, particles, energy",
     [
         (
-            f"{QA_TEST_DIR}/test/pawianHists_ROOT5_SigmaKp.root",
+            "pawianHists_ROOT5_SigmaKp.root",
             False,
             ["Sigmaplus", "antiproton", "K0"],
             1.338907402473968,
         ),
         (
-            f"{QA_TEST_DIR}/test/pawianHists_ROOT6_DDpi.root",
+            "pawianHists_ROOT6_DDpi.root",
             True,
             ["pi+", "D0", "D-"],
             0.20740474665355302,
@@ -30,6 +31,7 @@ QA_TEST_DIR = dirname(realpath(pawian.qa.__file__))
 )
 def test_read_pawian_hists(input_file, has_weights, particles, energy):
     """Test loading pawianHists.root file"""
+    input_file = f"{SAMPLE_DIR}/{input_file}"
     data = read_pawian_hists(input_file, type_name="data")
     fit = read_pawian_hists(input_file, type_name="fit")
 
@@ -45,6 +47,5 @@ def test_read_pawian_hists_exception():
     """Test whether expected exceptions are raised"""
     with pytest.raises(Exception):
         read_pawian_hists(
-            f"{QA_TEST_DIR}/test/pawianHists_ROOT6_DDpi.root",
-            type_name="wrong",
+            f"{SAMPLE_DIR}/pawianHists_ROOT6_DDpi.root", type_name="wrong",
         )
