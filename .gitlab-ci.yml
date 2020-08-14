@@ -41,7 +41,7 @@ Tests:
     - *activate-venv
     - python3 -m pip install .[test]
   script:
-    - python3 -m pytest --durations=0 --cov-config=.coveragerc --cov=./
+    - python3 -m pytest --cov=boostcfg --cov=pawian
 
 Style:
   <<: *only-default

@@ -1,9 +1,0 @@
-# Run from this folder with
-#   pytest --cov-config=.coveragerc --cov=./ --cov-report html
-# Requires Python package pytest-cov
-
-[run]
-omit =
-    test*/*
-    */test*.py
-    venv*/*
