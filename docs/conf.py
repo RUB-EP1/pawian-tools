@@ -34,16 +34,7 @@ subprocess.call(
     "--no-toc "
     "--templatedir _templates "
     "--separate "
-    "-o api/ ../boostcfg/; ",
-    shell=True,
-)
-subprocess.call(
-    "sphinx-apidoc "
-    "--force "
-    "--no-toc "
-    "--templatedir _templates "
-    "--separate "
-    "-o api/ ../pawian/; ",
+    "-o api/ ../src/; ",
     shell=True,
 )
 

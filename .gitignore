@@ -19,7 +19,7 @@ venv/
 *.pdf
 *.root
 *.server
-!/pawian/samples/*
+!/src/pawian/samples/*
 
 # Unit testing
 htmlcov/
