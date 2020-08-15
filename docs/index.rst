@@ -3,6 +3,10 @@ Welcome to the pyPawianTools documentation!
 
 .. list-table::
 
+  * - .. image:: https://mybinder.org/badge_logo.svg
+        :alt: Try out Jupyter notebooks
+        :target: https://mybinder.org/v2/git/https%3A%2F%2Fgitlab.ep1.rub.de%2Fredeboer%2FpyPawianTools/master?filepath=examples
+
   * - .. image:: https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/pipeline.svg
         :alt: CI status
         :target: https://gitlab.ep1.rub.de/redeboer/pyPawianTools/pipelines?&ref=master

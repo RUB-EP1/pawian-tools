@@ -1,5 +1,7 @@
 # Python Tools for Pawian
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/git/https%3A%2F%2Fgitlab.ep1.rub.de%2Fredeboer%2FpyPawianTools/master?filepath=examples)
+<br>
 [![pipeline status](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/pipeline.svg)](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/pipelines?&ref=master)
 [![coverage report](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/coverage.svg)](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/commits/master)
 <br>
