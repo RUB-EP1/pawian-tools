@@ -9,6 +9,7 @@ __pycache__
 **.egg-info
 
 # Python virtual environments
+.tox/
 venv/
 
 # I/O files
@@ -22,6 +23,8 @@ venv/
 !/src/pawian/samples/*
 
 # Unit testing
+.coverage*
+coverage.xml
 htmlcov/
 
 # Build files
