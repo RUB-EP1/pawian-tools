@@ -50,4 +50,5 @@ Style:
     - *activate-venv
     - python3 -m pip install .[dev]
   script:
+    - cspell $(git ls-files)
     - pre-commit run -a

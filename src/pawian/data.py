@@ -1,3 +1,5 @@
+# cspell:ignore astype dropna
+
 """
 This module allows you to parse and analyse ASCII data files of momentum tuples. The files have the
 following form:
@@ -230,24 +232,24 @@ def read_ascii(filename, particles=None, **kwargs):
 
     # Prepare splitting into particle columns
     first_momentum_row = 0
-    nrows = len(particles)
+    n_rows = len(particles)
     if has_weights:
         first_momentum_row = 1
-        nrows += 1
+        n_rows += 1
 
     # Create multi-column pandas.DataFrame
     frame = create_skeleton_frame(
-        particle_names=particles, number_of_rows=len(full_table) // nrows,
+        particle_names=particles, number_of_rows=len(full_table) // n_rows,
     )
 
     # Convert imported table to the multi-column one
     if has_weights:
         frame[_WEIGHT_LABEL] = full_table[_MOMENTUM_LABELS[0]][
-            0::nrows
+            0::n_rows
         ].reset_index(drop=True)
     for start_row, par in enumerate(particles, first_momentum_row):
         for mom in _MOMENTUM_LABELS:
-            frame[par, mom] = full_table[mom][start_row::nrows].reset_index(
+            frame[par, mom] = full_table[mom][start_row::n_rows].reset_index(
                 drop=True
             )
 

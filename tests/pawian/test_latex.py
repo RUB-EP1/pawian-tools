@@ -1,3 +1,5 @@
+# cspell:ignore Drho testpi
+
 import pytest
 
 import pawian.latex as latex

@@ -1,3 +1,5 @@
+# cspell:ignore mathrm
+
 """
 Functions that help converting strings to LaTeX syntax.
 """

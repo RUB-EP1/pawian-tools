@@ -1,5 +1,5 @@
-Welcome to pyPawianTools's documentation!
-=========================================
+Welcome to the pyPawianTools documentation!
+===========================================
 
 .. list-table::
 

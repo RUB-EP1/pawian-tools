@@ -1,3 +1,5 @@
+<!-- cspell:ignore coveragerc htmlcov -->
+
 # Contribute
 
 This repository is meant for development within the RUB EP1 group, so you're
