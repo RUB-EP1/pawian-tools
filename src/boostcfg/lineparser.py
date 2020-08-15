@@ -1,6 +1,4 @@
-"""
-A collection of tools to parse lines in a Boost config file
-"""
+"""A collection of tools to parse lines in a Boost config file."""
 
 __all__ = [
     "get_key_value_pair",
@@ -15,7 +13,11 @@ import re  # regex
 
 
 def get_key_value_pair(line):
-    """Extract everything before an equal sign as the key, and everything after as the value"""
+    """Extract key and value from a line in a :code:`cfg` file.
+
+    Extracts everything before an equal sign as the key, and everything after
+    as the value.
+    """
     new_line = strip_comment(line)
     matches = re.search(
         r"^\s*([^\s]+?)\s*=\s*([^\s]+.*?)\s*$", strip_comment(new_line)
@@ -26,23 +28,23 @@ def get_key_value_pair(line):
 
 
 def is_commented(line):
-    """Check if a line starts with a comment sign (#), ignoring whitespaces"""
+    """Check if a line starts with a comment sign (#), ignoring whitespaces."""
     return (bool)(re.match(r"\s*#", line))
 
 
 def is_empty(line):
-    """Check if a line is empty or commented"""
+    """Check if a line is empty or commented."""
     return (bool)(re.match(r"^\s*$", line)) or is_commented(line)
 
 
 def strip_comment(line):
-    """Remove everything before a comment sign (#)"""
+    """Remove everything before a comment sign (:code:`#`)."""
     matches = re.search(r"^[^#]*", line)
     return matches[0]
 
 
 def string_to_value(string):
-    """Attempt to convert a string to a float or int"""
+    """Attempt to convert a string to a `float` or `int`."""
     try:
         return int(string)
     except ValueError:

@@ -1,8 +1,6 @@
 # cspell:ignore mathrm
 
-"""
-Functions that help converting strings to LaTeX syntax.
-"""
+"""Functions that help converting strings to LaTeX syntax."""
 
 
 import re  # regex

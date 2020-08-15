@@ -48,6 +48,7 @@
         "mypy",
         "numpy",
         "pawian",
+        "pydocstyle",
         "pylint",
         "pytest",
         "venv"

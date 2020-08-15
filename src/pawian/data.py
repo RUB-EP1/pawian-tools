@@ -1,8 +1,9 @@
 # cspell:ignore astype dropna
 
-"""
-This module allows you to parse and analyse ASCII data files of momentum tuples. The files have the
-following form:
+"""Data module of pyPawianTools.
+
+This module allows you to parse and analyse ASCII data files of momentum
+tuples. The files have the following form:
 
 .. code-block::
 
@@ -15,10 +16,12 @@ following form:
       -0.619592    0.141315     0.32135     1.99619
        0.698477   -0.193756   -0.352357     2.03593
 
-The lines with single values are weights, but do not have to be present. Whitespaces are arbitrary.
+The lines with single values are weights, but do not have to be present.
+Whitespaces are arbitrary.
 
-The allows you to import the ASCII file to a nicely formatted ``pandas.DataFrame`` that has
-additional PWA methods in the form of ``pandas.DataFrame`` accessors.
+The allows you to import the ASCII file to a nicely formatted
+``pandas.DataFrame`` that has additional PWA methods in the form of
+``pandas.DataFrame`` accessors.
 """
 
 
@@ -38,12 +41,15 @@ _WEIGHT_LABEL = "weight"
 
 
 class DataParserError(Exception):
-    """Exception for if a data file can't be handled"""
+    """Exception for if a data file can't be handled."""
 
 
 @pd.api.extensions.register_dataframe_accessor("pawian")
 class PawianAccessor:
-    """Additional namespace to interpret DataFrame as Pawian style dataframe, see `here
+    """PWA-specific accessor for a `~pandas.DataFrame`.
+
+    Additional namespace to interpret DataFrame as Pawian style dataframe, see
+    `here
     <https://pandas.pydata.org/pandas-docs/stable/development/extending.html#registering-custom-accessors>`__
     """
 
@@ -72,29 +78,29 @@ class PawianAccessor:
 
     @property
     def has_weights(self):
-        """Check if dataframe contains weights"""
+        """Check if dataframe contains weights."""
         return _WEIGHT_LABEL in self._obj.columns
 
     @property
     def has_particles(self):
-        """Check if dataframe contains a main column with particles"""
+        """Check if dataframe contains a main column with particles."""
         return isinstance(self._obj.columns, pd.MultiIndex)
 
     @property
     def weights(self):
-        """Get list of weights, if available"""
+        """Get list of weights, if available."""
         if not self.has_weights:
             raise Exception("Dataframe doesn't contain weights")
         return self._obj[_WEIGHT_LABEL]
 
     @property
     def intensities(self):
-        """Alias for :func:`weights` in the case of a fit intensity sample"""
+        """Alias for :func:`weights` in the case of a fit intensity sample."""
         return self.weights
 
     @property
     def particles(self):
-        """Get list of particles contained in the data frame"""
+        """Get list of particles contained in the data frame."""
         if not self.has_particles:
             raise Exception(
                 "This dataframe is single-level and does not contain particles"
@@ -106,7 +112,7 @@ class PawianAccessor:
 
     @property
     def momentum_labels(self):
-        """Get list of momentum labels contained in the data frame"""
+        """Get list of momentum labels contained in the data frame."""
         momentum_labels = self._obj.columns.droplevel(0).unique()
         if self.has_weights:
             momentum_labels = momentum_labels[:-1]
@@ -114,47 +120,42 @@ class PawianAccessor:
 
     @property
     def energy(self):
-        """Get a dataframe containing only the energies"""
+        """Get a dataframe containing only the energies."""
         if self.has_particles:
             return self._obj.xs(_ENERGY_LABEL, level=1, axis=1)
         return self._obj[_ENERGY_LABEL]
 
     @property
     def p_xyz(self):
-        """Get a dataframe containing only the 3-momenta"""
+        """Get a dataframe containing only the 3-momenta."""
         return self._obj.filter(
             regex=("p_[xyz]")
         )  # ! may conflict with _MOMENTUM_LABELS
 
     @property
     def rho2(self):
-        """**Compute** a dataframe containing the square sum of the 3-momenta"""
+        """Compute a dataframe containing the square sum of the 3-momenta."""
         if self.has_particles:
             return (self.p_xyz ** 2).sum(axis=1, level=0)
         return (self.p_xyz ** 2).sum(axis=1)
 
     @property
     def rho(self):
-        """**Compute** a dataframe containing the absolute value of the 3-momenta"""
+        """**Compute** a dataframe with the absolute value of the 3-momenta."""
         return sqrt(self.rho2)
 
     @property
     def mass2(self):
-        """**Compute** the square of the invariant masses"""
+        """**Compute** the square of the invariant masses."""
         return self.energy ** 2 - self.rho2
 
     @property
     def mass(self):
-        """**Compute** the invariant masses"""
+        """**Compute** the invariant masses."""
         return sqrt(self.mass2)
 
     def write_ascii(self, filename, **kwargs):
-        """Write to Pawian-like ASCII file
-
-        :param kwargs:
-            Optional, additional arguments that are passed on to `pandas.DataFrame.to_csv
-            <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv>`__.
-        """
+        """Write to Pawian-like ASCII file."""
         new_dict = list()
         if self.has_weights:
             new_dict.append(self._obj[_WEIGHT_LABEL])
@@ -169,9 +170,10 @@ class PawianAccessor:
 
 
 def create_skeleton_frame(particle_names=None, number_of_rows=None):
-    """
-    Create an empty ``pandas.DataFrame`` that complies with the standards of the registered
-    ``pawian`` accessor
+    """Create skeleton `~pandas.DataFrame`.
+
+    Create an empty ``pandas.DataFrame`` that complies with the standards of
+    the registered ``pawian`` accessor.
     """
     index = None
     if number_of_rows is not None:
@@ -186,16 +188,7 @@ def create_skeleton_frame(particle_names=None, number_of_rows=None):
 
 
 def read_ascii(filename, particles=None, **kwargs):
-    """Import from a Pawian-like ASCII file
-
-    :param particles:
-        Interpretation for the tuples. **This argument is required if there are no weights.**
-        Provide either the number of particles or a list of particles.
-    :param kwargs:
-        Optional, additional arguments that are passed on to `pandas.read_table
-        <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_table.html>`__.
-    """
-
+    """Import from a Pawian-like ASCII file."""
     full_table = pd.read_table(
         filepath_or_buffer=filename,
         names=_MOMENTUM_LABELS,
@@ -257,13 +250,14 @@ def read_ascii(filename, particles=None, **kwargs):
 
 
 def read_pawian_hists(filename, type_name="data"):
-    """
+    """Read a :file:`pawianHists.root`.
+
     Import one of the momentum tuple branches of a ``pawianHists.root`` file.
 
-    :param type_name: data or fitted
-    :type type_name: string
+    Args:
+        filename (str): Path to the file that you want to read.
+        type_name (str): :code:`"data"` or `"fitted"`.
     """
-
     # Determine tree name
     if "dat" in type_name.lower():
         type_name = "data"
