@@ -11,8 +11,8 @@ This repository serves as a collection of Python tools to complement
 [Pawian](https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware).
 There are currently two Python packages:
 
-1. [`pawian`](./src/pawian), which is a collection of Python modules that facilitate
-   working with Pawian data
+1. [`pawian`](./src/pawian), which is a collection of Python modules that
+   facilitate working with Pawian data
 2. [`boostcfg`](./src/boostcfg), which is a tool to read the content of a
    [Boost config file](https://www.boost.org/doc/libs/1_72_0/doc/html/boost/program_options/parse_co_1_3_32_9_8_1_1_11.html)
 
@@ -24,8 +24,8 @@ handy Jupyter notebooks.
 As this package is developmental, and not yet published on PyPI (see Milestone
 %1), it is best to install this package in
 ["editable" mode](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs)
-(`pip install -e .`), so that you can easily modify the source code, try out new
-ideas, and proposer your implementations through a merge request.
+(`pip install -e .`), so that you can easily modify the source code, try out
+new ideas, and proposer your implementations through a merge request.
 
 It is safest to work in a virtual Python environment, so that all dependencies
 for this repository are installed there. After cloning this repository and
@@ -35,10 +35,10 @@ navigating into it, you can opt to use either Conda or PyPI.
 
 The easiest way to work with these packages is to use
 [Anaconda/Conda](https://www.anaconda.com/). This allows you to contain all
-dependencies you need for this project within a virtual environment that you can
-easily throw away or replace later on if you run into trouble. You can download
-Conda [here](https://www.anaconda.com/distribution/#download-section). It can be
-installed without admin rights on any system!
+dependencies you need for this project within a virtual environment that you
+can easily throw away or replace later on if you run into trouble. You can
+download Conda [here](https://www.anaconda.com/distribution/#download-section).
+It can be installed without admin rights on any system!
 
 Once you have Conda, all you need to do is:
 
@@ -48,9 +48,9 @@ conda activate pawian
 pip install -e .
 ```
 
-Note that you can easily switch back with `conda deactivate`. And if you want to
-trash this environment to start all over if you messed up something, just run
-`conda remove --name pawian --all`.
+Note that you can easily switch back with `conda deactivate`. And if you want
+to trash this environment to start all over if you messed up something, just
+run `conda remove --name pawian --all`.
 
 ### Option 2: Python's `venv`
 

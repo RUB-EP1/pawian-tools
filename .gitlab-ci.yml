@@ -51,4 +51,5 @@ Style:
     - python3 -m pip install .[dev]
   script:
     - cspell $(git ls-files)
+    - markdownlint $(git ls-files | grep --regexp="^.*.md$")
     - pre-commit run -a
