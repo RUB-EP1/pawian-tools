@@ -34,5 +34,5 @@ bin/
 lib/
 
 # Visual Studio Code
-.vscode/
+.ropeproject/
 *.code-workspace
