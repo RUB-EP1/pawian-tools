@@ -70,6 +70,7 @@
         "genindex",
         "heli",
         "iloc",
+        "intersphinx",
         "ipynb",
         "isclose",
         "jollyj",

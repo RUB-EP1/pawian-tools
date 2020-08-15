@@ -3,7 +3,7 @@
 The boostcfg parser is a Python module for parsing Boost config files that
 can be parsed by the `parse_config_file
 <https://www.boost.org/doc/libs/1_72_0/doc/html/boost/program_options/parse_co_1_3_32_9_8_1_1_11.html>`__
-of ``boost::program_options``.
+of :code:`boost::program_options`.
 
 BoostConfigParser was especially designed for `Pawian
 <https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware>`__.

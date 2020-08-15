@@ -1,6 +1,6 @@
 """Handle output of the QA step performed by Pawian.
 
-Usually, a ``pawianHists.root`` file is produced if you run Pawian in QA mode.
+Usually, a :file:`pawianHists.root` file is produced if you run Pawian in QA mode.
 This module contains handlers for such files.
 """
 
@@ -27,17 +27,17 @@ _4VEC_BRANCH_TAG = "Fourvecs"
 
 
 class PawianHists:
-    """Data container for a ``pawianHists.root`` file.
+    """Data container for a :file:`pawianHists.root` file.
 
-    Data container for a ``pawianHists.root`` file that is created by the QA
-    step in Pawian.
+    Data container for a :file:`pawianHists.root` file that is created by the
+    QA step in Pawian.
     """
 
     def __init__(self, filename):
         self.import_file(filename)
 
     def import_file(self, filename):
-        """Set data member by importing a ``pawianHists.root`` file."""
+        """Set data member by importing a :file:`pawianHists.root` file."""
         self.__file = uproot.open(filename)
         self.__data = read_pawian_hists(filename, type_name="data")
         self.__fit = read_pawian_hists(filename, type_name="fit")
@@ -45,11 +45,11 @@ class PawianHists:
     def get_uproot_histogram(self, name):
         """Get a histogram from a :file:`pawianHists.root` file.
 
-        Get an uproot ``TH1``, ``TH2``, or ``TH3`` from the
-        ``pawianHists.root`` file. See `here
+        Get an uproot :code:`TH1`, :code:`TH2`, or :code:`TH3` from the
+        :file:`pawianHists.root` file. See `here
         <https://github.com/scikit-hep/uproot-methods/blob/master/uproot_methods/classes/TH1.py>`__
         which methods you can call on these classes or have a look at the
-        ``QA_Histograms.ipynb`` Jupyter notebook.
+        :doc:`/usage/QA_Histograms` Jupyter notebook.
         """
         try:
             obj = self.__file[name]
@@ -62,13 +62,13 @@ class PawianHists:
     def get_histogram_content(self, name: str) -> Optional[Tuple[list, list]]:
         """Get an array of lower edges and an array of values for the histogram.
 
-        You can then for instance use `matplotlib.pyplot.hist
-        <https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html>`__ to
-        plot it like so (note the ``bins`` argument!):
+        You can then for instance use `matplotlib.pyplot.hist` to plot it like
+        so (note the :code:`bins` argument!):
 
         .. code-block:: python
 
             from pawian.qa import PawianHists
+
             import matplotlib.pyplot as plt
             hist_file = PawianHists(FILENAME)
             edges, values = hist_file.get_histogram_content(HISTOGRAM_NAME)
@@ -85,12 +85,10 @@ class PawianHists:
         """Plot a histogram in a matplotlib figure.
 
         :param plot_on:
-            Feed a matplotlib class with a hist method, such as `matplotlib.axes.Axes
-            <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.hist.html>`__
-            to draw the histogram on it.
+            Feed a matplotlib class with a hist method, such as
+            `matplotlib.axes.Axes` to draw the histogram on it.
         :param kwargs:
-            see `matplotlib.pyplot.hist arguments
-            <https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html>`__
+            see `matplotlib.pyplot.hist` arguments
         """
         if name not in self.histogram_names:
             raise Exception(f'Histogram "{name}" does not exist')
@@ -103,8 +101,9 @@ class PawianHists:
         """Combine the three types of histograms in one plot.
 
         :param name:
-            The name of the histogram in the ``pawianHists.root`` file that you want to plot, **but
-            without the prepended ``Data``, ``Fit``, or ``MC/Mc``**.
+            The name of the histogram in the :file:`pawianHists.root` file that
+            you want to plot, **but without the prepended :code:`Data`,
+            :code:`Fit`, or :code:`MC/Mc`**.
 
         .. seealso:: :func:`draw_histogram`
         """
@@ -169,8 +168,9 @@ class PawianHists:
     def unique_histogram_names(self):
         """Get a list of unique histograms from a :file:`pawianHists.root` file.
 
-        Get a list of histograms in the ``pawianHists.root`` file of which the
-        keywords ``Data``, ``MC``, or ``Fit`` have been removed.
+        Get a list of histograms in the :file:`pawianHists.root` file of which
+        the keywords :code:`Data`, :code:`MC`, or :code:`Fit` have been
+        removed.
         """
         names = []
         for name in self.__file.keys():
@@ -191,9 +191,8 @@ class PawianHists:
     def data(self):
         """Get a `~.pandas.DataFrame` of the data intensity sample.
 
-        Get a `pandas.DataFrame
-        <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__
-        of the **data events** contained in the ``pawianHists.root`` file.
+        Get a `~pandas.DataFrame` of the **data events** contained in the
+        :file:`pawianHists.root` file.
 
         .. seealso::
             :func:`fit <pawian.qa.PawianHists.fit>`
@@ -204,10 +203,8 @@ class PawianHists:
     def fit(self):
         """Get a `~.pandas.DataFrame` of the fit intensity sample.
 
-        Get a `pandas.DataFrame
-        <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html>`__
-        of the **fit intensity sample** contained in the ``pawianHists.root``
-        file.
+        Get a `~pandas.DataFrame` of the **fit intensity sample** contained in
+        the :file:`pawianHists.root` file.
 
         .. seealso::
             :func:`data <pawian.qa.PawianHists.data>`.

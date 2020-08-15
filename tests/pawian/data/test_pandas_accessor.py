@@ -1,4 +1,4 @@
-"""Test the ``pawian`` namespace added to the ``pandas.DataFrame``"""
+"""Test the :code:`pawian` namespace added to the `pandas.DataFrame`."""
 
 from os.path import dirname, realpath
 

@@ -20,8 +20,8 @@ The lines with single values are weights, but do not have to be present.
 Whitespaces are arbitrary.
 
 The allows you to import the ASCII file to a nicely formatted
-``pandas.DataFrame`` that has additional PWA methods in the form of
-``pandas.DataFrame`` accessors.
+`~pandas.DataFrame` that has additional PWA methods in the form of
+`~pandas.DataFrame` accessors.
 """
 
 
@@ -49,8 +49,7 @@ class PawianAccessor:
     """PWA-specific accessor for a `~pandas.DataFrame`.
 
     Additional namespace to interpret DataFrame as Pawian style dataframe, see
-    `here
-    <https://pandas.pydata.org/pandas-docs/stable/development/extending.html#registering-custom-accessors>`__
+    :doc:`pandas:development/extending`.
     """
 
     def __init__(self, pandas_object):
@@ -172,8 +171,8 @@ class PawianAccessor:
 def create_skeleton_frame(particle_names=None, number_of_rows=None):
     """Create skeleton `~pandas.DataFrame`.
 
-    Create an empty ``pandas.DataFrame`` that complies with the standards of
-    the registered ``pawian`` accessor.
+    Create an empty `~pandas.DataFrame that complies with the standards of the
+    registered :code:`pawian` accessor.
     """
     index = None
     if number_of_rows is not None:
@@ -252,7 +251,7 @@ def read_ascii(filename, particles=None, **kwargs):
 def read_pawian_hists(filename, type_name="data"):
     """Read a :file:`pawianHists.root`.
 
-    Import one of the momentum tuple branches of a ``pawianHists.root`` file.
+    Import one of the momentum tuple branches of a :file:`pawianHists.root`.
 
     Args:
         filename (str): Path to the file that you want to read.

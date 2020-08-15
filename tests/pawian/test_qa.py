@@ -142,7 +142,7 @@ def test_draw_combined_histogram():
 )
 def test_lorentz_vectors(filename, energy):
     """
-    Test whether vectors were loaded correctly as ``pandas.DataFrame``.
+    Test whether vectors were loaded correctly as `~pandas.DataFrame`.
     """
     pawian_hists = PawianHists(filename)
     particle = pawian_hists.particles[0]

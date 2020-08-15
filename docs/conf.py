@@ -57,11 +57,23 @@ def setup(app):
 
 
 # -- General configuration ---------------------------------------------------
+source_suffix = [
+    ".rst",
+    ".ipynb",
+    ".md",
+]
+
+# The master toctree document.
+master_doc = "index"
+
 extensions = [
     "nbsphinx",
     "sphinx.ext.autodoc",
+    "sphinx.ext.autosectionlabel",
     "sphinx.ext.autosummary",
+    "sphinx.ext.coverage",
     "sphinx.ext.ifconfig",
+    "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
@@ -70,20 +82,51 @@ extensions = [
 exclude_patterns = [
     "**.ipynb_checkpoints",
     "*build",
-    "test",
+    "README.md",
     "tests",
 ]
-pygments_style = "sphinx"
 
-todo_include_todos = False
+# General sphinx settings
 add_module_names = False
-viewcode_follow_imported_members = True
-autodoc_member_order = "bysource"
-
-
-# -- Options for HTML output -------------------------------------------------
-html_theme = "sphinx_rtd_theme"
+autodoc_default_options = {
+    "members": True,
+    "undoc-members": True,
+    "show-inheritance": True,
+    "special-members": "__call__, __eq__",
+}
+html_copy_source = False  # do not copy rst files
+html_show_copyright = False
 html_show_sourcelink = False
+html_show_sphinx = False
+html_theme = "sphinx_rtd_theme"
+pygments_style = "sphinx"
+todo_include_todos = False
+viewcode_follow_imported_members = True
+
+# Cross-referencing configuration
+default_role = "py:obj"
+primary_domain = "py"
+nitpicky = True  # warn if cross-references are missing
+nitpick_ignore = []
+
+# Intersphinx settings
+intersphinx_mapping = {
+    "matplotlib": ("https://matplotlib.org/", None),
+    "numpy": ("https://docs.scipy.org/doc/numpy/", None),
+    "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+    "python": ("https://docs.python.org/3", None),
+}
+
+# Settings for autosectionlabel
+autosectionlabel_prefix_document = True
+
+# Settings for linkcheck
+linkcheck_anchors = False
+linkcheck_ignore = [
+    "https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/coverage.svg",
+    "https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/pipeline.svg",
+    "https://gitlab.ep1.rub.de/redeboer/pyPawianTools/pipelines",
+]
 
 # Settings for nbsphinx
 if "NBSPHINX_EXECUTE" in os.environ:
