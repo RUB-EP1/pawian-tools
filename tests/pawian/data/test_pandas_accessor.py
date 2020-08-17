@@ -2,8 +2,6 @@
 
 from os.path import dirname, realpath
 
-import numpy as np
-
 import pandas as pd
 
 import pytest
@@ -82,16 +80,16 @@ def test_properties_multicolumn():
     assert frame_mc.pawian.momentum_labels == momentum_labels
     assert frame_data.pawian.momentum_labels == momentum_labels
 
-    assert np.allclose(
-        frame_data.pawian.mass.mean().tolist(),
-        [0.13957, 1.86484, 1.86961,],
-        atol=1e-5,
-    )
-    assert np.allclose(
-        frame_data.pawian.rho.mean().tolist(),
-        [0.14209, 0.64765, 0.69154,],
-        atol=1e-5,
-    )
+    assert pytest.approx(frame_data.pawian.mass.mean().tolist()) == [
+        0.13957021474219994,
+        1.8648403010481123,
+        1.8696104109755363,
+    ]
+    assert pytest.approx(frame_data.pawian.rho.mean().tolist()) == [
+        0.14209924919519798,
+        0.6476585301989026,
+        0.6915457642796756,
+    ]
 
 
 def test_properties_single_column():

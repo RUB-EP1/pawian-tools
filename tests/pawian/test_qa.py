@@ -1,6 +1,5 @@
 """Test `pawian.qa` module"""
 
-from math import isclose
 from os.path import dirname, realpath
 from statistics import mean
 
@@ -73,7 +72,7 @@ def test_data_model(  # pylint: disable=too-many-arguments
     edges, values = pawian_hists.get_histogram_content(hist_value[0])
     assert len(edges) == 100
     assert len(values) == 100
-    assert isclose(values[40], hist_value[1], abs_tol=1e-5)
+    assert pytest.approx(values[40]) == hist_value[1]
 
     assert pawian_hists.particles == particles
     assert pawian_hists.data.pawian.particles == particles
