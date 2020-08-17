@@ -1,11 +1,13 @@
 Welcome to the pyPawianTools documentation!
 ===========================================
 
+.. list-table::
+
   * - .. image:: https://readthedocs.org/projects/pawian/badge/?version=latest
         :alt: Documentation Status
         :target: https://pwa.readthedocs.io/projects/pawian
 
-    - .. image:: https://mybinder.org/badge_logo.svg
+      .. image:: https://mybinder.org/badge_logo.svg
         :alt: Try out Jupyter notebooks
         :target: https://mybinder.org/v2/git/https%3A%2F%2Fgitlab.ep1.rub.de%2Fredeboer%2FpyPawianTools/master?filepath=examples
 
