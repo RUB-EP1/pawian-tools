@@ -29,6 +29,7 @@
   "python.formatting.provider": "black",
   "python.languageServer": "Jedi",
   "python.linting.flake8Enabled": true,
+  "python.linting.mypyEnabled": true,
   "python.linting.pydocstyleEnabled": true,
   "python.linting.pylintCategorySeverity.refactor": "Information",
   "python.linting.pylintEnabled": true,

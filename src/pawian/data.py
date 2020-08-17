@@ -44,7 +44,7 @@ class DataParserError(Exception):
     """Exception for if a data file can't be handled."""
 
 
-@pd.api.extensions.register_dataframe_accessor("pawian")
+@pd.api.extensions.register_dataframe_accessor("pawian")  # type: ignore
 class PawianAccessor:
     """PWA-specific accessor for a `~pandas.DataFrame`.
 

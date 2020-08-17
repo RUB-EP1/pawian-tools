@@ -50,6 +50,13 @@ repos:
         types:
           - python
 
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: system
+        types:
+          - python
+
       - id: pydocstyle
         name: pydocstyle
         entry: pydocstyle

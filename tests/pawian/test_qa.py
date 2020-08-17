@@ -69,7 +69,7 @@ def test_data_model(  # pylint: disable=too-many-arguments
 
     failure = pawian_hists.get_histogram_content("non-existent")
     assert failure is None
-    edges, values = pawian_hists.get_histogram_content(hist_value[0])
+    edges, values = pawian_hists.get_histogram_content(hist_value[0])  # type: ignore
     assert len(edges) == 100
     assert len(values) == 100
     assert pytest.approx(values[40]) == hist_value[1]
@@ -103,7 +103,7 @@ def test_draw_all_histograms():
     """Test :func:`pawian.qa.PawianHists.draw_all_histograms`"""
     hists = PawianHists(FILENAME_ROOT6)
     hists.draw_all_histograms()
-    assert len(plt.gcf().get_axes()) == 20
+    assert len(plt.gcf().get_axes()) == 20  # type: ignore
 
 
 @pytest.mark.slow

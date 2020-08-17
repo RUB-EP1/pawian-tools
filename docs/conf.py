@@ -107,7 +107,7 @@ viewcode_follow_imported_members = True
 default_role = "py:obj"
 primary_domain = "py"
 nitpicky = True  # warn if cross-references are missing
-nitpick_ignore = []
+nitpick_ignore: list = []
 
 # Intersphinx settings
 intersphinx_mapping = {
