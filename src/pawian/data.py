@@ -280,7 +280,7 @@ def read_pawian_hists(filename, type_name="data"):
     frame = create_skeleton_frame(
         particle_names=particles, number_of_rows=len(weights),
     )
-    if weights.max() != 1.0 and weights.min() != 1.0:
+    if weights.max() != weights.min():
         frame[_WEIGHT_LABEL] = weights
     try:  # ROOT >= 6
         for particle in particles:
