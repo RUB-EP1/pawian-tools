@@ -185,7 +185,7 @@ class PawianHists:
     @property
     def particles(self):
         """Get particle names contained in the file."""
-        return self.data.pawian.particles
+        return self.data.pwa.particles
 
     @property
     def data(self):

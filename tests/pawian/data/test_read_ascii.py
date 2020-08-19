@@ -1,5 +1,3 @@
-"""Test :func:`pawian.data.read_ascii`"""
-
 from os.path import dirname, realpath
 
 import pytest

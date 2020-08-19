@@ -1,5 +1,3 @@
-"""Test :func:`pawian.data.read_pawian_hists`"""
-
 from os.path import dirname, realpath
 
 import pytest
@@ -35,12 +33,12 @@ def test_read_pawian_hists(input_file, has_weights, particles, energy):
     data = read_pawian_hists(input_file, type_name="data")
     fit = read_pawian_hists(input_file, type_name="fit")
 
-    assert fit.pawian.has_weights
-    assert data.pawian.has_weights == has_weights
+    assert fit.pwa.has_weights
+    assert data.pwa.has_weights == has_weights
 
-    assert data.pawian.particles == particles
+    assert data.pwa.particles == particles
 
-    assert data[particles[0]].pawian.energy.mean() == energy
+    assert data[particles[0]].pwa.energy.mean() == energy
 
 
 def test_read_pawian_hists_exception():

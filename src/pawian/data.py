@@ -25,9 +25,6 @@ The allows you to import the ASCII file to a nicely formatted
 """
 
 
-__all__ = ["DataParserError", "PawianAccessor", "read_ascii"]
-
-
 from numpy import sqrt
 
 import pandas as pd
@@ -44,8 +41,8 @@ class DataParserError(Exception):
     """Exception for if a data file can't be handled."""
 
 
-@pd.api.extensions.register_dataframe_accessor("pawian")  # type: ignore
-class PawianAccessor:
+@pd.api.extensions.register_dataframe_accessor("pwa")  # type: ignore
+class PwaAccessor:
     """PWA-specific accessor for a `~pandas.DataFrame`.
 
     Additional namespace to interpret DataFrame as Pawian style dataframe, see
@@ -171,8 +168,8 @@ class PawianAccessor:
 def create_skeleton_frame(particle_names=None, number_of_rows=None):
     """Create skeleton `~pandas.DataFrame`.
 
-    Create an empty `~pandas.DataFrame that complies with the standards of the
-    registered :code:`pawian` accessor.
+    Create an empty `~pandas.DataFrame` that complies with the standards of the
+    registered `.PwaAccessor`.
     """
     index = None
     if number_of_rows is not None:
@@ -255,7 +252,7 @@ def read_pawian_hists(filename, type_name="data"):
 
     Args:
         filename (str): Path to the file that you want to read.
-        type_name (str): :code:`"data"` or `"fitted"`.
+        type_name (str): :code:`"data"` or :code:`"fitted"`.
     """
     # Determine tree name
     if "dat" in type_name.lower():

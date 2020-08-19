@@ -1,5 +1,3 @@
-"""Test :func:`pawian.data.write_ascii`"""
-
 from os import remove
 from os.path import dirname, realpath
 
@@ -23,7 +21,7 @@ def test_write_ascii(input_file):
     """Write, then read an ASCII file"""
     particles = ["pi+", "D0", "D-"]
     frame_in = read_ascii(input_file, particles=particles).loc[:9]
-    frame_in.pawian.write_ascii(OUTPUT_FILE)
+    frame_in.pwa.write_ascii(OUTPUT_FILE)
     frame_out = read_ascii(OUTPUT_FILE, particles=particles)
     assert_frame_equal(frame_in, frame_out)
     remove(OUTPUT_FILE)
