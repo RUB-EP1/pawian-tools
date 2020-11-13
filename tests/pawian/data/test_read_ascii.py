@@ -3,11 +3,7 @@ from os.path import dirname, realpath
 import pytest
 
 import pawian
-from pawian.data import (
-    DataParserError,
-    read_ascii,
-)
-
+from pawian.data import DataParserError, read_ascii
 
 PAWIAN_DIR = dirname(realpath(pawian.__file__))
 SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
@@ -54,7 +50,14 @@ def test_read_with_weight():
     ]
 
 
-@pytest.mark.parametrize("particles", [["pi+", "D0", "D-"], 3, [1, 2, 3],])
+@pytest.mark.parametrize(
+    "particles",
+    [
+        ["pi+", "D0", "D-"],
+        3,
+        [1, 2, 3],
+    ],
+)
 def test_read_no_weights(particles):
     """Read a file without weights"""
     frame = read_ascii(INPUT_FILE_MC, particles=particles)

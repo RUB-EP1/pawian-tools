@@ -2,7 +2,6 @@ from os.path import dirname, realpath
 
 from boostcfg import BoostConfigParser
 
-
 SCRIPT_DIR = dirname(realpath(__file__))
 FILENAME = f"{SCRIPT_DIR}/example.cfg"
 

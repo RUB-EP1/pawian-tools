@@ -25,12 +25,9 @@ The allows you to import the ASCII file to a nicely formatted
 """
 
 
-from numpy import sqrt
-
 import pandas as pd
-
 import uproot
-
+from numpy import sqrt
 
 _ENERGY_LABEL = "E"
 _MOMENTUM_LABELS = ["p_x", "p_y", "p_z", _ENERGY_LABEL]
@@ -158,7 +155,8 @@ class PwaAccessor:
         for par in self.particles:
             new_dict.append(
                 self._obj[par].apply(
-                    lambda x: " ".join(x.dropna().astype(str)), axis=1,
+                    lambda x: " ".join(x.dropna().astype(str)),
+                    axis=1,
                 )
             )
         interleaved = pd.concat(new_dict).sort_index(kind="mergesort")
@@ -228,7 +226,8 @@ def read_ascii(filename, particles=None, **kwargs):
 
     # Create multi-column pandas.DataFrame
     frame = create_skeleton_frame(
-        particle_names=particles, number_of_rows=len(full_table) // n_rows,
+        particle_names=particles,
+        number_of_rows=len(full_table) // n_rows,
     )
 
     # Convert imported table to the multi-column one
@@ -275,7 +274,8 @@ def read_pawian_hists(filename, type_name="data"):
     # Import tuples as dataframe
     weights = uproot_file[f"{tree_name}/{_WEIGHT_LABEL}"].array()
     frame = create_skeleton_frame(
-        particle_names=particles, number_of_rows=len(weights),
+        particle_names=particles,
+        number_of_rows=len(weights),
     )
     if weights.max() != weights.min():
         frame[_WEIGHT_LABEL] = weights

@@ -2,12 +2,10 @@ from os.path import dirname, realpath
 from statistics import mean
 
 import matplotlib.pyplot as plt
-
 import pytest
 
 import pawian
 from pawian.qa import PawianHists
-
 
 PAWIAN_DIR = dirname(realpath(pawian.__file__))
 SAMPLE_DIR = f"{PAWIAN_DIR}/samples"

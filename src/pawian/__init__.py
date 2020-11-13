@@ -13,6 +13,4 @@ __all__ = [
 ]
 
 
-from . import data
-from . import latex
-from . import qa
+from . import data, latex, qa

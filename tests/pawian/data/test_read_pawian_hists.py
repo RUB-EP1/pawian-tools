@@ -5,7 +5,6 @@ import pytest
 import pawian
 from pawian.data import read_pawian_hists
 
-
 PAWIAN_DIR = dirname(realpath(pawian.__file__))
 SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
 
@@ -45,5 +44,6 @@ def test_read_pawian_hists_exception():
     """Test whether expected exceptions are raised"""
     with pytest.raises(Exception):
         read_pawian_hists(
-            f"{SAMPLE_DIR}/pawianHists_ROOT6_DDpi.root", type_name="wrong",
+            f"{SAMPLE_DIR}/pawianHists_ROOT6_DDpi.root",
+            type_name="wrong",
         )

@@ -7,20 +7,14 @@ This module contains handlers for such files.
 import logging
 import re  # regex
 from math import ceil, sqrt
-from typing import (
-    Optional,
-    Tuple,
-)
+from typing import Optional, Tuple
 
 import matplotlib.pyplot as plt
-
 import uproot
-
 from uproot_methods.classes import TH1
 
 from pawian.data import read_pawian_hists
 from pawian.latex import convert
-
 
 _WEIGHT_TAG = "weight"
 _4VEC_BRANCH_TAG = "Fourvecs"
@@ -96,7 +90,13 @@ class PawianHists:
         return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)
 
     def draw_combined_histogram(  # pylint: disable=too-many-arguments,invalid-name
-        self, name, plot_on=plt, data=True, fit=True, mc=True, **kwargs,
+        self,
+        name,
+        plot_on=plt,
+        data=True,
+        fit=True,
+        mc=True,
+        **kwargs,
     ):
         """Combine the three types of histograms in one plot.
 

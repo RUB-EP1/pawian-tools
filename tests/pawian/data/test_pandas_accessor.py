@@ -1,12 +1,10 @@
 from os.path import dirname, realpath
 
 import pandas as pd
-
 import pytest
 
 import pawian
 from pawian.data import create_skeleton_frame, read_ascii
-
 
 PAWIAN_DIR = dirname(realpath(pawian.__file__))
 SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
@@ -25,7 +23,8 @@ INPUT_FILE_MC = f"{SAMPLE_DIR}/momentum_tuples_mc.dat"
 def test_create_skeleton(particles, number_of_rows):
     """Test creating an empty pawian dataframe"""
     frame = create_skeleton_frame(
-        particle_names=particles, number_of_rows=number_of_rows,
+        particle_names=particles,
+        number_of_rows=number_of_rows,
     )
     if number_of_rows is None:
         number_of_rows = 0
@@ -39,11 +38,20 @@ def test_create_skeleton(particles, number_of_rows):
     "columns,names",
     [
         (  # wrong number of column LEVELS
-            [("A"), ("B"), ("C"),],
+            [
+                ("A"),
+                ("B"),
+                ("C"),
+            ],
             ["Particles"],
         ),
         (  # wrong momentum labels
-            [("A", "px"), ("A", "b"), ("B", "px"), ("B", "b"),],
+            [
+                ("A", "px"),
+                ("A", "b"),
+                ("B", "px"),
+                ("B", "b"),
+            ],
             ["Particles", "Momentum"],
         ),
     ],

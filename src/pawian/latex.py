@@ -5,7 +5,6 @@
 
 import re  # regex
 
-
 __PARTICLES = ["D", "pi", "pion", "eta", "rho"]
 
 

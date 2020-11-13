@@ -1,13 +1,11 @@
 from os import remove
 from os.path import dirname, realpath
 
-from pandas.testing import assert_frame_equal
-
 import pytest
+from pandas.testing import assert_frame_equal
 
 import pawian
 from pawian.data import read_ascii
-
 
 PAWIAN_DIR = dirname(realpath(pawian.__file__))
 SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
@@ -16,7 +14,13 @@ INPUT_FILE_MC = f"{SAMPLE_DIR}/momentum_tuples_mc.dat"
 OUTPUT_FILE = "temp_output.dat"
 
 
-@pytest.mark.parametrize("input_file", [INPUT_FILE_DATA, INPUT_FILE_MC,])
+@pytest.mark.parametrize(
+    "input_file",
+    [
+        INPUT_FILE_DATA,
+        INPUT_FILE_MC,
+    ],
+)
 def test_write_ascii(input_file):
     """Write, then read an ASCII file"""
     particles = ["pi+", "D0", "D-"]
