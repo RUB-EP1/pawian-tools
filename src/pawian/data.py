@@ -2,7 +2,7 @@
 
 """Data module of pyPawianTools.
 
-This module allows you to parse and analyse ASCII data files of momentum
+This module allows you to parse and analyze ASCII data files of momentum
 tuples. The files have the following form:
 
 .. code-block::

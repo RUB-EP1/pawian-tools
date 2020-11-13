@@ -1,18 +1,4 @@
-# Python temporary files
-*.pyc
-.coverage
-.eggs
-.fuse*
-.ipynb_checkpoints
-.pytest_cache/
-__pycache__
-**.egg-info
-
-# Python virtual environments
-.tox/
-venv/
-
-# I/O files
+# Output files
 *.client*
 *.dat
 *.log
@@ -20,19 +6,42 @@ venv/
 *.pdf
 *.root
 *.server
-!/src/pawian/samples/*
-
-# Unit testing
-.coverage*
-coverage.xml
-htmlcov/
+*.xml
+*.yaml
+*.yml
 
 # Build files
-*.so
+*.egg-info/
 *build/
-bin/
-lib/
+.eggs/
+.fuse_*
+dist/
+version.py
 
-# Visual Studio Code
-.ropeproject/
-*.code-workspace
+# Temporary files
+*.pyc
+.condaenv.*
+.coverage
+.coverage.*
+.ipynb_checkpoints/
+.mypy*/
+.pytest_cache/
+__pycache__/
+htmlcov/
+prof/
+
+# Virtual environments
+*venv/
+.tox/
+pyvenv*/
+
+# Settings
+.idea/
+**.code-workspace
+
+# Exceptions
+!.gitlab-ci.yml
+!.pre-commit-config.yaml
+!.readthedocs.yml
+!/src/pawian/samples/*
+!environment.yml

@@ -6,6 +6,7 @@
         "xml"
     ],
     "flagWords": [
+        "analyse",
         "colour",
         "comparision",
         "favour",
@@ -33,6 +34,7 @@
         "docs/_templates/*",
         "docs/conf.py",
         "pyproject.toml",
+        "pyrightconfig.json",
         "setup.cfg",
         "setup.py",
         "tox.ini"
@@ -88,6 +90,7 @@
         "pyplot",
         "realpath",
         "rtol",
+        "seealso",
         "tcsh",
         "toctree",
         "tolist",

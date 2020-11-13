@@ -15,22 +15,6 @@ copyright = "2020, RUB EP1"
 author = "Meike Küßner, Remco de Boer"
 
 
-# -- Copy example notebooks ---------------------------------------------------
-print("Copy example notebook and data files")
-PATH_SOURCE = "../examples"
-PATH_TARGET = "usage"
-FILES_TO_COPY = [
-    "ASCII_Data.ipynb",
-    "QA_Histograms.ipynb",
-]
-shutil.rmtree(PATH_TARGET, ignore_errors=True)
-os.makedirs(PATH_TARGET, exist_ok=True)
-for file_to_copy in FILES_TO_COPY:
-    path_from = os.path.join(PATH_SOURCE, file_to_copy)
-    path_to = os.path.join(PATH_TARGET, file_to_copy)
-    print("  copy", path_from, "to", path_to)
-    shutil.copyfile(path_from, path_to, follow_symlinks=True)
-
 # -- Generate API skeleton ----------------------------------------------------
 shutil.rmtree("api", ignore_errors=True)
 subprocess.call(
@@ -81,6 +65,8 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinx_copybutton",
+    "sphinx_togglebutton",
+    "sphinx_panels",
 ]
 exclude_patterns = [
     "**.ipynb_checkpoints",
@@ -108,6 +94,15 @@ html_show_sourcelink = False
 html_show_sphinx = False
 html_sourcelink_suffix = ""
 html_theme = "sphinx_book_theme"
+html_theme_options = {
+    "repository_url": "https://gitlab.ep1.rub.de/redeboer/pyPawianTools",
+    "repository_branch": "master",
+    "path_to_docs": "docs",
+    "use_download_button": True,
+    "use_issues_button": True,
+    "use_repository_button": True,
+    "theme_dev_mode": True,
+}
 html_title = "pyPawianTools"
 pygments_style = "sphinx"
 todo_include_todos = False

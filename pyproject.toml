@@ -1,12 +1,12 @@
 [build-system]
 requires = [
-    "setuptools>=30.3.0",
+    "setuptools>=36.2.1", # environment markers
     "setuptools_scm",
     "wheel",
 ]
 
 [tool.setuptools_scm]
-write_to = "pawian/version.py"
+write_to = "src/pawian/version.py"
 
 [tool.black]
 line-length = 79
@@ -29,3 +29,8 @@ exclude = '''
   | dist
 )/
 '''
+
+[tool.isort]
+profile = "black"
+src_paths = ["src", "tests"]
+line_length = 79

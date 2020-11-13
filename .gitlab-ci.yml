@@ -35,6 +35,7 @@ Documentation:
     - *print-system-info
     - *activate-venv
     - python3 -m pip install .[doc]
+    - python3 -m pip install nbconvert
   script:
     - cd docs
     - EXECUTE_NB= make html
