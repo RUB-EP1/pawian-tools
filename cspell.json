@@ -84,6 +84,7 @@
         "phsp",
         "pprint",
         "pygments",
+        "pypawian",
         "pyplot",
         "realpath",
         "rtol",

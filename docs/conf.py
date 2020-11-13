@@ -9,6 +9,11 @@ import os
 import shutil
 import subprocess
 
+# -- Project information -----------------------------------------------------
+project = "pyPawianTools"
+copyright = "2020, RUB EP1"
+author = "Meike Küßner, Remco de Boer"
+
 
 # -- Copy example notebooks ---------------------------------------------------
 print("Copy example notebook and data files")
@@ -29,20 +34,19 @@ for file_to_copy in FILES_TO_COPY:
 # -- Generate API skeleton ----------------------------------------------------
 shutil.rmtree("api", ignore_errors=True)
 subprocess.call(
-    "sphinx-apidoc "
-    "--force "
-    "--no-toc "
-    "--templatedir _templates "
-    "--separate "
-    "-o api/ ../src/; ",
+    " ".join(
+        [
+            "sphinx-apidoc",
+            "../src/",
+            "-o api/",
+            "--force",
+            "--no-toc",
+            "--templatedir _templates",
+            "--separate",
+        ]
+    ),
     shell=True,
 )
-
-
-# -- Project information -----------------------------------------------------
-project = "pyPawianTools"
-copyright = "2020, RUB EP1"
-author = "Meike Küßner, Remco de Boer"
 
 
 # -- Include constructors ----------------------------------------------------
@@ -57,22 +61,21 @@ def setup(app):
 
 
 # -- General configuration ---------------------------------------------------
-source_suffix = [
-    ".rst",
-    ".ipynb",
-    ".md",
-]
+master_doc = "index.rst"
+source_suffix = {
+    ".ipynb": "myst-nb",
+    ".md": "myst-nb",
+    ".rst": "restructuredtext",
+}
 
 # The master toctree document.
 master_doc = "index"
 
 extensions = [
-    "nbsphinx",
+    "myst_nb",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosectionlabel",
-    "sphinx.ext.autosummary",
-    "sphinx.ext.coverage",
-    "sphinx.ext.ifconfig",
+    "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
@@ -92,13 +95,15 @@ autodoc_default_options = {
     "members": True,
     "undoc-members": True,
     "show-inheritance": True,
-    "special-members": "__call__, __eq__",
+    "special-members": ", ".join(["__call__", "__eq__"]),
 }
-html_copy_source = False  # do not copy rst files
+html_copy_source = True  # needed for download notebook button
 html_show_copyright = False
 html_show_sourcelink = False
 html_show_sphinx = False
-html_theme = "sphinx_rtd_theme"
+html_sourcelink_suffix = ""
+html_theme = "sphinx_book_theme"
+html_title = "pyPawianTools"
 pygments_style = "sphinx"
 todo_include_todos = False
 viewcode_follow_imported_members = True
@@ -107,18 +112,21 @@ viewcode_follow_imported_members = True
 default_role = "py:obj"
 primary_domain = "py"
 nitpicky = True  # warn if cross-references are missing
-nitpick_ignore: list = []
 
 # Intersphinx settings
 intersphinx_mapping = {
-    "matplotlib": ("https://matplotlib.org/", None),
-    "numpy": ("https://docs.scipy.org/doc/numpy/", None),
-    "pandas": ("https://pandas.pydata.org/pandas-docs/stable/", None),
+    "matplotlib": ("https://matplotlib.org", None),
+    "numpy": ("https://docs.scipy.org/doc/numpy", None),
+    "pandas": ("https://pandas.pydata.org/pandas-docs/stable", None),
     "python": ("https://docs.python.org/3", None),
 }
 
 # Settings for autosectionlabel
 autosectionlabel_prefix_document = True
+
+# Settings for copybutton
+copybutton_prompt_is_regexp = True
+copybutton_prompt_text = r">>> |\.\.\. "  # doctest
 
 # Settings for linkcheck
 linkcheck_anchors = False
@@ -128,14 +136,29 @@ linkcheck_ignore = [
     "https://gitlab.ep1.rub.de/redeboer/pyPawianTools/pipelines",
 ]
 
-# Settings for nbsphinx
-if "NBSPHINX_EXECUTE" in os.environ:
+# Settings for myst_nb
+execution_timeout = -1
+nb_output_stderr = "remove"
+nb_render_priority = {
+    "html": (
+        "application/vnd.jupyter.widget-view+json",
+        "application/javascript",
+        "text/html",
+        "image/svg+xml",
+        "image/png",
+        "image/jpeg",
+        "text/markdown",
+        "text/latex",
+        "text/plain",
+    )
+}
+nb_render_priority["doctest"] = nb_render_priority["html"]
+
+jupyter_execute_notebooks = "off"
+if "EXECUTE_NB" in os.environ:
     print("\033[93;1mWill run Jupyter notebooks!\033[0m")
-    nbsphinx_execute = "always"
-else:
-    nbsphinx_execute = "never"
-nbsphinx_timeout = -1
-nbsphinx_execute_arguments = [
-    "--InlineBackend.figure_formats={'svg', 'pdf'}",
-    "--InlineBackend.rc={'figure.dpi': 96}",
-]
+    jupyter_execute_notebooks = "force"
+
+# Settings for myst-parser
+myst_admonition_enable = True
+myst_update_mathjax = False
