@@ -1,6 +1,10 @@
 variables:
   GIT_STRATEGY: clone
 
+stages:
+  - test
+  - deploy
+
 .only-default: &only-default
   only:
     - merge_requests
@@ -26,6 +30,7 @@ before_script:
 
 Documentation:
   <<: *only-default
+  stage: test
   before_script:
     - *print-system-info
     - *activate-venv
@@ -36,6 +41,7 @@ Documentation:
 
 Tests:
   <<: *only-default
+  stage: test
   before_script:
     - *print-system-info
     - *activate-venv
@@ -45,6 +51,7 @@ Tests:
 
 Style:
   <<: *only-default
+  stage: test
   before_script:
     - *print-system-info
     - *activate-venv
