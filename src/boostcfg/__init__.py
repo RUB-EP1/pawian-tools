@@ -54,3 +54,7 @@ class BoostConfigParser:
 
     def __getitem__(self, key):
         return self.__values[key]
+
+    @property
+    def config_file(self) -> str:
+        return self.__config_file

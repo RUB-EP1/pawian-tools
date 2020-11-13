@@ -12,6 +12,7 @@
     "james-yu.latex-workshop",
     "lextudio.restructuredtext",
     "ms-python.python",
+    "ms-python.vscode-pylance",
     "ms-vscode-remote.remote-ssh",
     "ms-vsliveshare.vsliveshare",
     "redhat.vscode-yaml",

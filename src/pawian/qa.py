@@ -16,9 +16,6 @@ from uproot_methods.classes import TH1
 from pawian.data import read_pawian_hists
 from pawian.latex import convert
 
-_WEIGHT_TAG = "weight"
-_4VEC_BRANCH_TAG = "Fourvecs"
-
 
 class PawianHists:
     """Data container for a :file:`pawianHists.root` file.
