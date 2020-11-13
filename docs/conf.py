@@ -61,7 +61,7 @@ def setup(app):
 
 
 # -- General configuration ---------------------------------------------------
-master_doc = "index.rst"
+master_doc = "index.md"
 source_suffix = {
     ".ipynb": "myst-nb",
     ".md": "myst-nb",
