@@ -1,9 +1,9 @@
-name: pawian
+name: pypawian
 channels:
-  - conda-forge
   - defaults
+  - conda-forge
 dependencies:
-  - python>=3.6
+  - python>=3.6,<3.9
   - pip
   - pip:
       - -e .
