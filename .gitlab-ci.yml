@@ -34,11 +34,9 @@ Documentation:
   before_script:
     - *print-system-info
     - *activate-venv
-    - python3 -m pip install .[doc]
-    - python3 -m pip install nbconvert
+    - python3 -m pip install .[citools,doc]
   script:
-    - cd docs
-    - EXECUTE_NB= make html
+    - python3 -m tox -e docnb
 
 Tests:
   <<: *only-default
