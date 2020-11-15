@@ -1,6 +1,6 @@
 # cspell:ignore astype dropna
 
-"""Data module of pyPawianTools.
+"""Data module of PawianTools.
 
 This module allows you to parse and analyze ASCII data files of momentum
 tuples. The files have the following form:

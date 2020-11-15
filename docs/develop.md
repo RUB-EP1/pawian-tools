@@ -2,24 +2,25 @@
 
 # Develop
 
+[![GitPod](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/redeboer/PawianTools)
+
 This repository is meant for development within the RUB EP1 group, so you're
-welcome to fork and submit pull/merge requests! Alternatively, you can
-[request access](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/-/project_members/request_access).
+welcome to fork and submit pull/merge requests!
 
 ## Developer extensions
 
-As a developer, you need to install pyPawianTools in
+As a developer, you need to install PawianTools in
 ["editable" mode](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs).
-See [installation instructions](./README.md#installation). You only need to do
-one additional thing: install the developer packages listed under
-`options.extras_requires` of the {download}`setup.cfg <../setup.cfg>`). This is
+See [installation instructions](./install.md). You only need to do one
+additional thing: install the developer packages listed under
+`options.extras_requires` of the {download}`setup.cfg <../setup.cfg>`. This is
 simply done with:
 
 ```bash
 pip install -e .[dev]
 ```
 
-(assuming you are in your [virtual environment](./README.md#installation)).
+(assuming you are in your [virtual environment](./install.md)).
 
 ## Conventions
 
@@ -48,7 +49,7 @@ pip install -e .[dev]
 
 ## Documentation
 
-Want to have a nice overview of the modules in pyPawianTools? If you have
+Want to have a nice overview of the modules in PawianTools? If you have
 followed the [installation instructions](./install.md), just do the following:
 
 ```bash

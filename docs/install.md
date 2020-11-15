@@ -1,8 +1,7 @@
 # Installation
 
-As this package is developmental, and not yet published on PyPI (see
-[Milestone %1](https://gitlab.ep1.rub.de/redeboer/pyPawianTools/-/milestones/1)),
-it is best to install this package in
+As this package is developmental, and not yet published on PyPI, it is best to
+install this package in
 ["editable" mode](https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs)
 ({command}`pip install -e .`), so that you can easily modify the source code,
 try out new ideas, and propose your implementations through a merge request.
@@ -24,7 +23,7 @@ Once you have Conda, all you need to do is:
 
 ```bash
 conda env create
-conda activate pypawian
+conda activate pawian-tools
 ```
 
 Note that you can easily switch back with `conda deactivate`. And if you want

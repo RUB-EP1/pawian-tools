@@ -1,7 +1,7 @@
 API
 ===
 
-pyPawianTools consists of the following packages:
+PawianTools consists of the following packages:
 
 .. toctree::
 
