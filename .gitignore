@@ -40,8 +40,11 @@ pyvenv*/
 **.code-workspace
 
 # Exceptions
-!.gitlab-ci.yml
+!.github/*.yml
+!.github/*/*.yml
+!.gitpod.yml
 !.pre-commit-config.yaml
 !.readthedocs.yml
 !/src/pawian/samples/*
+!codecov.yml
 !environment.yml

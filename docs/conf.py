@@ -10,7 +10,7 @@ import shutil
 import subprocess
 
 # -- Project information -----------------------------------------------------
-project = "pyPawianTools"
+project = "PawianTools"
 copyright = "2020, RUB EP1"
 author = "Meike Küßner, Remco de Boer"
 
@@ -65,8 +65,9 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinx_copybutton",
-    "sphinx_togglebutton",
     "sphinx_panels",
+    "sphinx_thebe",
+    "sphinx_togglebutton",
 ]
 exclude_patterns = [
     "**.ipynb_checkpoints",
@@ -95,15 +96,23 @@ html_show_sphinx = False
 html_sourcelink_suffix = ""
 html_theme = "sphinx_book_theme"
 html_theme_options = {
-    "repository_url": "https://gitlab.ep1.rub.de/redeboer/pyPawianTools",
+    "repository_url": "https://github.com/redeboer/PawianTools",
     "repository_branch": "master",
     "path_to_docs": "docs",
     "use_download_button": True,
+    "use_edit_page_button": True,
     "use_issues_button": True,
     "use_repository_button": True,
+    "launch_buttons": {
+        "binderhub_url": "https://mybinder.org",
+        "colab_url": "https://colab.research.google.com",
+        "notebook_interface": "jupyterlab",
+        "thebe": True,
+        "thebelab": True,
+    },
     "theme_dev_mode": True,
 }
-html_title = "pyPawianTools"
+html_title = "PawianTools"
 pygments_style = "sphinx"
 todo_include_todos = False
 viewcode_follow_imported_members = True
@@ -130,11 +139,6 @@ copybutton_prompt_text = r">>> |\.\.\. "  # doctest
 
 # Settings for linkcheck
 linkcheck_anchors = False
-linkcheck_ignore = [
-    "https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/coverage.svg",
-    "https://gitlab.ep1.rub.de/redeboer/pyPawianTools/badges/master/pipeline.svg",
-    "https://gitlab.ep1.rub.de/redeboer/pyPawianTools/pipelines",
-]
 
 # Settings for myst_nb
 execution_timeout = -1
@@ -162,3 +166,9 @@ if "EXECUTE_NB" in os.environ:
 # Settings for myst-parser
 myst_admonition_enable = True
 myst_update_mathjax = False
+
+# Settings for Thebe cell output
+thebe_config = {
+    "repository_url": html_theme_options["repository_url"],
+    "repository_branch": html_theme_options["repository_branch"],
+}

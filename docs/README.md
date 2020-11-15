@@ -1,6 +1,6 @@
 # Documentation folder
 
-If you are developing [pyPawianTools](../), it is useful to check the structure
+If you are developing [PawianTools](../), it is useful to check the structure
 of your modules from time to time and to have a look at how your
 [docstrings](https://www.python.org/dev/peps/pep-0257/#what-is-a-docstring) are
 rendered.
@@ -26,6 +26,6 @@ As a trick, you can run
 sphinx-apidoc -f -M -o docs .
 ```
 
-from the [pyPawianTools folder](..) to generate these rst files for all
+from the [PawianTools folder](..) to generate these rst files for all
 (sub-)modules automatically, but note that this will overwrite the existing
 files!
