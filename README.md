@@ -17,6 +17,6 @@
 
 Go to [pawian.rtfd.io](https://pwa.readthedocs.io) to view the documentation!
 
-## How to contribute?
+## Contribute
 
 See [`CONTRIBUTING.md`](./CONTRIBUTING.md)

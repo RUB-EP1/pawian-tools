@@ -16,15 +16,19 @@ repos:
       - id: check-yaml
       - id: debug-statements
       - id: end-of-file-fixer
-        exclude: cspell.json
+        exclude: >
+          (?x)^(
+            cspell.json|
+            .*\.bib
+          )$
       - id: mixed-line-ending
       - id: name-tests-test
         name: Tests should start with test_
         args: ["--django"]
       - id: trailing-whitespace
 
-  - repo: https://github.com/prettier/prettier
-    rev: 2.1.2
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.2.0
     hooks:
       - id: prettier
         language_version: 12.18.2 # prettier does not specify node correctly

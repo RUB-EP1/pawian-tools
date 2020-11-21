@@ -9,7 +9,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "off"
   },
   "[python]": {
     "editor.codeActionsOnSave": {
@@ -54,6 +55,7 @@
   "restructuredtext.confPath": "${workspaceFolder}/docs",
   "rewrap.wrappingColumn": 79,
   "search.exclude": {
+    "**/tests/__init__.py": true,
     "**/tests/**/__init__.py": true,
     "docs/tox.ini": true,
     "tests/tox.ini": true

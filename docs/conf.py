@@ -1,3 +1,5 @@
+# type: ignore
+
 """Configuration file for the Sphinx documentation builder.
 
 This file only contains a selection of the most common options. For a full
@@ -9,11 +11,18 @@ import os
 import shutil
 import subprocess
 
+from pkg_resources import get_distribution
+
 # -- Project information -----------------------------------------------------
 project = "PawianTools"
 copyright = "2020, RUB EP1"
+package = "pawian"
+repo_name = "PawianTools"
 author = "Meike Küßner, Remco de Boer"
 
+if os.path.exists(f"../src/{package}/version.py"):
+    __release = get_distribution(package).version
+    version = ".".join(__release.split(".")[:3])
 
 # -- Generate API skeleton ----------------------------------------------------
 shutil.rmtree("api", ignore_errors=True)
@@ -21,7 +30,7 @@ subprocess.call(
     " ".join(
         [
             "sphinx-apidoc",
-            "../src/",
+            f"../src/",
             "-o api/",
             "--force",
             "--no-toc",
@@ -54,6 +63,10 @@ source_suffix = {
 
 # The master toctree document.
 master_doc = "index"
+modindex_common_prefix = [
+    "boostcfg.",
+    f"{package}.",
+]
 
 extensions = [
     "myst_nb",
@@ -71,6 +84,7 @@ extensions = [
 ]
 exclude_patterns = [
     "**.ipynb_checkpoints",
+    "*build",
     "*build",
     "README.md",
     "tests",
@@ -96,7 +110,7 @@ html_show_sphinx = False
 html_sourcelink_suffix = ""
 html_theme = "sphinx_book_theme"
 html_theme_options = {
-    "repository_url": "https://github.com/redeboer/PawianTools",
+    "repository_url": f"https://github.com/redeboer/{repo_name}",
     "repository_branch": "master",
     "path_to_docs": "docs",
     "use_download_button": True,
@@ -172,3 +186,24 @@ thebe_config = {
     "repository_url": html_theme_options["repository_url"],
     "repository_branch": html_theme_options["repository_branch"],
 }
+
+# -- Visualize dependencies ---------------------------------------------------
+if jupyter_execute_notebooks != "off":
+    print("Generating module dependency tree...")
+    subprocess.call(
+        " ".join(
+            [
+                "HOME=.",  # in case of calling through tox
+                "pydeps",
+                f"../src/{package}",
+                "-o module_structure.svg",
+                "--exclude *._*",  # hide private modules
+                "--max-bacon=1",  # hide external dependencies
+                "--noshow",
+            ]
+        ),
+        shell=True,
+    )
+    if os.path.exists("module_structure.svg"):
+        with open(f"api/{package}.rst", "a") as stream:
+            stream.write("\n.. image:: /module_structure.svg")

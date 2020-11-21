@@ -28,7 +28,6 @@
         ".vscode/*",
         ".vscode/.gitignore",
         "Makefile",
-        "Notebooks/*",
         "codecov.yml",
         "cspell.json",
         "docs/_templates/*",

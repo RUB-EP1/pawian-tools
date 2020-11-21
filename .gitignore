@@ -1,14 +1,20 @@
 # Output files
+*.gv
+*.json
+*.npy
+*.pdf
+*.png
+*.svg
+*.xml
+*.yaml
+*.yml
+
 *.client*
 *.dat
 *.log
 *.out
-*.pdf
 *.root
 *.server
-*.xml
-*.yaml
-*.yml
 
 # Build files
 *.egg-info/
@@ -20,7 +26,7 @@ version.py
 
 # Temporary files
 *.pyc
-.condaenv.*
+*condaenv.*
 .coverage
 .coverage.*
 .ipynb_checkpoints/
@@ -43,8 +49,13 @@ pyvenv*/
 !.github/*.yml
 !.github/*/*.yml
 !.gitpod.yml
+!.markdownlint.json
 !.pre-commit-config.yaml
 !.readthedocs.yml
-!/src/pawian/samples/*
+!.vscode/*.json
 !codecov.yml
+!cspell.json
 !environment.yml
+!pyrightconfig.json
+
+!/src/pawian/samples/*
