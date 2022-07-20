@@ -129,8 +129,8 @@ class PwaAccessor:
     def rho2(self):
         """Compute a dataframe containing the square sum of the 3-momenta."""
         if self.has_particles:
-            return (self.p_xyz ** 2).sum(axis=1, level=0)
-        return (self.p_xyz ** 2).sum(axis=1)
+            return (self.p_xyz**2).sum(axis=1, level=0)
+        return (self.p_xyz**2).sum(axis=1)
 
     @property
     def rho(self):
@@ -140,7 +140,7 @@ class PwaAccessor:
     @property
     def mass2(self):
         """**Compute** the square of the invariant masses."""
-        return self.energy ** 2 - self.rho2
+        return self.energy**2 - self.rho2
 
     @property
     def mass(self):
