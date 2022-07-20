@@ -105,6 +105,7 @@
         "pyplot",
         "pyright",
         "realpath",
+        "redeboer",
         "rtfd",
         "rtol",
         "seealso",
