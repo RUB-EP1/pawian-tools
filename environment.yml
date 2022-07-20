@@ -6,4 +6,4 @@ dependencies:
   - python>=3.6,<3.9
   - pip
   - pip:
-      - -e .[doc]
+      - -e .[dev]
