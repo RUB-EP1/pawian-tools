@@ -1,3 +1,12 @@
+ci:
+  autoupdate_commit_msg: "ci: autoupdate pre-commit hooks"
+  autoupdate_schedule: quarterly
+  skip:
+    # local hooks
+    - flake8
+    - mypy
+    - pylint
+
 repos:
   - repo: meta
     hooks:
@@ -81,6 +90,9 @@ repos:
     hooks:
       - id: rstcheck
         files: \.(inc|rst)$
+
+  # The following tools have to be install locally, because they can also be
+  # used by code editors (e.g. linting and format-on-save).
 
   - repo: local
     hooks:
