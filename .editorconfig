@@ -15,9 +15,6 @@ indent_size = 4
 [*.{json,xml,yaml,yml}]
 indent_size = 2
 
-[*.{rst,inc}]
-indent_size = 2
-
 # when adding words through vscode, this is the resulting output format
 [cspell.json]
 indent_size = 4
