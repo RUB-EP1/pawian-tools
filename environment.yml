@@ -1,9 +1,9 @@
 name: pawian-tools
 channels:
   - defaults
-  - conda-forge
 dependencies:
-  - python>=3.6,<3.9
+  - graphviz # for binder
   - pip
+  - python>=3.6,<3.9
   - pip:
-      - -e .[doc]
+      - -e .[dev]

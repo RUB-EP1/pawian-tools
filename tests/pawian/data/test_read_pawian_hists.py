@@ -12,6 +12,7 @@ SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
 @pytest.mark.parametrize(
     "input_file, has_weights, particles, energy",
     [
+        # cspell:ignore Sigmaplus
         (
             "pawianHists_ROOT5_SigmaKp.root",
             False,

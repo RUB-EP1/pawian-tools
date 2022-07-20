@@ -16,7 +16,7 @@ class BoostConfigParser:
     """Data structure that holds information of Boost config files."""
 
     def __init__(self, filename=None):
-        self.__values = dict()
+        self.__values = {}
         self.__config_file = None
         if isinstance(filename, str):
             self.read_config(filename=filename, reset=True)
@@ -25,10 +25,10 @@ class BoostConfigParser:
         """Parse a config line and to the internal `dict`."""
         self.__config_file = filename
         if reset:
-            self.__values = dict()
-        cfg_file = open(filename, "r")
-        for line in cfg_file.readlines():
-            self.append_value_from_line(line)
+            self.__values = {}
+        with open(filename, "r") as stream:
+            for line in stream.readlines():
+                self.append_value_from_line(line)
 
     def append_value_from_line(self, line):
         """Smartly append a key-value pair from a line."""

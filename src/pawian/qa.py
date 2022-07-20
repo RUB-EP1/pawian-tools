@@ -38,7 +38,7 @@ class PawianHists:
 
         Get an uproot :code:`TH1`, :code:`TH2`, or :code:`TH3` from the
         :file:`pawianHists.root` file. See `here
-        <https://github.com/scikit-hep/uproot-methods/blob/master/uproot_methods/classes/TH1.py>`__
+        <https://github.com/scikit-hep/uproot3-methods/blob/master/uproot3_methods/classes/TH1.py>`__
         which methods you can call on these classes or have a look at the
         :doc:`/usage/QA_Histograms` Jupyter notebook.
         """
@@ -121,7 +121,7 @@ class PawianHists:
         names = [k for k in self.histogram_names if re.fullmatch(re_match, k)]
         labels = [re.match(re_match, k)[1].lower() for k in names]
         # Create histograms
-        hists = dict()
+        hists = {}
         for hist_name, label in zip(names, labels):
             histogram = self.draw_histogram(
                 hist_name, plot_on, label=label, **kwargs

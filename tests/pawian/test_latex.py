@@ -2,12 +2,13 @@
 
 import pytest
 
-import pawian.latex as latex
+from pawian import latex
 
 
 @pytest.mark.parametrize(
     "test_input,expected",
     [
+        # cspell:ignore testpion
         ("testpi+pion-pion+", r"test \pi^+ \pi^- \pi^+"),
         ("testpion+pion+", r"test \pi^+ \pi^+"),
         ("etaD0pion-pion+Drho0", r"\eta D^0 \pi^- \pi^+ D \rho^0"),
