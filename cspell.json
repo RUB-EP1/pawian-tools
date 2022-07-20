@@ -44,6 +44,7 @@
         "boostcfg",
         "ComPWA",
         "conda",
+        "graphviz",
         "ipython",
         "jupyter",
         "matplotlib",
