@@ -146,10 +146,10 @@ nitpicky = True  # warn if cross-references are missing
 
 # Intersphinx settings
 intersphinx_mapping = {
+    "compwa-org": ("https://compwa-org.readthedocs.io", None),
     "matplotlib": ("https://matplotlib.org", None),
     "numpy": ("https://docs.scipy.org/doc/numpy", None),
     "pandas": ("https://pandas.pydata.org/pandas-docs/stable", None),
-    "pwa": ("https://pwa.readthedocs.io", None),
     "python": ("https://docs.python.org/3", None),
 }
 
