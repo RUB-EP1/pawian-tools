@@ -3,11 +3,11 @@
 The fastest way of installing this package is through PyPI:
 
 ```shell
-python3 -m pip install git+https://github.com/redeboer/PawianTools@master
+python3 -m pip install git+https://github.com/redeboer/PawianTools@main
 ```
 
 This installs the latest version that you can find on the
-[`master`](https://github.com/redeboer/PawianTools/tree/master) branch.
+[`main`](https://github.com/redeboer/PawianTools/tree/main) branch.
 
 However, we highly recommend using the more dynamic,
 {ref}`'editable installation' <pwa:develop:Editable installation>` instead.

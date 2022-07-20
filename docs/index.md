@@ -6,7 +6,7 @@
 
 [![GPLv3+ license](https://img.shields.io/badge/License-GPLv3+-blue.svg)](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
 [![Documentation Status](https://readthedocs.org/projects/pawian/badge/?version=latest)](https://pwa.readthedocs.io/projects/pawian)
-[![Test coverage](https://codecov.io/gh/redeboer/PawianTools/branch/master/graph/badge.svg)](https://codecov.io/gh/redeboer/PawianTools)
+[![Test coverage](https://codecov.io/gh/redeboer/PawianTools/branch/main/graph/badge.svg)](https://codecov.io/gh/redeboer/PawianTools)
 
 This repository serves as a collection of Python tools to complement
 [Pawian](https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware).
