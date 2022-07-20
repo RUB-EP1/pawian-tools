@@ -22,12 +22,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-18.04]
+        os: [ubuntu-20.04]
         python-version: [3.7]
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@master
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -36,7 +36,7 @@ jobs:
           pip install .[test]
       - name: Test with pytest-cov
         run: pytest -n auto --cov=boostcfg --cov=pawian --cov-report=xml
-      - uses: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v3
         with:
           file: ./coverage.xml
           flags: unittests
@@ -48,20 +48,18 @@ jobs:
     strategy:
       matrix:
         os:
-          # - macos-10.15
-          - ubuntu-18.04
-        python-version: [3.6, 3.7, 3.8]
+          - ubuntu-20.04
+        python-version:
+          - 3.6
+          - 3.7
+          - 3.8
         exclude:
-          # - os: macos-10.15
-          #   python-version: 3.6
-          # - os: macos-10.15
-          #   python-version: 3.8
-          - os: ubuntu-18.04 # coverage job
+          - os: ubuntu-20.04 # coverage job
             python-version: 3.7
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -74,11 +72,11 @@ jobs:
   documentation:
     name: Build documentation and run notebooks
     if: github.event.pull_request.draft == false
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python 3.7
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.7
       - name: Install dependencies
