@@ -59,7 +59,7 @@ class PwaAccessor:
             if len(obj.columns.levels) != 2:
                 raise AttributeError(
                     "Not a Pawian data object!\n"
-                    "pandas.DataFrame must have multicolumns of 2 levels:\n"
+                    "pandas.DataFrame must have multi-columns of 2 levels:\n"
                     " - 1st level are particles\n"
                     f" - 2nd level are define the 4-momentum: {_MOMENTUM_LABELS}"
                 )
@@ -159,6 +159,7 @@ class PwaAccessor:
                     axis=1,
                 )
             )
+        # cspell:ignore mergesort
         interleaved = pd.concat(new_dict).sort_index(kind="mergesort")
         interleaved.to_csv(filename, header=False, index=False, **kwargs)
 
@@ -206,14 +207,14 @@ def read_ascii(filename, particles=None, **kwargs):
 
     # Try to determine number of particles from file
     if has_weights:
-        file_n_partices = py_values.index[py_values.isnull()][1] - 1
+        file_n_particles = py_values.index[py_values.isnull()][1] - 1
         if particles is None:
-            particles = range(1, file_n_partices + 1)
+            particles = range(1, file_n_particles + 1)
         if isinstance(particles, int):
             particles = range(1, particles + 1)
-        if len(particles) != file_n_partices:
+        if len(particles) != file_n_particles:
             raise DataParserError(
-                f'File "{filename}" contains {file_n_partices}, but you said there '
+                f'File "{filename}" contains {file_n_particles}, but you said there '
                 f"were {len(particles)} ({particles})"
             )
 

@@ -24,6 +24,7 @@ def test_faulty_import():
 @pytest.mark.parametrize(
     "filename, hist_value, particles, n_data, n_fit, hist_names, unique_names",
     [
+        # cspell:ignore Sigmaplus Sigmaplusantiproton
         (
             FILENAME_ROOT5,
             ("DataSigmaplusK0", 14.0),
@@ -87,6 +88,7 @@ def test_draw_histogram():
     with pytest.raises(Exception):
         assert hists.draw_histogram("non-existent")
     values, edges, patch = hists.draw_histogram("FitThetaHeli_pip_FrompipD0Dm")
+    # cspell:ignore Frompip
     assert len(values) == 100
     assert values[0] == 0.7086924910545349
     assert len(edges) == 101
