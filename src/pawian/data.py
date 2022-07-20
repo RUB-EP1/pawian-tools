@@ -149,7 +149,7 @@ class PwaAccessor:
 
     def write_ascii(self, filename, **kwargs):
         """Write to Pawian-like ASCII file."""
-        new_dict = list()
+        new_dict = []
         if self.has_weights:
             new_dict.append(self._obj[_WEIGHT_LABEL])
         for par in self.particles:

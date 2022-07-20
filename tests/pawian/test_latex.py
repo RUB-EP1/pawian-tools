@@ -2,7 +2,7 @@
 
 import pytest
 
-import pawian.latex as latex
+from pawian import latex
 
 
 @pytest.mark.parametrize(

@@ -121,7 +121,7 @@ class PawianHists:
         names = [k for k in self.histogram_names if re.fullmatch(re_match, k)]
         labels = [re.match(re_match, k)[1].lower() for k in names]
         # Create histograms
-        hists = dict()
+        hists = {}
         for hist_name, label in zip(names, labels):
             histogram = self.draw_histogram(
                 hist_name, plot_on, label=label, **kwargs
