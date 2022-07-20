@@ -46,14 +46,6 @@ repos:
     hooks:
       - id: cspell
 
-  - repo: https://github.com/PyCQA/doc8
-    rev: "0.11.2"
-    hooks:
-      - id: doc8
-        args:
-          - -q
-        files: \.(inc|rst)$
-
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:
@@ -94,12 +86,6 @@ repos:
     rev: 6.1.1
     hooks:
       - id: pydocstyle
-
-  - repo: https://github.com/rstcheck/rstcheck
-    rev: "v6.0.0.post1"
-    hooks:
-      - id: rstcheck
-        files: \.(inc|rst)$
 
   # The following tools have to be install locally, because they can also be
   # used by code editors (e.g. linting and format-on-save).
