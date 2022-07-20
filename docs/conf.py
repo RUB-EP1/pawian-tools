@@ -166,7 +166,7 @@ linkcheck_anchors = False
 def get_nb_execution_mode() -> str:
     if "EXECUTE_NB" in os.environ:
         print("\033[93;1mWill run Jupyter notebooks!\033[0m")
-        return "force"
+        return "cache"
     return "off"
 
 
