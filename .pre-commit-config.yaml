@@ -6,6 +6,8 @@ ci:
     - flake8
     - mypy
     - pylint
+    # hooks that don't work on pre-commit.ci
+    - pyright
 
 repos:
   - repo: meta
@@ -107,6 +109,11 @@ repos:
     rev: 6.1.1
     hooks:
       - id: pydocstyle
+
+  - repo: https://github.com/ComPWA/mirrors-pyright
+    rev: v1.1.262
+    hooks:
+      - id: pyright
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.37.2

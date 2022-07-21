@@ -38,6 +38,8 @@ def is_empty(line):
 def strip_comment(line):
     """Remove everything before a comment sign (:code:`#`)."""
     matches = re.search(r"^[^#]*", line)
+    if matches is None:
+        raise ValueError(f"Line {line} is not valid")
     return matches[0]
 
 

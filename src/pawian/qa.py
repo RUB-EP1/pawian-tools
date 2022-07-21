@@ -119,7 +119,8 @@ class PawianHists:
         re_match = f"({re_match}){name}"
         # Makes selection of names plus corresponding labels
         names = [k for k in self.histogram_names if re.fullmatch(re_match, k)]
-        labels = [re.match(re_match, k)[1].lower() for k in names]
+        matches = [re.match(re_match, k) for k in names]
+        labels = [match[1].lower() for match in matches if match is not None]
         # Create histograms
         hists = {}
         for hist_name, label in zip(names, labels):
