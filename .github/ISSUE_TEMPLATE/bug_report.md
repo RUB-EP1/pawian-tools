@@ -12,11 +12,10 @@ assignees: ""
 
 1.
 
-**Expected behavior** A clear and concise description of what you expected to
-happen.
+**Expected behavior** A clear and concise description of what you expected to happen.
 
-**Error log** If applicable, add an error log or screenshots to help explain
-your problem.
+**Error log** If applicable, add an error log or screenshots to help explain your
+problem.
 
 **Desktop (please complete the following information):**
 

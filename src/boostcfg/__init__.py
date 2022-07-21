@@ -41,8 +41,8 @@ class BoostConfigParser:
     def append_value(self, key, value):
         """Append a key-value pair.
 
-        Append a key-value pair to the internal dictionary: convert existing
-        string values to a list if a new value with the same key is added.
+        Append a key-value pair to the internal dictionary: convert existing string
+        values to a list if a new value with the same key is added.
         """
         if key in self.__values:
             old_values = self.__values[key]

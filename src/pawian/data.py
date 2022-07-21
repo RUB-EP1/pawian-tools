@@ -233,14 +233,12 @@ def read_ascii(filename, particles=None, **kwargs):
 
     # Convert imported table to the multi-column one
     if has_weights:
-        frame[_WEIGHT_LABEL] = full_table[_MOMENTUM_LABELS[0]][
-            0::n_rows
-        ].reset_index(drop=True)
+        frame[_WEIGHT_LABEL] = full_table[_MOMENTUM_LABELS[0]][0::n_rows].reset_index(
+            drop=True
+        )
     for start_row, par in enumerate(particles, first_momentum_row):
         for mom in _MOMENTUM_LABELS:
-            frame[par, mom] = full_table[mom][start_row::n_rows].reset_index(
-                drop=True
-            )
+            frame[par, mom] = full_table[mom][start_row::n_rows].reset_index(drop=True)
 
     return frame
 

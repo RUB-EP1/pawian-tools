@@ -25,8 +25,7 @@ __OTHER_REPLACEMENTS = {
 
 
 def convert(phrase):
-    """Convert particle names to Latex code which can be used for plot labels
-    etc."""
+    """Convert particle names to Latex code which can be used for plot labels etc."""
     phrase = re.sub(f"({'|'.join(__LATEX_COMMANDS)})", r" \\\1 ", phrase)
     for pattern, repl in __OTHER_REPLACEMENTS.items():
         phrase = re.sub(pattern, repl, phrase)

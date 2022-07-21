@@ -16,9 +16,7 @@ def test_get_key_value_pair(test_input, expected):
     assert lineparser.get_key_value_pair(test_input) == expected
 
 
-@pytest.mark.parametrize(
-    "test_input", ["something", r" \tsome string # and comment"]
-)
+@pytest.mark.parametrize("test_input", ["something", r" \tsome string # and comment"])
 def test_get_faulty_key_value_pair(test_input):
     with pytest.raises(SyntaxError):
         lineparser.get_key_value_pair(test_input)

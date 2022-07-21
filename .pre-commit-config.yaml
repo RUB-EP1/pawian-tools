@@ -52,8 +52,8 @@ repos:
       - id: docformatter
         args:
           - --in-place
-          - --wrap-descriptions=79
-          - --wrap-summaries=79
+          - --wrap-descriptions=88
+          - --wrap-summaries=88
 
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1

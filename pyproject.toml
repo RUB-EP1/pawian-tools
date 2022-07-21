@@ -9,7 +9,6 @@ requires = [
 write_to = "src/pawian/version.py"
 
 [tool.black]
-line-length = 79
 target-version = [
     'py36',
     'py37',
@@ -32,5 +31,12 @@ exclude = '''
 
 [tool.isort]
 profile = "black"
-src_paths = ["src", "tests"]
-line_length = 79
+src_paths = [
+    "src",
+    "tests",
+]
+
+[tool.nbqa.addopts]
+black = [
+    "--line-length=85",
+]

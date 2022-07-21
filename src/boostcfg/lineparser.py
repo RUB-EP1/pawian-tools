@@ -15,13 +15,11 @@ import re  # regex
 def get_key_value_pair(line):
     """Extract key and value from a line in a :code:`cfg` file.
 
-    Extracts everything before an equal sign as the key, and everything after
-    as the value.
+    Extracts everything before an equal sign as the key, and everything after as the
+    value.
     """
     new_line = strip_comment(line)
-    matches = re.search(
-        r"^\s*([^\s]+?)\s*=\s*([^\s]+.*?)\s*$", strip_comment(new_line)
-    )
+    matches = re.search(r"^\s*([^\s]+?)\s*=\s*([^\s]+.*?)\s*$", strip_comment(new_line))
     if matches is None:
         raise SyntaxError(f'Line "{new_line}" is not a key, value pair!')
     return (matches[1], matches[2])

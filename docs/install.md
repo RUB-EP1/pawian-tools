@@ -10,11 +10,10 @@ This installs the latest version that you can find on the
 [`main`](https://github.com/redeboer/PawianTools/tree/main) branch.
 
 However, we highly recommend using the more dynamic,
-{ref}`'editable installation' <compwa-org:develop:Editable installation>`
-instead. This goes as follows:
+{ref}`'editable installation' <compwa-org:develop:Editable installation>` instead. This
+goes as follows:
 
-1. Get the source code (see
-   [the Pro Git Book](https://git-scm.com/book/en/v2)):
+1. Get the source code (see [the Pro Git Book](https://git-scm.com/book/en/v2)):
 
    ```shell
    git clone https://github.com/redeboer/PawianTools.git
@@ -25,15 +24,13 @@ instead. This goes as follows:
    {ref}`here <compwa-org:develop:Virtual environment>`).
 
 3. Install the project in
-   {ref}`'editable installation' <compwa-org:develop:Editable installation>`
-   with
-   {ref}`additional dependencies <compwa-org:develop:Optional dependencies>`
-   for the developer:
+   {ref}`'editable installation' <compwa-org:develop:Editable installation>` with
+   {ref}`additional dependencies <compwa-org:develop:Optional dependencies>` for the
+   developer:
 
    ```shell
    python3 -m pip install -e .[dev]
    ```
 
-That's all! Have a look at the {doc}`/usage` page to try out the package, and
-see {doc}`compwa-org:develop` for tips on how to work with this 'editable'
-developer setup!
+That's all! Have a look at the {doc}`/usage` page to try out the package, and see
+{doc}`compwa-org:develop` for tips on how to work with this 'editable' developer setup!
