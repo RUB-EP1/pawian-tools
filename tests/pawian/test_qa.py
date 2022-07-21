@@ -14,7 +14,7 @@ FILENAME_ROOT6 = f"{SAMPLE_DIR}/pawianHists_ROOT6_DDpi.root"
 
 
 def test_faulty_import():
-    """Test exceptions upon corrupt file"""
+    """Test exceptions upon corrupt file."""
     with pytest.raises(FileNotFoundError):
         PawianHists("non-existent")
     with pytest.raises(ValueError):
@@ -58,7 +58,7 @@ def test_faulty_import():
 def test_data_model(  # pylint: disable=too-many-arguments
     filename, hist_value, particles, n_data, n_fit, hist_names, unique_names
 ):
-    """Test whether properties are correct"""
+    """Test whether properties are correct."""
     pawian_hists = PawianHists(filename)
 
     assert pawian_hists.get_uproot_histogram("non-existent") is None
@@ -83,7 +83,7 @@ def test_data_model(  # pylint: disable=too-many-arguments
 
 
 def test_draw_histogram():
-    """Test whether embedded histograms can be drawn"""
+    """Test whether embedded histograms can be drawn."""
     hists = PawianHists(FILENAME_ROOT6)
     with pytest.raises(Exception):
         assert hists.draw_histogram("non-existent")
@@ -138,9 +138,7 @@ def test_draw_combined_histogram():
     ],
 )
 def test_lorentz_vectors(filename, energy):
-    """
-    Test whether vectors were loaded correctly as `~pandas.DataFrame`.
-    """
+    """Test whether vectors were loaded correctly as `~pandas.DataFrame`."""
     pawian_hists = PawianHists(filename)
     particle = pawian_hists.particles[0]
     assert pawian_hists.data[particle].E.mean() == energy

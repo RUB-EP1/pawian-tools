@@ -1,7 +1,7 @@
 """Handle output of the QA step performed by Pawian.
 
-Usually, a :file:`pawianHists.root` file is produced if you run Pawian in QA mode.
-This module contains handlers for such files.
+Usually, a :file:`pawianHists.root` file is produced if you run Pawian in QA mode. This
+module contains handlers for such files.
 """
 
 import logging
@@ -20,8 +20,8 @@ from pawian.latex import convert
 class PawianHists:
     """Data container for a :file:`pawianHists.root` file.
 
-    Data container for a :file:`pawianHists.root` file that is created by the
-    QA step in Pawian.
+    Data container for a :file:`pawianHists.root` file that is created by the QA step in
+    Pawian.
     """
 
     def __init__(self, filename):
@@ -119,13 +119,12 @@ class PawianHists:
         re_match = f"({re_match}){name}"
         # Makes selection of names plus corresponding labels
         names = [k for k in self.histogram_names if re.fullmatch(re_match, k)]
-        labels = [re.match(re_match, k)[1].lower() for k in names]
+        matches = [re.match(re_match, k) for k in names]
+        labels = [match[1].lower() for match in matches if match is not None]
         # Create histograms
         hists = {}
         for hist_name, label in zip(names, labels):
-            histogram = self.draw_histogram(
-                hist_name, plot_on, label=label, **kwargs
-            )
+            histogram = self.draw_histogram(hist_name, plot_on, label=label, **kwargs)
             hists[label] = histogram
         return hists
 
@@ -153,7 +152,7 @@ class PawianHists:
 
     @property
     def histogram_names(self):
-        """Get a list of all histogram names in the :file:`pawianHists.root`."""
+        """Get a list of all histogram names in a :file:`pawianHists.root` file."""
         names = []
         for name in self.__file.keys():
             obj = self.__file[name]
@@ -165,9 +164,8 @@ class PawianHists:
     def unique_histogram_names(self):
         """Get a list of unique histograms from a :file:`pawianHists.root` file.
 
-        Get a list of histograms in the :file:`pawianHists.root` file of which
-        the keywords :code:`Data`, :code:`MC`, or :code:`Fit` have been
-        removed.
+        Get a list of histograms in the :file:`pawianHists.root` file of which the
+        keywords :code:`Data`, :code:`MC`, or :code:`Fit` have been removed.
         """
         names = []
         for name in self.__file.keys():

@@ -8,11 +8,11 @@
 [![Test coverage](https://codecov.io/gh/redeboer/PawianTools/branch/main/graph/badge.svg)](https://codecov.io/gh/redeboer/PawianTools)
 
 This repository serves as a collection of Python tools to complement
-[Pawian](https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware).
-There are currently two Python packages:
+[Pawian](https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware). There are
+currently two Python packages:
 
-1. {mod}`pawian`, which is a collection of Python modules that facilitate
-   working with Pawian data
+1. {mod}`pawian`, which is a collection of Python modules that facilitate working with
+   Pawian data
 2. {mod}`boostcfg`, which is a tool to read the content of a
    [Boost config file](https://www.boost.org/doc/libs/1_72_0/doc/html/boost/program_options/parse_co_1_3_32_9_8_1_1_11.html)
 

@@ -22,7 +22,7 @@ OUTPUT_FILE = "temp_output.dat"
     ],
 )
 def test_write_ascii(input_file):
-    """Write, then read an ASCII file"""
+    """Write, then read an ASCII file."""
     particles = ["pi+", "D0", "D-"]
     frame_in = read_ascii(input_file, particles=particles).loc[:9]
     frame_in.pwa.write_ascii(OUTPUT_FILE)

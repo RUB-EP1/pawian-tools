@@ -28,7 +28,7 @@ SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
     ],
 )
 def test_read_pawian_hists(input_file, has_weights, particles, energy):
-    """Test loading pawianHists.root file"""
+    """Test loading pawianHists.root file."""
     input_file = f"{SAMPLE_DIR}/{input_file}"
     data = read_pawian_hists(input_file, type_name="data")
     fit = read_pawian_hists(input_file, type_name="fit")
@@ -42,7 +42,7 @@ def test_read_pawian_hists(input_file, has_weights, particles, energy):
 
 
 def test_read_pawian_hists_exception():
-    """Test whether expected exceptions are raised"""
+    """Test whether expected exceptions are raised."""
     with pytest.raises(Exception):
         read_pawian_hists(
             f"{SAMPLE_DIR}/pawianHists_ROOT6_DDpi.root",

@@ -6,6 +6,9 @@ ci:
     - flake8
     - mypy
     - pylint
+    # hooks that don't work on pre-commit.ci
+    - editorconfig-checker
+    - pyright
 
 repos:
   - repo: meta
@@ -46,6 +49,27 @@ repos:
     hooks:
       - id: cspell
 
+  - repo: https://github.com/myint/docformatter
+    rev: v1.4
+    hooks:
+      - id: docformatter
+        args:
+          - --in-place
+          - --wrap-descriptions=88
+          - --wrap-summaries=88
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 2.4.0
+    hooks:
+      - id: editorconfig-checker
+        exclude: >
+          (?x)^(
+            .*\.dat|
+            .*\.ipynb|
+            .*\.md|
+            .*\.py
+          )$
+
   - repo: https://github.com/pycqa/isort
     rev: 5.10.1
     hooks:
@@ -55,6 +79,18 @@ repos:
     rev: v0.32.0
     hooks:
       - id: markdownlint
+
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.4.0
+    hooks:
+      - id: nbqa-black
+        additional_dependencies:
+          - black>=22.1.0
+      - id: nbqa-flake8
+      - id: nbqa-isort
+      - id: nbqa-pyupgrade
+        args:
+          - --py36-plus
 
   - repo: https://github.com/kynan/nbstripout
     rev: 0.5.0
@@ -86,6 +122,18 @@ repos:
     rev: 6.1.1
     hooks:
       - id: pydocstyle
+
+  - repo: https://github.com/ComPWA/mirrors-pyright
+    rev: v1.1.262
+    hooks:
+      - id: pyright
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.37.2
+    hooks:
+      - id: pyupgrade
+        args:
+          - --py36-plus
 
   # The following tools have to be install locally, because they can also be
   # used by code editors (e.g. linting and format-on-save).

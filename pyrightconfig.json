@@ -2,6 +2,8 @@
   "exclude": [".git", ".tox", "docs/_build"],
   "include": ["docs", "src", "tests"],
   "reportGeneralTypeIssues": false,
+  "reportOptionalMemberAccess": false,
+  "reportOptionalSubscript": true,
   "reportUnboundVariable": false,
   "reportUnusedClass": true,
   "reportUnusedFunction": true,
