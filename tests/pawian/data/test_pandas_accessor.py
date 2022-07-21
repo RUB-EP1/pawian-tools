@@ -39,9 +39,9 @@ def test_create_skeleton(particles, number_of_rows):
     [
         (  # wrong number of column LEVELS
             [
-                ("A"),
-                ("B"),
-                ("C"),
+                "A",
+                "B",
+                "C",
             ],
             ["Particles"],
         ),

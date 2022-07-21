@@ -121,9 +121,8 @@ class PwaAccessor:
     @property
     def p_xyz(self):
         """Get a dataframe containing only the 3-momenta."""
-        return self._obj.filter(
-            regex=("p_[xyz]")
-        )  # ! may conflict with _MOMENTUM_LABELS
+        # ! may conflict with _MOMENTUM_LABELS
+        return self._obj.filter(regex=r"p_[xyz]")
 
     @property
     def rho2(self):

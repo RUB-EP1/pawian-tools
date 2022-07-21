@@ -9,25 +9,26 @@ requires = [
 write_to = "src/pawian/version.py"
 
 [tool.black]
-target-version = [
-    'py36',
-    'py37',
-    'py38',
-]
-include = '\.pyi?$'
 exclude = '''
 /(
     .*\.egg-info
-  | .*build
-  | \.eggs
-  | \.git
-  | \.pytest_cache
-  | \.tox
-  | \.venv
-  | \.vscode
-  | dist
+    | .*build
+    | \.eggs
+    | \.git
+    | \.pytest_cache
+    | \.tox
+    | \.venv
+    | \.vscode
+    | dist
 )/
 '''
+include = '\.pyi?$'
+preview = true
+target-version = [
+    "py36",
+    "py37",
+    "py38",
+]
 
 [tool.isort]
 profile = "black"
