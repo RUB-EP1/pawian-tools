@@ -12,7 +12,7 @@ INPUT_FILE_MC = f"{SAMPLE_DIR}/momentum_tuples_mc.dat"
 
 
 def test_read_with_weight():
-    """Read a file that contains weights"""
+    """Read a file that contains weights."""
     frame = read_ascii(INPUT_FILE_DATA)
     assert len(frame) == 1000
     assert len(frame.columns.levels[0]) == 4
@@ -59,7 +59,7 @@ def test_read_with_weight():
     ],
 )
 def test_read_no_weights(particles):
-    """Read a file without weights"""
+    """Read a file without weights."""
     frame = read_ascii(INPUT_FILE_MC, particles=particles)
     assert len(frame) == 1000
     assert len(frame.columns.levels[0]) == 3
@@ -96,7 +96,7 @@ def test_read_no_weights(particles):
 
 
 def test_read_with_weights_wrong_particles():
-    """Test whether exceptions are raised"""
+    """Test whether exceptions are raised."""
     with pytest.raises(DataParserError):
         read_ascii(INPUT_FILE_DATA, 4)
     with pytest.raises(DataParserError):

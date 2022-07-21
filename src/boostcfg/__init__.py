@@ -26,7 +26,7 @@ class BoostConfigParser:
         self.__config_file = filename
         if reset:
             self.__values = {}
-        with open(filename, "r") as stream:
+        with open(filename) as stream:
             for line in stream.readlines():
                 self.append_value_from_line(line)
 

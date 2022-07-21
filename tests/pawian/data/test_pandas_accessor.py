@@ -21,7 +21,7 @@ INPUT_FILE_MC = f"{SAMPLE_DIR}/momentum_tuples_mc.dat"
     ],
 )
 def test_create_skeleton(particles, number_of_rows):
-    """Test creating an empty pawian dataframe"""
+    """Test creating an empty pawian dataframe."""
     frame = create_skeleton_frame(
         particle_names=particles,
         number_of_rows=number_of_rows,
@@ -57,7 +57,7 @@ def test_create_skeleton(particles, number_of_rows):
     ],
 )
 def test_raise_validate(columns, names):
-    """Test exception upon validate"""
+    """Test exception upon validate."""
     multi_index = pd.MultiIndex.from_tuples(columns, names=names)
     frame = pd.DataFrame(columns=multi_index)
     with pytest.raises(AttributeError):
@@ -65,7 +65,7 @@ def test_raise_validate(columns, names):
 
 
 def test_properties_multicolumn():
-    """Test whether properties work for multicolumn dataframe"""
+    """Test whether properties work for multicolumn dataframe."""
     particles = ["pi+", "D0", "D-"]
     frame_data = read_ascii(INPUT_FILE_DATA, particles=particles)
     frame_mc = read_ascii(INPUT_FILE_MC, particles=particles)
@@ -99,7 +99,7 @@ def test_properties_multicolumn():
 
 
 def test_properties_single_column():
-    """Test whether properties work for single column dataframe"""
+    """Test whether properties work for single column dataframe."""
     particles = ["pi+", "D0", "D-"]
     pi_data = read_ascii(INPUT_FILE_DATA, particles=particles)["pi+"]
     pi_mc = read_ascii(INPUT_FILE_MC, particles=particles)["pi+"]
