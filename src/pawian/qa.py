@@ -40,7 +40,7 @@ class PawianHists:
         :file:`pawianHists.root` file. See `here
         <https://github.com/scikit-hep/uproot3-methods/blob/master/uproot3_methods/classes/TH1.py>`__
         which methods you can call on these classes or have a look at the
-        :doc:`/usage/QA_Histograms` Jupyter notebook.
+        :doc:`/usage/qa` Jupyter notebook.
         """
         try:
             obj = self.__file[name]

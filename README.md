@@ -1,6 +1,6 @@
 # Python Tools for Pawian
 
-[![Documentation build status](https://readthedocs.org/projects/pawian/badge/?version=latest)](https://pwa.readthedocs.io/projects/pawian)
+[![Documentation build status](https://github.com/redeboer/PawianTools/workflows/CI/badge.svg)](https://github.com/redeboer/PawianTools/actions?query=branch%3Amain+workflow%3ACI)
 [![Binder](https://static.mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/redeboer/PawianTools/stable?filepath=docs/usage)
 [![Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/redeboer/PawianTools/blob/main)
 [![GPLv3+ license](https://img.shields.io/badge/License-GPLv3+-blue.svg)](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
@@ -15,7 +15,8 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort)
 
-Go to [pawian.rtfd.io](https://pwa.readthedocs.io) to view the documentation!
+Go to [redeboer.github.io/PawianTools](https://redeboer.github.io/PawianTools)
+to view the documentation!
 
 ## Contribute
 

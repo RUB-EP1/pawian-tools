@@ -6,6 +6,6 @@ Some examples of how to use {mod}`pawian` and {mod}`boostcfg`:
 :maxdepth: 2
 :glob:
 
-usage/ASCII_Data
-usage/QA_Histograms
+usage/ascii
+usage/qa
 ```
