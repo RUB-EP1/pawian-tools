@@ -135,6 +135,7 @@ html_theme_options = {
     },
 }
 html_title = "PawianTools"
+panels_add_bootstrap_css = False  # remove panels css to get wider main content
 pygments_style = "sphinx"
 todo_include_todos = False
 viewcode_follow_imported_members = True
