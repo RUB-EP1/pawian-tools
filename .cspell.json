@@ -1,5 +1,4 @@
 {
-  "enableFiletypes": ["git-commit", "jupyter", "xml"],
   "flagWords": [
     "analyse",
     "colour",
