@@ -48,6 +48,7 @@
         "ipython",
         "jupyter",
         "matplotlib",
+        "mkdir",
         "mypy",
         "numpy",
         "pawian",

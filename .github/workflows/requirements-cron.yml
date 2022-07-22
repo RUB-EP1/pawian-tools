@@ -48,6 +48,7 @@ jobs:
             cd artifact
             ls -A
             [[ -f .pre-commit-config.yaml ]] && mv -f .pre-commit-config.yaml ..
+            mkdir -p ../.constraints/
             [[ "$(ls)" != "" ]] && mv -f * ../.constraints/
           fi
       - run: git status -s
