@@ -16,9 +16,5 @@ indent_size = 4
 [*.rst_t]
 indent_size = 3
 
-# when adding words through vscode, this is the resulting output format
-[.cspell.json]
-indent_size = 4
-
 [setup.cfg]
 indent_size = 4
