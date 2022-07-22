@@ -16,6 +16,7 @@
         "parmater"
     ],
     "ignorePaths": [
+        "**/.cspell.json",
         "*.root",
         "*.rst_t",
         "*.svg",
