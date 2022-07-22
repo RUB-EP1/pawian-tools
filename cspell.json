@@ -60,6 +60,7 @@
     "ignoreWords": [
         "apidoc",
         "atol",
+        "autoupdate",
         "breit",
         "cano",
         "citools",
