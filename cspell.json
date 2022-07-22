@@ -1,5 +1,4 @@
 {
-    "version": "0.1",
     "enableFiletypes": [
         "git-commit",
         "jupyter",
@@ -38,26 +37,6 @@
         "setup.cfg",
         "setup.py",
         "tox.ini"
-    ],
-    "language": "en-US",
-    "words": [
-        "blatt",
-        "boostcfg",
-        "ComPWA",
-        "conda",
-        "graphviz",
-        "ipython",
-        "jupyter",
-        "matplotlib",
-        "mkdir",
-        "mypy",
-        "numpy",
-        "pawian",
-        "pydocstyle",
-        "pylint",
-        "pypi",
-        "pytest",
-        "venv"
     ],
     "ignoreWords": [
         "apidoc",
@@ -119,5 +98,25 @@
         "xlabel",
         "ylabel",
         "ylim"
+    ],
+    "language": "en-US",
+    "words": [
+        "blatt",
+        "boostcfg",
+        "ComPWA",
+        "conda",
+        "graphviz",
+        "ipython",
+        "jupyter",
+        "matplotlib",
+        "mkdir",
+        "mypy",
+        "numpy",
+        "pawian",
+        "pydocstyle",
+        "pylint",
+        "pypi",
+        "pytest",
+        "venv"
     ]
 }
