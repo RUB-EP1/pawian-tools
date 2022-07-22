@@ -62,7 +62,8 @@ repos:
             .*\.dat|
             .*\.ipynb|
             .*\.md|
-            .*\.py
+            .*\.py|
+            LICENSE
           )$
 
   - repo: https://github.com/pycqa/isort
