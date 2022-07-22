@@ -1,6 +1,6 @@
 # Python Tools for Pawian
 
-[![Documentation build status](https://github.com/redeboer/PawianTools/workflows/CI/badge.svg)](https://github.com/redeboer/PawianTools/actions?query=branch%3Amain+workflow%3ACI)
+[![GitHub Pages](https://github.com/redeboer/PawianTools/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/redeboer/PawianTools/actions/workflows/gh-pages.yml)
 [![Binder](https://static.mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/redeboer/PawianTools/stable?filepath=docs/usage)
 [![Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/redeboer/PawianTools/blob/main)
 [![GPLv3+ license](https://img.shields.io/badge/License-GPLv3+-blue.svg)](https://www.gnu.org/licenses/gpl-3.0-standalone.html)

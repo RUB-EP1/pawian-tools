@@ -28,11 +28,6 @@ repos:
       - id: check-yaml
       - id: debug-statements
       - id: end-of-file-fixer
-        exclude: >
-          (?x)^(
-            cspell.json|
-            .*\.bib
-          )$
       - id: mixed-line-ending
       - id: name-tests-test
         name: Tests should start with test_
@@ -67,7 +62,8 @@ repos:
             .*\.dat|
             .*\.ipynb|
             .*\.md|
-            .*\.py
+            .*\.py|
+            LICENSE
           )$
 
   - repo: https://github.com/pycqa/isort
