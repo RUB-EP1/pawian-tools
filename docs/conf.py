@@ -181,7 +181,13 @@ nb_execution_mode = get_nb_execution_mode()
 nb_execution_timeout = -1
 
 # Settings for myst-parser
-myst_admonition_enable = True
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "dollarmath",
+    "smartquotes",
+    "substitution",
+]
 myst_update_mathjax = False
 
 # Settings for Thebe cell output
