@@ -198,7 +198,7 @@ class PawianHists:
     @property
     def particles(self) -> List[str]:
         """Get particle names contained in the file."""
-        return self.data.pwa.particles  # type: ignore[attr-defined]
+        return self.data.pwa.particles
 
     @property
     def data(self) -> pd.DataFrame:

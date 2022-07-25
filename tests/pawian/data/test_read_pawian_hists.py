@@ -33,10 +33,10 @@ def test_read_pawian_hists(input_file, has_weights, particles, energy):
     data = read_pawian_hists(input_file, type_name="data")
     fit = read_pawian_hists(input_file, type_name="fitted")
 
-    assert fit.pwa.has_weights  # type: ignore[attr-defined]
-    assert data.pwa.has_weights == has_weights  # type: ignore[attr-defined]
+    assert fit.pwa.has_weights
+    assert data.pwa.has_weights == has_weights
 
-    assert data.pwa.particles == particles  # type: ignore[attr-defined]
+    assert data.pwa.particles == particles
 
     assert data[particles[0]].pwa.energy.mean() == energy
 

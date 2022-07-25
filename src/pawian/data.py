@@ -49,7 +49,7 @@ class DataParserError(Exception):
     """Exception for if a data file can't be handled."""
 
 
-@pd.api.extensions.register_dataframe_accessor("pwa")  # type: ignore[attr-defined]
+@pd.api.extensions.register_dataframe_accessor("pwa")
 class PwaAccessor:
     """PWA-specific accessor for a `~pandas.DataFrame`.
 
@@ -193,7 +193,7 @@ def create_skeleton_frame(
     """
     index = None
     if number_of_rows is not None:
-        index = pd.RangeIndex(number_of_rows)  # type: ignore[attr-defined]
+        index = pd.RangeIndex(number_of_rows)
     if particle_names is None:
         return pd.DataFrame(index=index, columns=_MOMENTUM_LABELS)
     cols = [(p, mom) for p in particle_names for mom in _MOMENTUM_LABELS]
@@ -216,7 +216,7 @@ def read_ascii(
             `int`, column names for the particles are numbered.
         **kwargs: Additional keyword arguments to pass to :func:`pandas.read_table`.
     """
-    full_table = pd.read_table(  # type: ignore[attr-defined]
+    full_table = pd.read_table(
         filepath_or_buffer=filename,
         names=_MOMENTUM_LABELS,
         sep=r"\s+",

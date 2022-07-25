@@ -28,10 +28,10 @@ def test_create_skeleton(particles, number_of_rows):
     )
     if number_of_rows is None:
         number_of_rows = 0
-    assert not frame.pwa.has_weights  # type: ignore[attr-defined]
+    assert not frame.pwa.has_weights
     assert len(frame) == number_of_rows
-    if frame.pwa.has_particles:  # type: ignore[attr-defined]
-        assert frame.pwa.particles == particles  # type: ignore[attr-defined]
+    if frame.pwa.has_particles:
+        assert frame.pwa.particles == particles
 
 
 @pytest.mark.parametrize(
@@ -70,28 +70,28 @@ def test_properties_multicolumn():
     frame_data = read_ascii(INPUT_FILE_DATA, particles=particles)
     frame_mc = read_ascii(INPUT_FILE_MC, particles=particles)
 
-    assert frame_data.pwa.has_weights  # type: ignore[attr-defined]
-    assert not frame_mc.pwa.has_weights  # type: ignore[attr-defined]
+    assert frame_data.pwa.has_weights
+    assert not frame_mc.pwa.has_weights
     with pytest.raises(Exception):
-        assert frame_mc.pwa.weights  # type: ignore[attr-defined]
+        assert frame_mc.pwa.weights
 
-    assert frame_data.pwa.weights.iloc[1] == 0.990748  # type: ignore[attr-defined]
-    assert frame_data.pwa.weights.iloc[-1] == 0.986252  # type: ignore[attr-defined]
-    assert frame_data.pwa.weights.equals(frame_data.pwa.intensities)  # type: ignore[attr-defined]
+    assert frame_data.pwa.weights.iloc[1] == 0.990748
+    assert frame_data.pwa.weights.iloc[-1] == 0.986252
+    assert frame_data.pwa.weights.equals(frame_data.pwa.intensities)
 
-    assert frame_mc.pwa.particles == particles  # type: ignore[attr-defined]
-    assert frame_data.pwa.particles == particles  # type: ignore[attr-defined]
+    assert frame_mc.pwa.particles == particles
+    assert frame_data.pwa.particles == particles
 
     momentum_labels = ["p_x", "p_y", "p_z", "E"]
-    assert frame_mc.pwa.momentum_labels == momentum_labels  # type: ignore[attr-defined]
-    assert frame_data.pwa.momentum_labels == momentum_labels  # type: ignore[attr-defined]
+    assert frame_mc.pwa.momentum_labels == momentum_labels
+    assert frame_data.pwa.momentum_labels == momentum_labels
 
-    assert pytest.approx(frame_data.pwa.mass.mean().tolist()) == [  # type: ignore[attr-defined]
+    assert pytest.approx(frame_data.pwa.mass.mean().tolist()) == [
         0.13957021474219994,
         1.8648403010481123,
         1.8696104109755363,
     ]
-    assert pytest.approx(frame_data.pwa.rho.mean().tolist()) == [  # type: ignore[attr-defined]
+    assert pytest.approx(frame_data.pwa.rho.mean().tolist()) == [
         0.14209924919519798,
         0.6476585301989026,
         0.6915457642796756,
@@ -104,10 +104,10 @@ def test_properties_single_column():
     pi_data = read_ascii(INPUT_FILE_DATA, particles=particles)["pi+"]
     pi_mc = read_ascii(INPUT_FILE_MC, particles=particles)["pi+"]
 
-    assert pi_data.pwa.energy.iloc[-1] == 0.152749  # type: ignore[attr-defined]
-    assert pi_mc.pwa.energy.iloc[-1] == 0.257006  # type: ignore[attr-defined]
+    assert pi_data.pwa.energy.iloc[-1] == 0.152749
+    assert pi_mc.pwa.energy.iloc[-1] == 0.257006
 
-    assert pytest.approx(pi_data.pwa.rho2.iloc[-1]) == 0.00385247006036  # type: ignore[attr-defined]
+    assert pytest.approx(pi_data.pwa.rho2.iloc[-1]) == 0.00385247006036
 
     with pytest.raises(Exception):
-        assert pi_data.pwa.particles  # type: ignore[attr-defined]
+        assert pi_data.pwa.particles
