@@ -92,10 +92,10 @@ class PawianHists:
             kwargs: See `matplotlib.pyplot.hist` arguments
         """
         if name not in self.histogram_names:
-            raise Exception(f'Histogram "{name}" does not exist')
+            raise KeyError(f'Histogram "{name}" does not exist')
         hist_content = self.get_histogram_content(name)
         if hist_content is None:
-            raise ValueError(f'Could not get histogram "{name}"')
+            raise KeyError(f'Could not get histogram "{name}"')
         edges, values = hist_content
         if plot_on is None:
             plot_on = plt  # type: ignore[assignment]
@@ -125,7 +125,7 @@ class PawianHists:
             kwargs: Arguments that are passed to :func:`draw_histogram`.
         """
         if name not in self.unique_histogram_names:
-            raise Exception(f'Histogram of type "{name}" does not exist')
+            raise KeyError(f'Histogram of type "{name}" does not exist')
         # Construct regular expression
         re_match_list = []
         if data:

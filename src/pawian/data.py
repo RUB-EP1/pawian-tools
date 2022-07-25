@@ -94,7 +94,7 @@ class PwaAccessor:
     def weights(self) -> pd.Series:
         """Get list of weights, if available."""
         if not self.has_weights:
-            raise Exception("Dataframe doesn't contain weights")
+            raise ValueError("Dataframe doesn't contain weights")
         return self._obj[_WEIGHT_LABEL]
 
     @property
@@ -106,7 +106,7 @@ class PwaAccessor:
     def particles(self) -> List[str]:
         """Get list of particles contained in the data frame."""
         if not self.has_particles:
-            raise Exception(
+            raise ValueError(
                 "This dataframe is single-level and does not contain particles"
             )
         particles = self._obj.columns.droplevel(1).unique()
@@ -292,7 +292,7 @@ def read_pawian_hists(
     elif "fit" in type_name.lower():
         type_name = "fitted"
     else:
-        raise Exception('Wrong type_name: should be either "data" or "fitted"')
+        raise ValueError('Wrong type_name: should be either "data" or "fitted"')
     tree_name = f"_{type_name}Fourvecs"
 
     # Get particle names

@@ -6,7 +6,7 @@ from pawian import latex
 
 
 @pytest.mark.parametrize(
-    "test_input,expected",
+    ("test_input", "expected"),
     [
         # cspell:ignore testpion
         ("testpi+pion-pion+", r"test \pi^+ \pi^- \pi^+"),

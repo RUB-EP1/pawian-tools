@@ -13,7 +13,7 @@ INPUT_FILE_MC = f"{SAMPLE_DIR}/momentum_tuples_mc.dat"
 
 
 @pytest.mark.parametrize(
-    "particles,number_of_rows",
+    ("particles", "number_of_rows"),
     [
         (["pi+", "D0", "D-"], 100),
         # (['gamma', 'pi+', 'pi-'], None),
@@ -35,7 +35,7 @@ def test_create_skeleton(particles, number_of_rows):
 
 
 @pytest.mark.parametrize(
-    "columns,names",
+    ("columns", "names"),
     [
         (  # wrong number of column LEVELS
             [
@@ -72,7 +72,7 @@ def test_properties_multicolumn():
 
     assert frame_data.pwa.has_weights
     assert not frame_mc.pwa.has_weights
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError, match=r"Dataframe doesn't contain weights"):
         assert frame_mc.pwa.weights
 
     assert frame_data.pwa.weights.iloc[1] == 0.990748
@@ -109,5 +109,8 @@ def test_properties_single_column():
 
     assert pytest.approx(pi_data.pwa.rho2.iloc[-1]) == 0.00385247006036
 
-    with pytest.raises(Exception):
+    with pytest.raises(
+        ValueError,
+        match=r"This dataframe is single-level and does not contain particles",
+    ):
         assert pi_data.pwa.particles
