@@ -4,6 +4,8 @@ channels:
 dependencies:
   - graphviz # for binder
   - pip
-  - python>=3.6,<3.9
+  - python==3.8.*
   - pip:
-      - -e .[dev]
+      - |
+        -c .constraints/py3.8.txt
+        -e .[dev]
