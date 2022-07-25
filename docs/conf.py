@@ -146,6 +146,9 @@ viewcode_follow_imported_members = True
 default_role = "py:obj"
 primary_domain = "py"
 nitpicky = True  # warn if cross-references are missing
+nitpick_ignore = [
+    ("py:class", "uproot.behaviors.TH1.TH1"),
+]
 
 # Intersphinx settings
 intersphinx_mapping = {
