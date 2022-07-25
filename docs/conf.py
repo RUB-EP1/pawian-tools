@@ -140,7 +140,7 @@ default_role = "py:obj"
 primary_domain = "py"
 nitpicky = True  # warn if cross-references are missing
 nitpick_ignore = [
-    ("py:class", "uproot.behaviors.TH1.TH1"),
+    ("py:class", "pandas.core.base.PandasObject"),
 ]
 
 
@@ -189,6 +189,7 @@ def get_minor_version(package_name: str) -> str:
 
 
 intersphinx_mapping = {
+    "awkward": ("https://awkward-array.readthedocs.io/en/stable", None),
     "IPython": (f"https://ipython.readthedocs.io/en/{get_version('IPython')}", None),
     "compwa-org": ("https://compwa-org.readthedocs.io", None),
     "matplotlib": (f"https://matplotlib.org/{get_version('matplotlib')}", None),
@@ -198,6 +199,7 @@ intersphinx_mapping = {
         None,
     ),
     "python": ("https://docs.python.org/3", None),
+    "uproot": ("https://uproot.readthedocs.io/en/stable", None),
 }
 
 # Settings for autosectionlabel

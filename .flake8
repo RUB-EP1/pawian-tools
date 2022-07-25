@@ -8,13 +8,23 @@ filename =
 exclude =
   __pycache__
   docs/conf.py
-ignore = # more info: https://www.flake8rules.com/
-  E203 # https://github.com/psf/black#slices
-  E231 # allowed by black
-  E501 # https://github.com/psf/black#line-length
-  RST201 # block quote ends without a blank line (black formatting)
-  RST301 # unexpected indentation (related to google style docstring)
-  W503 # https://github.com/psf/black#line-breaks--binary-operators
+ignore =
+  # https://github.com/psf/black#slices
+  E203
+  # allowed by black
+  E231
+  # https://github.com/psf/black#line-length
+  E501
+  # block quote ends without a blank line (black formatting)
+  RST201
+  # unexpected indentation (related to google style docstring)
+  RST301
+  # enforce type ignore with mypy error codes (combined --extend-select=TI100)
+  TI1
+  # https://github.com/psf/black#line-breaks--binary-operators
+  W503
+extend-select =
+  TI100
 rst-roles =
   attr,
   class,

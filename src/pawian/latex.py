@@ -24,7 +24,7 @@ __OTHER_REPLACEMENTS = {
 }
 
 
-def convert(phrase):
+def convert(phrase: str) -> str:
     """Convert particle names to Latex code which can be used for plot labels etc."""
     phrase = re.sub(f"({'|'.join(__LATEX_COMMANDS)})", r" \\\1 ", phrase)
     for pattern, repl in __OTHER_REPLACEMENTS.items():

@@ -8,6 +8,7 @@
   "reportUnusedClass": true,
   "reportUnusedFunction": true,
   "reportUnusedImport": true,
+  "reportMissingImports": false,
   "reportUnusedVariable": true,
   "stubPath": ""
 }

@@ -7,12 +7,19 @@ module contains handlers for such files.
 import logging
 import re  # regex
 from math import ceil, sqrt
-from typing import Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
 import uproot
+from matplotlib.axes import Axes
+from matplotlib.container import BarContainer
+from matplotlib.figure import Figure
 from uproot.behaviors.TAxis import TAxis
 from uproot.behaviors.TH1 import TH1
+from uproot.behaviors.TH2 import TH2
+from uproot.behaviors.TH3 import TH3
 from uproot.reading import ReadOnlyDirectory
 
 from pawian.data import read_pawian_hists
@@ -26,23 +33,19 @@ class PawianHists:
     Pawian.
     """
 
-    def __init__(self, filename):
+    def __init__(self, filename: str) -> None:
         self.import_file(filename)
 
-    def import_file(self, filename):
+    def import_file(self, filename: str) -> None:
         """Set data member by importing a :file:`pawianHists.root` file."""
         self.__file: ReadOnlyDirectory = uproot.open(filename)
         self.__data = read_pawian_hists(filename, type_name="data")
-        self.__fit = read_pawian_hists(filename, type_name="fit")
+        self.__fit = read_pawian_hists(filename, type_name="fitted")
 
-    def get_uproot_histogram(self, name: str) -> Optional[TH1]:
+    def get_uproot_histogram(self, name: str) -> Optional[Union[TH1, TH2, TH3]]:
         """Get a histogram from a :file:`pawianHists.root` file.
 
-        Get an uproot :code:`TH1`, :code:`TH2`, or :code:`TH3` from the
-        :file:`pawianHists.root` file. See `here
-        <https://github.com/scikit-hep/uproot3-methods/blob/master/uproot3_methods/classes/TH1.py>`__
-        which methods you can call on these classes or have a look at the
-        :doc:`/usage/qa` Jupyter notebook.
+        Get an `uproot` histogram from the :file:`pawianHists.root` file.
         """
         try:
             obj = self.__file[name]
@@ -61,8 +64,8 @@ class PawianHists:
         .. code-block:: python
 
             from pawian.qa import PawianHists
-
             import matplotlib.pyplot as plt
+
             hist_file = PawianHists(FILENAME)
             edges, values = hist_file.get_histogram_content(HISTOGRAM_NAME)
             plt.hist(edges, weights=values, bins=len(values))
@@ -73,52 +76,66 @@ class PawianHists:
         x_axis: TAxis = histogram.axes[0]
         edges = x_axis.edges()[:-1]
         values = histogram.values()
-        return (edges, values)
+        return edges, values
 
-    def draw_histogram(self, name, plot_on=plt, **kwargs):
+    def draw_histogram(
+        self, name: str, plot_on: Optional[Axes] = None, **kwargs: Any
+    ) -> Tuple[np.ndarray, np.ndarray, BarContainer]:
         """Plot a histogram in a matplotlib figure.
 
-        :param plot_on:
-            Feed a matplotlib class with a hist method, such as
-            `matplotlib.axes.Axes` to draw the histogram on it.
-        :param kwargs:
-            see `matplotlib.pyplot.hist` arguments
+        Args:
+            name: The name of the histogram in the :file:`pawianHists.root` file that
+                you want to plot.
+            plot_on: Feed a matplotlib class with a hist method, such as
+                `matplotlib.axes.Axes` to draw the histogram on it.
+
+            kwargs: See `matplotlib.pyplot.hist` arguments
         """
         if name not in self.histogram_names:
-            raise Exception(f'Histogram "{name}" does not exist')
-        edges, values = self.get_histogram_content(name)
-        return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)
+            raise KeyError(f'Histogram "{name}" does not exist')
+        hist_content = self.get_histogram_content(name)
+        if hist_content is None:
+            raise KeyError(f'Could not get histogram "{name}"')
+        edges, values = hist_content
+        if plot_on is None:
+            plot_on = plt  # type: ignore[assignment]
+        return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)  # type: ignore[call-arg,return-value,union-attr]
 
-    def draw_combined_histogram(  # pylint: disable=too-many-arguments,invalid-name
+    def draw_combined_histogram(  # pylint: disable=invalid-name,too-many-arguments,too-many-locals
         self,
-        name,
-        plot_on=plt,
-        data=True,
-        fit=True,
-        mc=True,
-        **kwargs,
-    ):
+        name: str,
+        plot_on: Optional[Axes] = None,
+        data: bool = True,
+        fit: bool = True,
+        mc: bool = True,
+        **kwargs: Any,
+    ) -> Dict[str, Tuple[np.ndarray, np.ndarray, BarContainer]]:
         """Combine the three types of histograms in one plot.
 
-        :param name:
-            The name of the histogram in the :file:`pawianHists.root` file that
-            you want to plot, **but without the prepended :code:`Data`,
-            :code:`Fit`, or :code:`MC/Mc`**.
+        Args:
+            name: The name of the histogram in the :file:`pawianHists.root` file that
+                you want to plot, but without the prepended :code:`Data`, :code:`Fit`,
+                or :code:`MC/Mc`.
+            plot_on: The axis on which to draw the histogram. If `None`, `matplotlib`
+                will create a new figure.
 
-        .. seealso:: :func:`draw_histogram`
+            data: Whether to draw the data histogram.
+            fit: Whether to draw the 'fitted' histogram.
+            mc: Whether to draw the Monte Carlo histogram.
+            kwargs: Arguments that are passed to :func:`draw_histogram`.
         """
         if name not in self.unique_histogram_names:
-            raise Exception(f'Histogram of type "{name}" does not exist')
+            raise KeyError(f'Histogram of type "{name}" does not exist')
         # Construct regular expression
-        re_match = []
+        re_match_list = []
         if data:
-            re_match.append("Data")
+            re_match_list.append("Data")
         if fit:
-            re_match.append("Fit")
+            re_match_list.append("Fit")
         if mc:
-            re_match.append("MC")
-            re_match.append("Mc")
-        re_match = "|".join(re_match)
+            re_match_list.append("MC")
+            re_match_list.append("Mc")
+        re_match = "|".join(re_match_list)
         re_match = f"({re_match}){name}"
         # Makes selection of names plus corresponding labels
         names = [k for k in self.histogram_names if re.fullmatch(re_match, k)]
@@ -131,19 +148,21 @@ class PawianHists:
             hists[label] = histogram
         return hists
 
-    def draw_all_histograms(self, plot_on=plt.figure(), legend=True, **kwargs):
+    def draw_all_histograms(
+        self, plot_on: Optional[Figure] = None, legend: bool = True, **kwargs: Any
+    ) -> None:
         """Draw a comparative overview of all histograms.
 
-        .. seealso::
-            :func:`draw_combined_histogram`.
+        .. seealso:: :func:`draw_combined_histogram`.
         """
         logging.info(f"Drawing all histograms for file {self.__file.file_path}...")
         names = self.unique_histogram_names
         n_hists = len(names)
         n_x = ceil(sqrt(len(names)))
         n_y = ceil(n_hists / n_x)
-
-        grid = plot_on.add_gridspec(n_x, n_y)
+        if plot_on is None:
+            plot_on = plt.figure()
+        grid = plot_on.add_gridspec(n_x, n_y)  # type: ignore[union-attr]
         for idx, name in enumerate(names):
             sub = plot_on.add_subplot(grid[idx % n_x, idx // n_x])
             self.draw_combined_histogram(name, sub, **kwargs)
@@ -152,7 +171,7 @@ class PawianHists:
                 sub.legend()
 
     @property
-    def histogram_names(self):
+    def histogram_names(self) -> List[str]:
         """Get a list of all histogram names in a :file:`pawianHists.root` file."""
         names = []
         for name in self.__file.keys():
@@ -162,7 +181,7 @@ class PawianHists:
         return names
 
     @property
-    def unique_histogram_names(self):
+    def unique_histogram_names(self) -> List[str]:
         """Get a list of unique histograms from a :file:`pawianHists.root` file.
 
         Get a list of histograms in the :file:`pawianHists.root` file of which the
@@ -179,12 +198,12 @@ class PawianHists:
         return names
 
     @property
-    def particles(self):
+    def particles(self) -> List[str]:
         """Get particle names contained in the file."""
         return self.data.pwa.particles
 
     @property
-    def data(self):
+    def data(self) -> pd.DataFrame:
         """Get a `~.pandas.DataFrame` of the data intensity sample.
 
         Get a `~pandas.DataFrame` of the **data events** contained in the
@@ -196,13 +215,12 @@ class PawianHists:
         return self.__data
 
     @property
-    def fit(self):
+    def fit(self) -> pd.DataFrame:
         """Get a `~.pandas.DataFrame` of the fit intensity sample.
 
         Get a `~pandas.DataFrame` of the **fit intensity sample** contained in
         the :file:`pawianHists.root` file.
 
-        .. seealso::
-            :func:`data <pawian.qa.PawianHists.data>`.
+        .. seealso:: :func:`pawian.qa.PawianHists.data`.
         """
         return self.__fit

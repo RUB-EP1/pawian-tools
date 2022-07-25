@@ -114,6 +114,7 @@
     "matplotlib",
     "mkdir",
     "mypy",
+    "ndarray",
     "numpy",
     "pawian",
     "pydocstyle",

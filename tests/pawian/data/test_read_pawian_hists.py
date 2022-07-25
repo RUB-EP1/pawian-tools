@@ -10,7 +10,7 @@ SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
 
 
 @pytest.mark.parametrize(
-    "input_file, has_weights, particles, energy",
+    ("input_file", "has_weights", "particles", "energy"),
     [
         # cspell:ignore Sigmaplus
         (
@@ -31,7 +31,7 @@ def test_read_pawian_hists(input_file, has_weights, particles, energy):
     """Test loading pawianHists.root file."""
     input_file = f"{SAMPLE_DIR}/{input_file}"
     data = read_pawian_hists(input_file, type_name="data")
-    fit = read_pawian_hists(input_file, type_name="fit")
+    fit = read_pawian_hists(input_file, type_name="fitted")
 
     assert fit.pwa.has_weights
     assert data.pwa.has_weights == has_weights
@@ -43,8 +43,11 @@ def test_read_pawian_hists(input_file, has_weights, particles, energy):
 
 def test_read_pawian_hists_exception():
     """Test whether expected exceptions are raised."""
-    with pytest.raises(Exception):
+    with pytest.raises(
+        ValueError,
+        match=r'^Wrong type_name: should be either "data" or "fitted"$',
+    ):
         read_pawian_hists(
             f"{SAMPLE_DIR}/pawianHists_ROOT6_DDpi.root",
-            type_name="wrong",
+            type_name="wrong",  # type: ignore[arg-type]
         )

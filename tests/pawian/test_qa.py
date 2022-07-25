@@ -17,12 +17,20 @@ def test_faulty_import():
     """Test exceptions upon corrupt file."""
     with pytest.raises(FileNotFoundError):
         PawianHists("non-existent")
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match=r"^not a ROOT file"):
         PawianHists(__file__)
 
 
 @pytest.mark.parametrize(
-    "filename, hist_value, particles, n_data, n_fit, hist_names, unique_names",
+    (
+        "filename",
+        "hist_value",
+        "particles",
+        "n_data",
+        "n_fit",
+        "hist_names",
+        "unique_names",
+    ),
     [
         # cspell:ignore Sigmaplus Sigmaplusantiproton
         (
@@ -66,7 +74,7 @@ def test_data_model(  # pylint: disable=too-many-arguments
 
     failure = pawian_hists.get_histogram_content("non-existent")
     assert failure is None
-    edges, values = pawian_hists.get_histogram_content(hist_value[0])  # type: ignore
+    edges, values = pawian_hists.get_histogram_content(hist_value[0])  # type: ignore[misc]
     assert len(edges) == 100
     assert len(values) == 100
     assert pytest.approx(values[40]) == hist_value[1]
@@ -85,7 +93,7 @@ def test_data_model(  # pylint: disable=too-many-arguments
 def test_draw_histogram():
     """Test whether embedded histograms can be drawn."""
     hists = PawianHists(FILENAME_ROOT6)
-    with pytest.raises(Exception):
+    with pytest.raises(KeyError):
         assert hists.draw_histogram("non-existent")
     values, edges, patch = hists.draw_histogram("FitThetaHeli_pip_FrompipD0Dm")
     # cspell:ignore Frompip
@@ -96,21 +104,21 @@ def test_draw_histogram():
     assert patch[-5].get_height() == values[-5]
 
 
-@pytest.mark.slow
+@pytest.mark.slow()
 def test_draw_all_histograms():
     """Test :func:`pawian.qa.PawianHists.draw_all_histograms`"""
     hists = PawianHists(FILENAME_ROOT6)
     hists.draw_all_histograms()
-    n_plots = len(plt.gcf().get_axes())  # type: ignore
+    n_plots = len(plt.gcf().get_axes())
     assert n_plots == 19
 
 
-@pytest.mark.slow
+@pytest.mark.slow()
 def test_draw_combined_histogram():
     """Test :func:`pawian.qa.PawianHists.draw_combined_histogram`"""
     hists = PawianHists(FILENAME_ROOT6)
     name = "pipDm"
-    with pytest.raises(Exception):
+    with pytest.raises(KeyError):
         hists.draw_combined_histogram("non-existent")
     assert list(hists.draw_combined_histogram(name, data=False).keys()) == [
         "mc",
@@ -132,7 +140,7 @@ def test_draw_combined_histogram():
 
 
 @pytest.mark.parametrize(
-    "filename, energy",
+    ("filename", "energy"),
     [
         (FILENAME_ROOT5, 1.338907402473968),
         (FILENAME_ROOT6, 0.20740474665355302),

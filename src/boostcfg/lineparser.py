@@ -9,10 +9,11 @@ __all__ = [
 ]
 
 
-import re  # regex
+import re
+from typing import Tuple, Union  # regex
 
 
-def get_key_value_pair(line):
+def get_key_value_pair(line: str) -> Tuple[str, str]:
     """Extract key and value from a line in a :code:`cfg` file.
 
     Extracts everything before an equal sign as the key, and everything after as the
@@ -22,20 +23,20 @@ def get_key_value_pair(line):
     matches = re.search(r"^\s*([^\s]+?)\s*=\s*([^\s]+.*?)\s*$", strip_comment(new_line))
     if matches is None:
         raise SyntaxError(f'Line "{new_line}" is not a key, value pair!')
-    return (matches[1], matches[2])
+    return matches[1], matches[2]
 
 
-def is_commented(line):
+def is_commented(line: str) -> bool:
     """Check if a line starts with a comment sign (#), ignoring whitespaces."""
     return (bool)(re.match(r"\s*#", line))
 
 
-def is_empty(line):
+def is_empty(line: str) -> bool:
     """Check if a line is empty or commented."""
     return (bool)(re.match(r"^\s*$", line)) or is_commented(line)
 
 
-def strip_comment(line):
+def strip_comment(line: str) -> str:
     """Remove everything before a comment sign (:code:`#`)."""
     matches = re.search(r"^[^#]*", line)
     if matches is None:
@@ -43,7 +44,7 @@ def strip_comment(line):
     return matches[0]
 
 
-def string_to_value(string):
+def string_to_value(string: str) -> Union[bool, float, int, str]:
     """Attempt to convert a string to a `float` or `int`."""
     try:
         return int(string)

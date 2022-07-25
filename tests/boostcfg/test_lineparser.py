@@ -4,7 +4,7 @@ from boostcfg import lineparser
 
 
 @pytest.mark.parametrize(
-    "test_input,expected",
+    ("test_input", "expected"),
     [
         ("errLogMode = trace", ("errLogMode", "trace")),
         ("  \tverbose	= true\n	  ", ("verbose", "true")),
@@ -23,7 +23,7 @@ def test_get_faulty_key_value_pair(test_input):
 
 
 @pytest.mark.parametrize(
-    "test_input,expected",
+    ("test_input", "expected"),
     [
         ("\t don't ignore # and a comment", False),
         ("  \t# ignore whitespaces", True),
@@ -34,7 +34,7 @@ def test_is_commented(test_input, expected):
 
 
 @pytest.mark.parametrize(
-    "test_input,expected",
+    ("test_input", "expected"),
     [
         ("   some text  ", False),
         ("# and a comment", True),
@@ -46,7 +46,7 @@ def test_is_empty(test_input, expected):
 
 
 @pytest.mark.parametrize(
-    "test_input,expected",
+    ("test_input", "expected"),
     [
         ("", ""),
         ("No comments here", "No comments here"),
