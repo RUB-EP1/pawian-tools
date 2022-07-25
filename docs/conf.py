@@ -48,18 +48,6 @@ subprocess.call(
     shell=True,
 )
 
-
-# -- Include constructors ----------------------------------------------------
-def skip(app, what, name, obj, would_skip, options):
-    if name == "__init__":
-        return False
-    return would_skip
-
-
-def setup(app):
-    app.connect("autodoc-skip-member", skip)
-
-
 # -- General configuration ---------------------------------------------------
 master_doc = "index.md"
 source_suffix = {
@@ -116,6 +104,7 @@ codeautolink_global_preface = """
 from IPython.display import display
 
 """
+graphviz_output_format = "svg"
 html_copy_source = True  # needed for download notebook button
 html_show_copyright = False
 html_show_sourcelink = False
