@@ -1,16 +1,15 @@
-# type: ignore
-
 """Configuration file for the Sphinx documentation builder.
 
-This file only contains a selection of the most common options. For a full
-list see the documentation:
-https://www.sphinx-doc.org/en/master/usage/configuration.html
+This file only contains a selection of the most common options. For a full list see the
+documentation: https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
 
 import os
+import re
 import shutil
 import subprocess
 import sys
+from typing import Dict
 
 if sys.version_info < (3, 8):
     from importlib_metadata import PackageNotFoundError
@@ -32,7 +31,7 @@ try:
 except PackageNotFoundError:
     pass
 
-# -- Generate API skeleton ----------------------------------------------------
+# -- Generate API ------------------------------------------------------------
 shutil.rmtree("api", ignore_errors=True)
 subprocess.call(
     " ".join(
@@ -154,12 +153,60 @@ nitpick_ignore = [
     ("py:class", "uproot.behaviors.TH1.TH1"),
 ]
 
+
 # Intersphinx settings
+version_remapping: Dict[str, Dict[str, str]] = {}
+
+
+def get_version(package_name: str) -> str:
+    python_version = f"{sys.version_info.major}.{sys.version_info.minor}"
+    constraints_path = f"../.constraints/py{python_version}.txt"
+    package_name = package_name.lower()
+    with open(constraints_path) as stream:
+        constraints = stream.read()
+    for line in constraints.split("\n"):
+        line = line.split("#")[0]  # remove comments
+        line = line.strip()
+        line = line.lower()
+        if not line.startswith(package_name):
+            continue
+        if not line:
+            continue
+        line_segments = tuple(line.split("=="))
+        if len(line_segments) != 2:
+            continue
+        _, installed_version, *_ = line_segments
+        installed_version = installed_version.strip()
+        remapped_versions = version_remapping.get(package_name)
+        if remapped_versions is not None:
+            existing_version = remapped_versions.get(installed_version)
+            if existing_version is not None:
+                return existing_version
+        return installed_version
+    return "stable"
+
+
+def get_minor_version(package_name: str) -> str:
+    installed_version = get_version(package_name)
+    if installed_version == "stable":
+        return installed_version
+    matches = re.match(r"^([0-9]+\.[0-9]+).*$", installed_version)
+    if matches is None:
+        raise ValueError(
+            f"Could not find documentation for {package_name} v{installed_version}"
+        )
+    return matches[1]
+
+
 intersphinx_mapping = {
+    "IPython": (f"https://ipython.readthedocs.io/en/{get_version('IPython')}", None),
     "compwa-org": ("https://compwa-org.readthedocs.io", None),
-    "matplotlib": ("https://matplotlib.org", None),
-    "numpy": ("https://docs.scipy.org/doc/numpy", None),
-    "pandas": ("https://pandas.pydata.org/pandas-docs/stable", None),
+    "matplotlib": (f"https://matplotlib.org/{get_version('matplotlib')}", None),
+    "numpy": (f"https://numpy.org/doc/{get_minor_version('numpy')}", None),
+    "pandas": (
+        f"https://pandas.pydata.org/pandas-docs/version/{get_minor_version('pandas')}",
+        None,
+    ),
     "python": ("https://docs.python.org/3", None),
 }
 
