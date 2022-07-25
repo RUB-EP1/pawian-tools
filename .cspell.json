@@ -16,6 +16,7 @@
     "*.rst_t",
     "*.svg",
     ".constraints/*",
+    ".flake8",
     ".gitignore",
     ".gitpod.*",
     ".pre-commit-config.yaml",

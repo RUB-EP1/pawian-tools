@@ -49,10 +49,9 @@
   "python.testing.unittestEnabled": false,
   "rewrap.wrappingColumn": 88,
   "search.exclude": {
-    "**/tests/__init__.py": true,
-    "**/tests/**/__init__.py": true,
-    "docs/tox.ini": true,
-    "tests/tox.ini": true
+    "*/.pydocstyle": true,
+    ".constraints/*.txt": true,
+    "tests/**/__init__.py": true
   },
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false
