@@ -95,8 +95,6 @@ extensions = [
 exclude_patterns = [
     "**.ipynb_checkpoints",
     "*build",
-    "*build",
-    "README.md",
     "tests",
 ]
 
