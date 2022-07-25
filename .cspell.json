@@ -30,6 +30,7 @@
     "docs/conf.py",
     "pyproject.toml",
     "pyrightconfig.json",
+    "pytest.ini",
     "setup.cfg",
     "setup.py",
     "tox.ini"
