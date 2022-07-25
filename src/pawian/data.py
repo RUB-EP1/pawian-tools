@@ -163,7 +163,7 @@ class PwaAccessor:
 
         Args:
             filename: Name of the file to write to.
-            **kwargs: Additional keyword arguments to pass to
+            kwargs: Additional keyword arguments to pass to
                 :meth:`pandas.DataFrame.to_csv`.
         """
         new_dict = []
@@ -214,7 +214,7 @@ def read_ascii(
         filename: The name of the file to read.
         particles: A list of particles to read. If `None`, all particles are read. If
             `int`, column names for the particles are numbered.
-        **kwargs: Additional keyword arguments to pass to :func:`pandas.read_table`.
+        kwargs: Additional keyword arguments to pass to :func:`pandas.read_table`.
     """
     full_table = pd.read_table(
         filepath_or_buffer=filename,

@@ -88,6 +88,7 @@ class PawianHists:
                 you want to plot.
             plot_on: Feed a matplotlib class with a hist method, such as
                 `matplotlib.axes.Axes` to draw the histogram on it.
+
             kwargs: See `matplotlib.pyplot.hist` arguments
         """
         if name not in self.histogram_names:
@@ -117,10 +118,11 @@ class PawianHists:
                 or :code:`MC/Mc`.
             plot_on: The axis on which to draw the histogram. If `None`, `matplotlib`
                 will create a new figure.
+
             data: Whether to draw the data histogram.
             fit: Whether to draw the 'fitted' histogram.
             mc: Whether to draw the Monte Carlo histogram.
-            **kwargs: Arguments that are passed to :func:`draw_histogram`.
+            kwargs: Arguments that are passed to :func:`draw_histogram`.
         """
         if name not in self.unique_histogram_names:
             raise Exception(f'Histogram of type "{name}" does not exist')
