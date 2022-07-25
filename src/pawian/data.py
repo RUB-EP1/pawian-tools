@@ -49,7 +49,7 @@ class DataParserError(Exception):
     """Exception for if a data file can't be handled."""
 
 
-@pd.api.extensions.register_dataframe_accessor("pwa")  # type: ignore
+@pd.api.extensions.register_dataframe_accessor("pwa")  # type: ignore[attr-defined]
 class PwaAccessor:
     """PWA-specific accessor for a `~pandas.DataFrame`.
 
