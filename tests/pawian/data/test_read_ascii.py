@@ -15,11 +15,11 @@ def test_read_with_weight():
     """Read a file that contains weights."""
     frame = read_ascii(INPUT_FILE_DATA)
     assert len(frame) == 1000
-    assert len(frame.columns.levels[0]) == 4
-    assert len(frame.columns.levels[1]) == 5
-    assert "" in frame.columns.levels[1]
+    assert len(frame.columns.levels[0]) == 4  # type: ignore[attr-defined]
+    assert len(frame.columns.levels[1]) == 5  # type: ignore[attr-defined]
+    assert "" in frame.columns.levels[1]  # type: ignore[attr-defined]
 
-    column_names = frame.columns.droplevel(1).unique().tolist()
+    column_names = frame.columns.droplevel(1).unique().tolist()  # type: ignore[attr-defined]
     head = frame.head(1)
     assert pytest.approx(head[column_names[-1]].values[0]) == 0.99407
     assert pytest.approx(head[column_names[0]].values.tolist()[0]) == [
@@ -62,10 +62,10 @@ def test_read_no_weights(particles):
     """Read a file without weights."""
     frame = read_ascii(INPUT_FILE_MC, particles=particles)
     assert len(frame) == 1000
-    assert len(frame.columns.levels[0]) == 3
-    assert len(frame.columns.levels[1]) == 4
+    assert len(frame.columns.levels[0]) == 3  # type: ignore[attr-defined]
+    assert len(frame.columns.levels[1]) == 4  # type: ignore[attr-defined]
 
-    column_names = frame.columns.droplevel(1).unique().tolist()
+    column_names = frame.columns.droplevel(1).unique().tolist()  # type: ignore[attr-defined]
     head = frame.head(1)
     assert pytest.approx(head[column_names[0]].values.tolist()[0]) == [
         -0.279306,

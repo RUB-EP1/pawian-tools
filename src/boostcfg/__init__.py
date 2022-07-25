@@ -1,7 +1,7 @@
 """File parser for config files from Boost.
 
-The boostcfg parser is a Python module for parsing Boost config files that
-can be parsed by the `parse_config_file
+The boostcfg parser is a Python module for parsing Boost config files that can be parsed
+by the `parse_config_file
 <https://www.boost.org/doc/libs/1_72_0/doc/html/boost/program_options/parse_co_1_3_32_9_8_1_1_11.html>`__
 of :code:`boost::program_options`.
 
@@ -9,19 +9,21 @@ BoostConfigParser was especially designed for `Pawian
 <https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware>`__.
 """
 
+from typing import Any, Dict, Optional
+
 from . import lineparser
 
 
 class BoostConfigParser:
     """Data structure that holds information of Boost config files."""
 
-    def __init__(self, filename=None):
-        self.__values = {}
-        self.__config_file = None
+    def __init__(self, filename: Optional[str] = None) -> None:
+        self.__values: Dict[str, Any] = {}
+        self.__config_file: Optional[str] = None
         if isinstance(filename, str):
             self.read_config(filename=filename, reset=True)
 
-    def read_config(self, filename, reset=True):
+    def read_config(self, filename: str, reset: bool = True) -> None:
         """Parse a config line and to the internal `dict`."""
         self.__config_file = filename
         if reset:
@@ -30,7 +32,7 @@ class BoostConfigParser:
             for line in stream.readlines():
                 self.append_value_from_line(line)
 
-    def append_value_from_line(self, line):
+    def append_value_from_line(self, line: str) -> None:
         """Smartly append a key-value pair from a line."""
         if lineparser.is_empty(line):
             return
@@ -38,7 +40,7 @@ class BoostConfigParser:
         converted_value = lineparser.string_to_value(value)
         self.append_value(key, converted_value)
 
-    def append_value(self, key, value):
+    def append_value(self, key: str, value: Any) -> None:
         """Append a key-value pair.
 
         Append a key-value pair to the internal dictionary: convert existing string
@@ -52,9 +54,9 @@ class BoostConfigParser:
         else:
             self.__values[key] = value
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: str) -> Any:
         return self.__values[key]
 
     @property
-    def config_file(self) -> str:
+    def config_file(self) -> Optional[str]:
         return self.__config_file

@@ -72,8 +72,8 @@ def test_data_model(  # pylint: disable=too-many-arguments
     assert pytest.approx(values[40]) == hist_value[1]
 
     assert pawian_hists.particles == particles
-    assert pawian_hists.data.pwa.particles == particles
-    assert pawian_hists.fit.pwa.particles == particles
+    assert pawian_hists.data.pwa.particles == particles  # type: ignore[attr-defined]
+    assert pawian_hists.fit.pwa.particles == particles  # type: ignore[attr-defined]
 
     assert len(pawian_hists.data) == n_data
     assert len(pawian_hists.fit) == n_fit
@@ -142,4 +142,4 @@ def test_lorentz_vectors(filename, energy):
     """Test whether vectors were loaded correctly as `~pandas.DataFrame`."""
     pawian_hists = PawianHists(filename)
     particle = pawian_hists.particles[0]
-    assert pawian_hists.data[particle].E.mean() == energy
+    assert pawian_hists.data[particle].E.mean() == energy  # type: ignore[attr-defined]

@@ -14,6 +14,7 @@ disable=
   C0114,  # done by pydocstyle
   C0115,  # done by pydocstyle
   C0116,  # done by pydocstyle
+  line-too-long,    # automatically fixed with black
   logging-fstring-interpolation,
   unspecified-encoding, # http://pylint.pycqa.org/en/latest/whatsnew/2.10.html
   unused-import,  # https://www.flake8rules.com/rules/F401
