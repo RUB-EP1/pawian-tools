@@ -107,7 +107,7 @@ def test_properties_single_column():
     assert pi_data.pwa.energy.iloc[-1] == 0.152749
     assert pi_mc.pwa.energy.iloc[-1] == 0.257006
 
-    assert pi_data.pwa.rho2.iloc[-1] == 0.0038524700603599993
+    assert pytest.approx(pi_data.pwa.rho2.iloc[-1]) == 0.00385247006036
 
     with pytest.raises(Exception):
         assert pi_data.pwa.particles

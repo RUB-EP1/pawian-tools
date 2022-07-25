@@ -25,9 +25,11 @@ The allows you to import the ASCII file to a nicely formatted
 """
 
 
+import awkward as ak
 import pandas as pd
 import uproot
 from numpy import sqrt
+from uproot.exceptions import KeyInFileError
 
 _ENERGY_LABEL = "E"
 _MOMENTUM_LABELS = ["p_x", "p_y", "p_z", _ENERGY_LABEL]
@@ -263,11 +265,7 @@ def read_pawian_hists(filename, type_name="data"):
     # Get particle names
     uproot_file = uproot.open(filename)
     tree = uproot_file[tree_name]
-    particles = [
-        particle.decode()
-        for particle in tree.keys()
-        if particle.decode() != _WEIGHT_LABEL
-    ]
+    particles = [branch.name for branch in tree if branch.name != _WEIGHT_LABEL]
 
     # Import tuples as dataframe
     weights = uproot_file[f"{tree_name}/{_WEIGHT_LABEL}"].array()
@@ -275,16 +273,16 @@ def read_pawian_hists(filename, type_name="data"):
         particle_names=particles,
         number_of_rows=len(weights),
     )
-    if weights.max() != weights.min():
+    if ak.max(weights) != ak.min(weights):
         frame[_WEIGHT_LABEL] = weights
     try:  # ROOT >= 6
         for particle in particles:
             vectors = uproot_file[f"{tree_name}/{particle}"].array()
-            frame[particle, _MOMENTUM_LABELS[0]] = vectors.x
-            frame[particle, _MOMENTUM_LABELS[1]] = vectors.y
-            frame[particle, _MOMENTUM_LABELS[2]] = vectors.z
-            frame[particle, _MOMENTUM_LABELS[3]] = vectors.E
-    except ValueError:  # ROOT <= 5
+            frame[particle, _MOMENTUM_LABELS[0]] = vectors.fP.fX
+            frame[particle, _MOMENTUM_LABELS[1]] = vectors.fP.fY
+            frame[particle, _MOMENTUM_LABELS[2]] = vectors.fP.fZ
+            frame[particle, _MOMENTUM_LABELS[3]] = vectors.fE
+    except (KeyError, KeyInFileError):  # ROOT <= 5
         for particle in particles:
             frame[particle, _MOMENTUM_LABELS[0]] = uproot_file[
                 f"{tree_name}/{particle}/fP/fP.fX"

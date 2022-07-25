@@ -11,7 +11,9 @@ from typing import Optional, Tuple
 
 import matplotlib.pyplot as plt
 import uproot
-from uproot_methods.classes import TH1
+from uproot.behaviors.TAxis import TAxis
+from uproot.behaviors.TH1 import TH1
+from uproot.reading import ReadOnlyDirectory
 
 from pawian.data import read_pawian_hists
 from pawian.latex import convert
@@ -29,11 +31,11 @@ class PawianHists:
 
     def import_file(self, filename):
         """Set data member by importing a :file:`pawianHists.root` file."""
-        self.__file = uproot.open(filename)
+        self.__file: ReadOnlyDirectory = uproot.open(filename)
         self.__data = read_pawian_hists(filename, type_name="data")
         self.__fit = read_pawian_hists(filename, type_name="fit")
 
-    def get_uproot_histogram(self, name):
+    def get_uproot_histogram(self, name: str) -> Optional[TH1]:
         """Get a histogram from a :file:`pawianHists.root` file.
 
         Get an uproot :code:`TH1`, :code:`TH2`, or :code:`TH3` from the
@@ -46,7 +48,7 @@ class PawianHists:
             obj = self.__file[name]
         except KeyError:
             return None
-        if isinstance(obj, TH1.Methods):
+        if isinstance(obj, TH1):
             return obj
         return None
 
@@ -68,8 +70,9 @@ class PawianHists:
         histogram = self.get_uproot_histogram(name)
         if histogram is None:
             return None
-        edges = histogram.edges[:-1]
-        values = histogram.values
+        x_axis: TAxis = histogram.axes[0]
+        edges = x_axis.edges()[:-1]
+        values = histogram.values()
         return (edges, values)
 
     def draw_histogram(self, name, plot_on=plt, **kwargs):
@@ -134,9 +137,7 @@ class PawianHists:
         .. seealso::
             :func:`draw_combined_histogram`.
         """
-        logging.info(
-            "Drawing all histograms for file %s ...", self.__file.name.decode()
-        )
+        logging.info(f"Drawing all histograms for file {self.__file.file_path}...")
         names = self.unique_histogram_names
         n_hists = len(names)
         n_x = ceil(sqrt(len(names)))
@@ -156,8 +157,8 @@ class PawianHists:
         names = []
         for name in self.__file.keys():
             obj = self.__file[name]
-            if isinstance(obj, TH1.Methods):
-                names.append(obj.name.decode())
+            if isinstance(obj, TH1):
+                names.append(obj.name)
         return names
 
     @property
@@ -170,8 +171,8 @@ class PawianHists:
         names = []
         for name in self.__file.keys():
             obj = self.__file[name]
-            if isinstance(obj, TH1.Methods):
-                hist_name = obj.name.decode()
+            if isinstance(obj, TH1):
+                hist_name = obj.name
                 if hist_name.startswith("Data"):
                     hist_name = hist_name[4:]
                     names.append(hist_name)

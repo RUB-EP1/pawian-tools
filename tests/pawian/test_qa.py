@@ -101,7 +101,8 @@ def test_draw_all_histograms():
     """Test :func:`pawian.qa.PawianHists.draw_all_histograms`"""
     hists = PawianHists(FILENAME_ROOT6)
     hists.draw_all_histograms()
-    assert len(plt.gcf().get_axes()) == 20  # type: ignore
+    n_plots = len(plt.gcf().get_axes())  # type: ignore
+    assert n_plots == 19
 
 
 @pytest.mark.slow
