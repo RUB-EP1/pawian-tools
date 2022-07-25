@@ -86,6 +86,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
+    "sphinx_codeautolink",
     "sphinx_copybutton",
     "sphinx_panels",
     "sphinx_thebe",
@@ -112,6 +113,11 @@ autodoc_default_options = {
         ]
     ),
 }
+codeautolink_concat_default = True
+codeautolink_global_preface = """
+from IPython.display import display
+
+"""
 html_copy_source = True  # needed for download notebook button
 html_show_copyright = False
 html_show_sourcelink = False
