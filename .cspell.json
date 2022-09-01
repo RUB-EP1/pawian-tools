@@ -37,6 +37,7 @@
     "tox.ini"
   ],
   "ignoreWords": [
+    "MAINT",
     "apidoc",
     "atol",
     "autoupdate",
