@@ -11,7 +11,7 @@ argon2-cffi-bindings==21.2.0
 astroid==2.11.7
 async-generator==1.10
 attrs==21.4.0
-awkward==1.8.0
+awkward==1.9.0
 babel==2.10.3
 backcall==0.2.0
 beautifulsoup4==4.11.1
@@ -113,7 +113,7 @@ platformdirs==2.4.0
 pluggy==1.0.0
 pre-commit==2.17.0
 prometheus-client==0.14.1
-prompt-toolkit==3.0.30
+prompt-toolkit==3.0.31
 ptyprocess==0.7.0
 py==1.11.0
 pycodestyle==2.8.0
@@ -170,7 +170,7 @@ traitlets==4.3.3
 typed-ast==1.5.4
 types-setuptools==65.3.0
 typing-extensions==4.1.1
-uproot==4.3.4
+uproot==4.3.5
 urllib3==1.26.12
 virtualenv==20.15.1 ; python_version < "3.8.0"
 wcwidth==0.2.5
