@@ -70,7 +70,7 @@ jupyter-client==7.3.5
 jupyter-console==6.4.4
 jupyter-core==4.11.1
 jupyter-server==1.19.1
-jupyterlab==3.4.7
+jupyterlab==3.4.8
 jupyterlab-code-formatter==1.5.3
 jupyterlab-pygments==0.2.2
 jupyterlab-server==2.15.2
@@ -78,7 +78,6 @@ jupyterlab-widgets==3.0.3
 kiwisolver==1.4.4
 lazy-object-proxy==1.7.1
 livereload==2.6.3
-lxml==4.9.1
 markdown-it-py==2.1.0
 markupsafe==2.1.1
 matplotlib==3.6.0
@@ -93,7 +92,7 @@ myst-nb==0.17.1
 myst-parser==0.18.1
 nbclassic==0.4.4
 nbclient==0.5.13
-nbconvert==7.0.0
+nbconvert==7.1.0
 nbformat==5.6.1
 nbstripout==0.6.1
 nest-asyncio==1.5.6
@@ -139,7 +138,7 @@ pytz==2022.4
 pyyaml==6.0
 pyzmq==24.0.1
 qtconsole==5.3.2
-qtpy==2.2.0
+qtpy==2.2.1
 requests==2.28.1
 restructuredtext-lint==1.4.0
 send2trash==1.8.0
