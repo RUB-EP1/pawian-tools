@@ -1,25 +1,37 @@
 name-template: PawianTools $NEXT_PATCH_VERSION
 tag-template: $NEXT_PATCH_VERSION
 
+references:
+  - main
+  - epic/*
+
 categories:
-  - title: 💡 New features
-    label: 💡 Enhancement
+  - title: ✨ New features
+    label: 💡 Feature
+  - title: ⚠️ Enhancements and optimizations
+    label: ⚙️ Enhancement
+  - title: ⚠️ API changes
+    label: ⚠️ Interface
+  - title: ⚠️ Changes that may affect behavior
+    label: ❗ Behavior
   - title: 🐛 Bug fixes
-    label: Bug
-  - title: 🔨 Interface changes
-    label: 🔨 Maintenance
+    label: 🐛 Bug
   - title: 📝 Documentation
     label: 📝 Docs
-  - title: 🖱️ Internals
+  - title: 🔨 Maintenance
+    label: 🔨 Maintenance
+  - title: 🖱️ Developer Experience
     label: 🖱️ DX
 
 change-template: "- $TITLE (#$NUMBER)"
+
+replacers:
+  - search: /([A-Z]+!?:\s*)(.*)/g
+    replace: $2
+
 sort-direction: ascending
+
 template: |
-  # Release $NEXT_PATCH_VERSION
+  _See all documentation for this version [here](https://redeboer.github.io/PawianTools)._
 
   $CHANGES
-
-  ## Contributors since [$PREVIOUS_TAG](https://github.com/redeboer/PawianTools/releases/tag/$PREVIOUS_TAG)
-
-  $CONTRIBUTORS
