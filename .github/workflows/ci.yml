@@ -95,7 +95,6 @@ jobs:
 
   documentation:
     name: Build documentation and run notebooks
-    if: github.event.pull_request.draft == false
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
