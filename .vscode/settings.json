@@ -1,4 +1,7 @@
 {
+  "[git-commit]": {
+    "rewrap.wrappingColumn": 72
+  },
   "[ipynb]": {
     "editor.formatOnSave": false
   },
