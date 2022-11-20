@@ -122,6 +122,7 @@
     "pylint",
     "pypi",
     "pytest",
+    "PYTHONHASHSEED",
     "venv"
   ]
 }
