@@ -49,6 +49,7 @@ class DataParserError(Exception):
     """Exception for if a data file can't be handled."""
 
 
+# pyright: reportUntypedClassDecorator=false
 @pd.api.extensions.register_dataframe_accessor("pwa")
 class PwaAccessor:
     """PWA-specific accessor for a `~pandas.DataFrame`.

@@ -1,3 +1,4 @@
+# pyright: reportAssertAlwaysTrue=false
 from os.path import dirname, realpath
 from statistics import mean
 
