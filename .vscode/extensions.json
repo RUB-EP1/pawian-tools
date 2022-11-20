@@ -8,6 +8,7 @@
     "esbenp.prettier-vscode",
     "executablebookproject.myst-highlight",
     "github.vscode-pull-request-github",
+    "ms-python.flake8",
     "ms-python.python",
     "ms-python.vscode-pylance",
     "ms-vscode-remote.remote-ssh",
