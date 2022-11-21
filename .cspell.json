@@ -53,6 +53,7 @@
     "typings"
   ],
   "ignoreWords": [
+    "MAINT",
     "apidoc",
     "atol",
     "autoupdate",
@@ -90,7 +91,6 @@
     "lineparser",
     "linkcheck",
     "macos",
-    "MAINT",
     "markdownlint",
     "maxdepth",
     "mimetype",
