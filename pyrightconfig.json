@@ -1,14 +1,26 @@
 {
-  "exclude": [".git", ".tox", "docs/_build"],
-  "include": ["docs", "src", "tests"],
+  "exclude": [
+    "**/__pycache__",
+    "**/_build",
+    "**/.git",
+    "**/.ipynb_checkpoints",
+    "**/.mypy_cache",
+    "**/.pytest_cache",
+    "**/.tox"
+  ],
   "reportGeneralTypeIssues": false,
-  "reportOptionalMemberAccess": false,
-  "reportOptionalSubscript": true,
-  "reportUnboundVariable": false,
+  "reportMissingParameterType": false,
+  "reportMissingTypeArgument": false,
+  "reportMissingTypeStubs": false,
+  "reportUnknownArgumentType": false,
+  "reportUnknownLambdaType": false,
+  "reportUnknownMemberType": false,
+  "reportUnknownParameterType": false,
+  "reportUnknownVariableType": false,
+  "reportUnnecessaryIsInstance": false,
   "reportUnusedClass": true,
   "reportUnusedFunction": true,
   "reportUnusedImport": true,
-  "reportMissingImports": false,
   "reportUnusedVariable": true,
-  "stubPath": ""
+  "typeCheckingMode": "strict"
 }

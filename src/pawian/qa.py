@@ -164,6 +164,7 @@ class PawianHists:
             plot_on = plt.figure()
         grid = plot_on.add_gridspec(n_x, n_y)  # type: ignore[union-attr]
         for idx, name in enumerate(names):
+            assert plot_on is not None
             sub = plot_on.add_subplot(grid[idx % n_x, idx // n_x])
             self.draw_combined_histogram(name, sub, **kwargs)
             sub.set_title(f"${convert(name)}$")
