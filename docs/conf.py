@@ -212,6 +212,7 @@ copybutton_prompt_text = r">>> |\.\.\. "  # doctest
 # Settings for linkcheck
 linkcheck_anchors = False
 
+
 # Settings for myst_nb
 def get_nb_execution_mode() -> str:
     if "EXECUTE_NB" in os.environ:
