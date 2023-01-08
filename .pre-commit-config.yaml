@@ -75,6 +75,8 @@ repos:
           - --no-cd
           - --no-docs
           - --pin-requirements=bimonthly
+          - --repo-name=pawian-tools
+          - --repo-title=PawianTools
 
   - repo: local
     hooks:
