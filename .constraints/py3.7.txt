@@ -124,7 +124,7 @@ pydeps==1.11.0
 pydocstyle==6.2.3
 pyflakes==2.5.0
 pygments==2.14.0
-pylint==2.15.9
+pylint==2.15.10
 pyparsing==3.0.9
 pyrsistent==0.19.3
 pytest==7.2.0
