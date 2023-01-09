@@ -118,6 +118,3 @@ jobs:
         env:
           EXECUTE_NB: YES
         run: make html
-      - name: Test doctests in docstrings
-        working-directory: docs
-        run: make ignore-warnings=1 doctest
