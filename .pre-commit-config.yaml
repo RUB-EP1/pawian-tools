@@ -7,7 +7,6 @@ ci:
     - mypy
     - pylint
     # hooks that don't work on pre-commit.ci
-    - editorconfig-checker
     - pyright
 
 repos:
@@ -33,6 +32,16 @@ repos:
         name: Tests should start with test_
         args: ["--django"]
       - id: trailing-whitespace
+
+  - repo: https://github.com/ComPWA/repo-maintenance
+    rev: 7369f96
+    hooks:
+      - id: check-dev-files
+        args:
+          - --pin-requirements=bimonthly
+          - --repo-name=bossdoc
+          - --repo-title=BOSS Documentation
+      - id: format-setup-cfg
 
   - repo: https://github.com/psf/black
     rev: 22.10.0
@@ -66,27 +75,6 @@ repos:
             .*\.py|
             LICENSE
           )$
-
-  - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.0.159
-    hooks:
-      - id: check-dev-files
-        args:
-          - --no-cd
-          - --no-docs
-          - --pin-requirements=bimonthly
-
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.5.3
-    hooks:
-      - id: nbqa-black
-        additional_dependencies:
-          - black>=22.1.0
-      - id: nbqa-flake8
-      - id: nbqa-isort
-      - id: nbqa-pyupgrade
-        args:
-          - --py36-plus
 
   - repo: local
     hooks:

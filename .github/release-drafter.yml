@@ -1,4 +1,4 @@
-name-template: PawianTools $NEXT_PATCH_VERSION
+name-template: BOSS Documentation $NEXT_PATCH_VERSION
 tag-template: $NEXT_PATCH_VERSION
 
 references:
@@ -32,6 +32,6 @@ replacers:
 sort-direction: ascending
 
 template: |
-  _See all documentation for this version [here](https://redeboer.github.io/PawianTools)._
-
   $CHANGES
+
+  _The full changelog as commits can be found [here](https://github.com/ComPWA/bossdoc/compare/$PREVIOUS_TAG...$NEXT_PATCH_VERSION)._
