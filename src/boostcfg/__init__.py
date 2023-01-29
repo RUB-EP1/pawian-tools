@@ -6,7 +6,7 @@ by the `parse_config_file
 of :code:`boost::program_options`.
 
 BoostConfigParser was especially designed for `Pawian
-<https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware>`__.
+<https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware>`__.
 """
 
 from typing import Any, Dict, Optional

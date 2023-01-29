@@ -189,7 +189,7 @@ def get_minor_version(package_name: str) -> str:
 
 
 intersphinx_mapping = {
-    "awkward": ("https://awkward-array.readthedocs.io/en/stable", None),
+    "awkward": ("https://awkward-array.org/doc/stable", None),
     "IPython": (f"https://ipython.readthedocs.io/en/{get_version('IPython')}", None),
     "compwa-org": ("https://compwa-org.readthedocs.io", None),
     "matplotlib": (f"https://matplotlib.org/{get_version('matplotlib')}", None),
@@ -211,6 +211,9 @@ copybutton_prompt_text = r">>> |\.\.\. "  # doctest
 
 # Settings for linkcheck
 linkcheck_anchors = False
+linkcheck_ignore = [
+    "https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware",
+]
 
 # Settings for myst_nb
 def get_nb_execution_mode() -> str:
