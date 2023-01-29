@@ -189,7 +189,7 @@ def get_minor_version(package_name: str) -> str:
 
 
 intersphinx_mapping = {
-    "awkward": ("https://awkward-array.readthedocs.io/en/stable", None),
+    "awkward": ("https://awkward-array.org/doc/stable", None),
     "IPython": (f"https://ipython.readthedocs.io/en/{get_version('IPython')}", None),
     "compwa-org": ("https://compwa-org.readthedocs.io", None),
     "matplotlib": (f"https://matplotlib.org/{get_version('matplotlib')}", None),
