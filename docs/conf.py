@@ -211,6 +211,9 @@ copybutton_prompt_text = r">>> |\.\.\. "  # doctest
 
 # Settings for linkcheck
 linkcheck_anchors = False
+linkcheck_ignore = [
+    "https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware",
+]
 
 
 # Settings for myst_nb

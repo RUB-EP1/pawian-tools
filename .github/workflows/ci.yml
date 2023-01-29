@@ -1,4 +1,9 @@
 name: CI
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   PYTHONHASHSEED: "0"
 
@@ -7,112 +12,29 @@ on:
     branches:
       - main
       - epic/*
-      - "[0-9]+.[0-9]+.x"
   pull_request:
     branches:
       - main
       - epic/*
-      - "[0-9]+.[0-9]+.x"
   workflow_dispatch:
+    inputs:
+      specific-pip-packages:
+        description: Run CI with specific pip packages
+        required: false
+        type: string
 
 jobs:
-  codecov:
-    name: Unit tests + coverage
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - ubuntu-20.04
-        python-version:
-          - "3.7"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        with:
-          key: |
-            ${{ github.workflow }}-${{ github.job }}-${{ matrix.os }}-py${{ matrix.python-version }}-${{ hashFiles('.constraints/py3.*.txt', 'setup.cfg') }}
-          path: |
-            .pytest_cache
-            ~/.cache/pip/
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -c .constraints/py${{ matrix.python-version }}.txt -e .[test]
-      - name: Test with pytest-cov
-        run: pytest -n auto --cov=boostcfg --cov=pawian --cov-report=xml
-      - uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage.xml
-          # cspell:ignore unittests
-          flags: unittests
-
+  doc:
+    uses: ComPWA/actions/.github/workflows/ci-docs.yml@v1
+    with:
+      gh-pages: true
+      specific-pip-packages: ${{ inputs.specific-pip-packages }}
   pytest:
-    name: Unit tests
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-20.04
-        python-version:
-          - "3.6"
-          - "3.7"
-          - "3.8"
-          - "3.9"
-          - "3.10"
-          - "3.11"
-        exclude:
-          - os: ubuntu-20.04 # coverage job
-            python-version: "3.7"
-        include:
-          - os: macos-11
-            python-version: "3.7"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        with:
-          key: |
-            ${{ github.workflow }}-${{ github.job }}-${{ matrix.os }}-py${{ matrix.python-version }}-${{ hashFiles('.constraints/py3.*.txt', 'setup.cfg') }}
-          path: |
-            .pytest_cache
-            ~/.cache/pip/
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -c .constraints/py${{ matrix.python-version }}.txt -e .[test]
-      - name: Run unit tests and doctests with pytest
-        run: pytest -n auto
-      - uses: actions/upload-artifact@v3
-        if: ${{ always() }}
-        with:
-          name: test_output_${{ matrix.os }}_${{ matrix.python-version }}
-          path: tests/output
-
-  documentation:
-    name: Build documentation and run notebooks
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        with:
-          key: |
-            ${{ github.workflow }}-${{ github.job }}-${{ runner.os }}-${{ hashFiles('.constraints/py3.*.txt', 'setup.cfg') }}
-          path: |
-            .pytest_cache
-            ~/.cache/pip/
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.8"
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -c .constraints/py3.8.txt .[doc] tox
-          sudo apt-get -y install pandoc
-      - name: Build documentation and run notebooks
-        run: tox -e docnb
+    uses: ComPWA/actions/.github/workflows/pytest.yml@v1
+    with:
+      coverage-target: pawian
+      macos-python-version: "3.7"
+      specific-pip-packages: ${{ inputs.specific-pip-packages }}
+  style:
+    if: inputs.specific-pip-packages == ''
+    uses: ComPWA/actions/.github/workflows/pre-commit.yml@v1

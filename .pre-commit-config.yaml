@@ -7,7 +7,6 @@ ci:
     - mypy
     - pylint
     # hooks that don't work on pre-commit.ci
-    - editorconfig-checker
     - pyright
 
 repos:
@@ -35,28 +34,14 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.0.164
+    rev: 0.0.167
     hooks:
       - id: check-dev-files
         args:
-          - --no-cd
-          - --no-docs
           - --pin-requirements=bimonthly
-          - --repo-name=pawian-tools
-          - --repo-title=PawianTools
+          - --repo-name=PawianTools
+          - --repo-title=Pawian Tools
       - id: format-setup-cfg
-
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.6.1
-    hooks:
-      - id: nbqa-black
-        additional_dependencies:
-          - black>=22.1.0
-      - id: nbqa-flake8
-      - id: nbqa-isort
-      - id: nbqa-pyupgrade
-        args:
-          - --py36-plus
 
   - repo: https://github.com/psf/black
     rev: 22.12.0
@@ -67,15 +52,6 @@ repos:
     rev: v6.17.1
     hooks:
       - id: cspell
-
-  - repo: https://github.com/PyCQA/docformatter
-    rev: v1.5.1
-    hooks:
-      - id: docformatter
-        args:
-          - --in-place
-          - --wrap-descriptions=88
-          - --wrap-summaries=88
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
     rev: 2.6.2

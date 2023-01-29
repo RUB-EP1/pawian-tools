@@ -8,7 +8,7 @@
 [![Test coverage](https://codecov.io/gh/redeboer/PawianTools/branch/main/graph/badge.svg)](https://codecov.io/gh/redeboer/PawianTools)
 
 This repository serves as a collection of Python tools to complement
-[Pawian](https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware). There are
+[Pawian](https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware). There are
 currently two Python packages:
 
 1. {mod}`pawian`, which is a collection of Python modules that facilitate working with
@@ -26,7 +26,7 @@ install
 usage
 api
 Help developing <https://compwa-org.readthedocs.io/develop.html>
-Pawian <https://panda-wiki.gsi.de/foswiki/bin/view/PWA/PawianPwaSoftware>
+Pawian <https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware>
 ```
 
 - {ref}`Python API <modindex>`
