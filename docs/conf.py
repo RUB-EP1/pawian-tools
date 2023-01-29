@@ -215,6 +215,7 @@ linkcheck_ignore = [
     "https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware",
 ]
 
+
 # Settings for myst_nb
 def get_nb_execution_mode() -> str:
     if "EXECUTE_NB" in os.environ:
