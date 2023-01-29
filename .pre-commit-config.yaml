@@ -39,8 +39,8 @@ repos:
       - id: check-dev-files
         args:
           - --pin-requirements=bimonthly
-          - --repo-name=bossdoc
-          - --repo-title=BOSS Documentation
+          - --repo-name=PawianTools
+          - --repo-title=Pawian Tools
       - id: format-setup-cfg
 
   - repo: https://github.com/psf/black
