@@ -179,8 +179,6 @@ class PwaAccessor:
             )
         # cspell:ignore mergesort
         interleaved = pd.concat(new_dict).sort_index(kind="mergesort")
-        if interleaved is None:
-            raise ValueError("Could not concatenate DataFrames")
         interleaved.to_csv(filename, header=False, index=False, **kwargs)
 
 
