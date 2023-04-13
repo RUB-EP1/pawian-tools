@@ -141,7 +141,7 @@ class PwaAccessor:
         """Compute a dataframe containing the square sum of the 3-momenta."""
         p3_squared = self.p_xyz**2  # type: ignore[operator]
         if self.has_particles:
-            return p3_squared.sum(axis=1, level=0)
+            return p3_squared.groupby(axis=1, level=0).sum()
         return p3_squared.sum(axis=1)
 
     @property

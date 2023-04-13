@@ -87,14 +87,14 @@ def test_properties_multicolumn():
     assert frame_data.pwa.momentum_labels == momentum_labels
 
     assert pytest.approx(frame_data.pwa.mass.mean().tolist()) == [
-        0.13957021474219994,
-        1.8648403010481123,
         1.8696104109755363,
+        1.8648403010481123,
+        0.13957021474219994,
     ]
     assert pytest.approx(frame_data.pwa.rho.mean().tolist()) == [
-        0.14209924919519798,
-        0.6476585301989026,
         0.6915457642796756,
+        0.6476585301989026,
+        0.14209924919519798,
     ]
 
 
