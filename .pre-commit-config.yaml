@@ -33,7 +33,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.0.171
+    rev: 0.0.179
     hooks:
       - id: check-dev-files
         args:
@@ -43,7 +43,7 @@ repos:
       - id: format-setup-cfg
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
 
@@ -56,14 +56,11 @@ repos:
     rev: 2.7.1
     hooks:
       - id: editorconfig-checker
-        name: editorconfig-checker
-        exclude: >
+        name: editorconfig
+        alias: ec
+        exclude: >-
           (?x)^(
-            .*\.dat|
-            .*\.ipynb|
-            .*\.md|
-            .*\.py|
-            LICENSE
+            .*\.py
           )$
 
   - repo: local
@@ -104,6 +101,7 @@ repos:
           - |
             cell.metadata.code_folding
             cell.metadata.id
+            cell.metadata.user_expressions
             metadata.celltoolbar
             metadata.colab.name
             metadata.colab.provenance
@@ -116,6 +114,7 @@ repos:
             metadata.toc-showtags
             metadata.varInspector
             metadata.vscode
+
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.0.0-alpha.6
     hooks:
@@ -140,7 +139,7 @@ repos:
           - python
 
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.300
+    rev: v1.1.303
     hooks:
       - id: pyright
 
