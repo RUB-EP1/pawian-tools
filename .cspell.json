@@ -84,6 +84,7 @@
     "heli",
     "iloc",
     "intersphinx",
+    "ipykernel",
     "ipynb",
     "isclose",
     "isort",
