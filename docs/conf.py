@@ -146,7 +146,11 @@ nitpick_ignore = [
 
 
 # Intersphinx settings
-version_remapping: Dict[str, Dict[str, str]] = {}
+version_remapping: Dict[str, Dict[str, str]] = {
+    "ipython": {
+        "8.12.2": "8.13.2",
+    },
+}
 
 
 def get_version(package_name: str) -> str:
