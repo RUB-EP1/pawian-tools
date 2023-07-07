@@ -7,7 +7,7 @@ module contains handlers for such files.
 import logging
 import re  # regex
 from math import ceil, sqrt
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,14 +16,16 @@ import uproot
 from matplotlib.axes import Axes
 from matplotlib.container import BarContainer
 from matplotlib.figure import Figure
-from uproot.behaviors.TAxis import TAxis
 from uproot.behaviors.TH1 import TH1
 from uproot.behaviors.TH2 import TH2
 from uproot.behaviors.TH3 import TH3
-from uproot.reading import ReadOnlyDirectory
 
 from pawian.data import read_pawian_hists
 from pawian.latex import convert
+
+if TYPE_CHECKING:
+    from uproot.behaviors.TAxis import TAxis
+    from uproot.reading import ReadOnlyDirectory
 
 
 class PawianHists:
@@ -92,10 +94,12 @@ class PawianHists:
             kwargs: See `matplotlib.pyplot.hist` arguments
         """
         if name not in self.histogram_names:
-            raise KeyError(f'Histogram "{name}" does not exist')
+            msg = f'Histogram "{name}" does not exist'
+            raise KeyError(msg)
         hist_content = self.get_histogram_content(name)
         if hist_content is None:
-            raise KeyError(f'Could not get histogram "{name}"')
+            msg = f'Could not get histogram "{name}"'
+            raise KeyError(msg)
         edges, values = hist_content
         if plot_on is None:
             plot_on = plt  # type: ignore[assignment]
@@ -125,7 +129,8 @@ class PawianHists:
             kwargs: Arguments that are passed to :func:`draw_histogram`.
         """
         if name not in self.unique_histogram_names:
-            raise KeyError(f'Histogram of type "{name}" does not exist')
+            msg = f'Histogram of type "{name}" does not exist'
+            raise KeyError(msg)
         # Construct regular expression
         re_match_list = []
         if data:
@@ -175,7 +180,7 @@ class PawianHists:
     def histogram_names(self) -> List[str]:
         """Get a list of all histogram names in a :file:`pawianHists.root` file."""
         names = []
-        for name in self.__file.keys():
+        for name in self.__file:
             obj = self.__file[name]
             if isinstance(obj, TH1):
                 names.append(obj.name)
@@ -189,7 +194,7 @@ class PawianHists:
         keywords :code:`Data`, :code:`MC`, or :code:`Fit` have been removed.
         """
         names = []
-        for name in self.__file.keys():
+        for name in self.__file:
             obj = self.__file[name]
             if isinstance(obj, TH1):
                 hist_name = obj.name

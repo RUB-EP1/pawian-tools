@@ -16,7 +16,6 @@ INPUT_FILE_MC = f"{SAMPLE_DIR}/momentum_tuples_mc.dat"
     ("particles", "number_of_rows"),
     [
         (["pi+", "D0", "D-"], 100),
-        # (['gamma', 'pi+', 'pi-'], None),
         (None, 50),
     ],
 )
