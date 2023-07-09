@@ -2,9 +2,7 @@ ci:
   autoupdate_commit_msg: "MAINT: update pip constraints and pre-commit"
   autoupdate_schedule: quarterly
   skip:
-    - flake8
     - mypy
-    - pylint
     - pyright
     - taplo
 
@@ -33,7 +31,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.0.183
+    rev: 0.0.191
     hooks:
       - id: check-dev-files
         args:
@@ -103,14 +101,9 @@ repos:
             metadata.vscode
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.0-alpha.9-for-vscode
+    rev: v3.0.0
     hooks:
       - id: prettier
-
-  - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.3.0
-    hooks:
-      - id: pydocstyle
 
   - repo: https://github.com/ComPWA/mirrors-pyright
     rev: v1.1.316
@@ -118,14 +111,14 @@ repos:
       - id: pyright
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.8.0
+    rev: v3.9.0
     hooks:
       - id: pyupgrade
         args:
           - --py36-plus
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.0.276"
+    rev: v0.0.277
     hooks:
       - id: ruff
         args:
