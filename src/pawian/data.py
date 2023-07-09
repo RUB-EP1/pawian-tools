@@ -68,18 +68,19 @@ class PwaAccessor:
         if isinstance(columns, pd.MultiIndex):
             # if multicolumn, test if 2 levels
             columns = columns.levels
-            if len(obj.columns.levels) != 2:
-                raise AttributeError(
-                    "Not a Pawian data object!\n"
-                    "pandas.DataFrame must have multi-columns of 2 levels:\n"
-                    " - 1st level are particles\n"
-                    f" - 2nd level are define the 4-momentum: {_MOMENTUM_LABELS}"
+            if len(obj.columns.levels) != 2:  # noqa: PLR2004
+                msg = (
+                    "Not a Pawian data object!\npandas.DataFrame must have"
+                    " multi-columns of 2 levels:\n - 1st level are particles\n - 2nd"
+                    f" level are define the 4-momentum: {_MOMENTUM_LABELS}"
                 )
+                raise AttributeError(msg)
             # then select 2nd columns only
             columns = columns[1]
         # Check if (sub)column names are same as momentum labels
         if not set(_MOMENTUM_LABELS) <= set(columns):
-            raise AttributeError(f"Columns must be {_MOMENTUM_LABELS}")
+            msg = f"Columns must be {_MOMENTUM_LABELS}"
+            raise AttributeError(msg)
 
     @property
     def has_weights(self) -> bool:
@@ -95,7 +96,8 @@ class PwaAccessor:
     def weights(self) -> pd.Series:
         """Get list of weights, if available."""
         if not self.has_weights:
-            raise ValueError("Dataframe doesn't contain weights")
+            msg = "Dataframe doesn't contain weights"
+            raise ValueError(msg)
         return self._obj[_WEIGHT_LABEL]
 
     @property
@@ -107,9 +109,8 @@ class PwaAccessor:
     def particles(self) -> List[str]:
         """Get list of particles contained in the data frame."""
         if not self.has_particles:
-            raise ValueError(
-                "This dataframe is single-level and does not contain particles"
-            )
+            msg = "This dataframe is single-level and does not contain particles"
+            raise ValueError(msg)
         particles = self._obj.columns.droplevel(1).unique()
         if self.has_weights:
             particles = particles.drop(_WEIGHT_LABEL)
@@ -202,7 +203,7 @@ def create_skeleton_frame(
     return pd.DataFrame(index=index, columns=multi_column)
 
 
-def read_ascii(
+def read_ascii(  # noqa: C901
     filename: str,
     particles: Optional[Union[List[str], int]] = None,
     **kwargs: Any,
@@ -231,10 +232,11 @@ def read_ascii(
         if isinstance(particles, int):
             particles = [f"Particle {i}" for i in range(1, particles + 1)]
         elif particles is None or not isinstance(particles, list):
-            raise DataParserError(
-                f'Cannot determine number of particles in file"{filename}"\n'
-                "--> Please provide an array of particles for interpretation"
+            msg = (
+                f'Cannot determine number of particles in file"{filename}"\n--> Please'
+                " provide an array of particles for interpretation"
             )
+            raise DataParserError(msg)
 
     # Try to determine number of particles from file
     if has_weights:
@@ -244,10 +246,11 @@ def read_ascii(
         if isinstance(particles, int):
             particles = [str(i) for i in range(1, particles + 1)]
         if len(particles) != file_n_particles:
-            raise DataParserError(
-                f'File "{filename}" contains {file_n_particles}, but you said there '
-                f"were {len(particles)} ({particles})"
+            msg = (
+                f'File "{filename}" contains {file_n_particles}, but you said there'
+                f" were {len(particles)} ({particles})"
             )
+            raise DataParserError(msg)
 
     # Prepare splitting into particle columns
     first_momentum_row = 0
@@ -291,7 +294,8 @@ def read_pawian_hists(
     elif "fit" in type_name.lower():
         type_name = "fitted"
     else:
-        raise ValueError('Wrong type_name: should be either "data" or "fitted"')
+        msg = 'Wrong type_name: should be either "data" or "fitted"'
+        raise ValueError(msg)
     tree_name = f"_{type_name}Fourvecs"
 
     # Get particle names

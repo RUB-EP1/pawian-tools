@@ -133,7 +133,6 @@
     "numpy",
     "pawian",
     "pydocstyle",
-    "pylint",
     "pypi",
     "pytest",
     "PYTHONHASHSEED",

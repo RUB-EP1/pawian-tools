@@ -37,7 +37,7 @@ subprocess.call(
     " ".join(
         [
             "sphinx-apidoc",
-            f"../src/",
+            "../src/",
             "-o api/",
             "--force",
             "--no-toc",
@@ -45,7 +45,7 @@ subprocess.call(
             "--separate",
         ]
     ),
-    shell=True,
+    shell=True,  # noqa: S602
 )
 
 # -- General configuration ---------------------------------------------------
@@ -168,7 +168,7 @@ def get_version(package_name: str) -> str:
         if not line:
             continue
         line_segments = tuple(line.split("=="))
-        if len(line_segments) != 2:
+        if len(line_segments) != 2:  # noqa: PLR2004
             continue
         _, installed_version, *_ = line_segments
         installed_version = installed_version.strip()
@@ -187,9 +187,8 @@ def get_minor_version(package_name: str) -> str:
         return installed_version
     matches = re.match(r"^([0-9]+\.[0-9]+).*$", installed_version)
     if matches is None:
-        raise ValueError(
-            f"Could not find documentation for {package_name} v{installed_version}"
-        )
+        msg = f"Could not find documentation for {package_name} v{installed_version}"
+        raise ValueError(msg)
     return matches[1]
 
 
@@ -263,7 +262,7 @@ if nb_execution_mode != "off":
                 "--noshow",
             ]
         ),
-        shell=True,
+        shell=True,  # noqa: S602
     )
     if os.path.exists("module_structure.svg"):
         with open(f"api/{PACKAGE}.rst", "a") as stream:

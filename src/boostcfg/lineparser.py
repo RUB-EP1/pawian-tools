@@ -22,7 +22,8 @@ def get_key_value_pair(line: str) -> Tuple[str, str]:
     new_line = strip_comment(line)
     matches = re.search(r"^\s*([^\s]+?)\s*=\s*([^\s]+.*?)\s*$", strip_comment(new_line))
     if matches is None:
-        raise SyntaxError(f'Line "{new_line}" is not a key, value pair!')
+        msg = f'Line "{new_line}" is not a key, value pair!'
+        raise SyntaxError(msg)
     return matches[1], matches[2]
 
 
@@ -40,7 +41,8 @@ def strip_comment(line: str) -> str:
     """Remove everything before a comment sign (:code:`#`)."""
     matches = re.search(r"^[^#]*", line)
     if matches is None:
-        raise ValueError(f"Line {line} is not valid")
+        msg = f"Line {line} is not valid"
+        raise ValueError(msg)
     return matches[0]
 
 

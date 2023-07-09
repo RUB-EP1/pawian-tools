@@ -33,10 +33,12 @@ target-version = [
     "py39",
 ]
 
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
 [tool.nbqa.addopts]
-black = [
-    "--line-length=85",
-]
+black = ["--line-length=85"]
 
 [tool.mypy]
 disallow_incomplete_defs = true
@@ -46,26 +48,26 @@ show_error_codes = true
 warn_unused_configs = true
 
 [[tool.mypy.overrides]]
-module = ["tests.*"]
 check_untyped_defs = true
 disallow_incomplete_defs = false
 disallow_untyped_defs = false
+module = ["tests.*"]
 
 [[tool.mypy.overrides]]
+ignore_missing_imports = true
 module = ["awkward.*"]
-ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
+ignore_missing_imports = true
 module = ["matplotlib.*"]
-ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
+ignore_missing_imports = true
 module = ["pandas.*"]
-ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = ["uproot.*"]
 ignore_missing_imports = true
+module = ["uproot.*"]
 
 [tool.pyright]
 exclude = [
@@ -94,10 +96,6 @@ reportUnusedImport = true
 reportUnusedVariable = true
 typeCheckingMode = "strict"
 
-[tool.coverage.run]
-branch = true
-source = ["src"]
-
 [tool.pytest.ini_options]
 addopts = '''
 --color=yes
@@ -112,13 +110,13 @@ filterwarnings = [
     "ignore:Using the level keyword in DataFrame and Series aggregations is deprecated.*:FutureWarning",
     "ignore:the imp module is deprecated in favour of importlib.*:DeprecationWarning",
 ]
-norecursedirs = [
-    ".ipynb_checkpoints",
-    "_build",
-]
 markers = [
     "serial",
     "slow: marks tests as slow (select with '-m slow')",
+]
+norecursedirs = [
+    ".ipynb_checkpoints",
+    "_build",
 ]
 testpaths = [
     "src",
@@ -157,15 +155,39 @@ extend-select = [
     "UP",
     "YTT",
 ]
+ignore = [
+    "D101",
+    "D102",
+    "D103",
+    "D105",
+    "D107",
+    "D203",
+    "D213",
+    "D407",
+    "D416",
+    "E501",
+    "SIM108",
+]
 show-fixes = true
-target-version = "py37"
-task-tags = ["cspell"]
 src = [
     "src",
     "tests",
 ]
+target-version = "py37"
+task-tags = ["cspell"]
 
 [tool.ruff.per-file-ignores]
+"docs/*" = [
+    "E402",
+    "INP001",
+    "S101",
+    "S113",
+    "T201",
+]
+"docs/conf.py" = [
+    "A001",
+    "PLW2901",
+]
 "setup.py" = ["D100"]
 "tests/*" = [
     "D",
