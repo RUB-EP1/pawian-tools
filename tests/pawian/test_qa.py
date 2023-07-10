@@ -64,7 +64,7 @@ def test_faulty_import():
         ),
     ],
 )
-def test_data_model(  # pylint: disable=too-many-arguments
+def test_data_model(
     filename, hist_value, particles, n_data, n_fit, hist_names, unique_names
 ):
     """Test whether properties are correct."""

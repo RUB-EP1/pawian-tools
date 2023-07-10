@@ -2,9 +2,7 @@ ci:
   autoupdate_commit_msg: "MAINT: update pip constraints and pre-commit"
   autoupdate_schedule: quarterly
   skip:
-    - flake8
     - mypy
-    - pylint
     - pyright
     - taplo
 
@@ -33,7 +31,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.0.179
+    rev: 0.0.192
     hooks:
       - id: check-dev-files
         args:
@@ -53,7 +51,7 @@ repos:
       - id: cspell
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 2.7.1
+    rev: 2.7.2
     hooks:
       - id: editorconfig-checker
         name: editorconfig
@@ -63,22 +61,8 @@ repos:
             .*\.py
           )$
 
-  - repo: local
-    hooks:
-      - id: flake8
-        name: flake8
-        entry: flake8
-        language: system
-        types:
-          - python
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.34.0
+    rev: v0.35.0
     hooks:
       - id: markdownlint
 
@@ -99,6 +83,7 @@ repos:
         args:
           - --extra-keys
           - |
+            cell.attachments
             cell.metadata.code_folding
             cell.metadata.id
             cell.metadata.user_expressions
@@ -116,39 +101,28 @@ repos:
             metadata.vscode
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.0-alpha.9-for-vscode
+    rev: v3.0.0
     hooks:
       - id: prettier
 
-  - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.3.0
-    hooks:
-      - id: pydocstyle
-
-  - repo: local
-    hooks:
-      - id: pylint
-        name: pylint
-        entry: pylint
-        args:
-          - --rcfile=.pylintrc
-          - --score=no
-        language: system
-        require_serial: true
-        types:
-          - python
-
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.308
+    rev: v1.1.316
     hooks:
       - id: pyright
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.4.0
+    rev: v3.9.0
     hooks:
       - id: pyupgrade
         args:
           - --py36-plus
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.0.277
+    hooks:
+      - id: ruff
+        args:
+          - --fix
 
   - repo: https://github.com/ComPWA/mirrors-taplo
     rev: v0.8.0

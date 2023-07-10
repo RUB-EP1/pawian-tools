@@ -16,7 +16,6 @@ INPUT_FILE_MC = f"{SAMPLE_DIR}/momentum_tuples_mc.dat"
     ("particles", "number_of_rows"),
     [
         (["pi+", "D0", "D-"], 100),
-        # (['gamma', 'pi+', 'pi-'], None),
         (None, 50),
     ],
 )
@@ -61,7 +60,7 @@ def test_raise_validate(columns, names):
     multi_index = pd.MultiIndex.from_tuples(columns, names=names)
     frame = pd.DataFrame(columns=multi_index)
     with pytest.raises(AttributeError):
-        print(frame.pwa)
+        print(frame.pwa)  # noqa: T201
 
 
 def test_properties_multicolumn():
