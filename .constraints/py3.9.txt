@@ -169,7 +169,7 @@ tomli==2.0.1
 tornado==6.3.3
 tox==4.11.1
 traitlets==5.9.0
-types-setuptools==68.1.0.1
+types-setuptools==68.2.0.0
 typing-extensions==4.7.1
 tzdata==2023.3
 uproot==5.0.11

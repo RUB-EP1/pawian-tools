@@ -144,7 +144,7 @@ tornado==6.1
 tox==3.28.0 ; python_version < "3.8.0"
 traitlets==4.3.3
 typed-ast==1.5.5
-types-setuptools==68.1.0.1
+types-setuptools==68.2.0.0
 typing-extensions==4.1.1
 uproot==4.3.7
 urllib3==1.26.16
