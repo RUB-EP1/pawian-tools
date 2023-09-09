@@ -107,6 +107,7 @@ addopts = '''
 filterwarnings = [
     "error",
     "ignore:.*Consider switching from .* to .*:DeprecationWarning",
+    "ignore:DataFrame.groupby with axis=1 is deprecated.*:FutureWarning",
     "ignore:Using the level keyword in DataFrame and Series aggregations is deprecated.*:FutureWarning",
     "ignore:the imp module is deprecated in favour of importlib.*:DeprecationWarning",
 ]
