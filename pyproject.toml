@@ -38,7 +38,6 @@ branch = true
 source = ["src"]
 
 [tool.nbqa.addopts]
-black = ["--line-length=85"]
 
 [tool.mypy]
 disallow_incomplete_defs = true
