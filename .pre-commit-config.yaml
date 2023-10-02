@@ -44,6 +44,11 @@ repos:
     rev: 23.9.1
     hooks:
       - id: black
+      - id: black-jupyter
+        args:
+          - --line-length=85
+        types_or:
+          - jupyter
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
     rev: v7.3.1
@@ -60,11 +65,6 @@ repos:
           (?x)^(
             .*\.py
           )$
-
-  - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.37.0
-    hooks:
-      - id: markdownlint
 
   - repo: local
     hooks:
@@ -86,6 +86,7 @@ repos:
             cell.attachments
             cell.metadata.code_folding
             cell.metadata.id
+            cell.metadata.pycharm
             cell.metadata.user_expressions
             metadata.celltoolbar
             metadata.colab.name

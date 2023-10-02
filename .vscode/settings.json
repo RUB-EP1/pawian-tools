@@ -25,11 +25,11 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "black-formatter.importStrategy": "fromEnvironment",
+  "cSpell.enabled": true,
   "coverage-gutters.coverageFileNames": ["coverage.xml"],
   "coverage-gutters.coverageReportFileName": "**/htmlcov/index.html",
   "coverage-gutters.showGutterCoverage": false,
   "coverage-gutters.showLineCoverage": true,
-  "cSpell.enabled": true,
   "editor.formatOnSave": true,
   "editor.rulers": [88],
   "git.rebaseWhenSync": true,
@@ -54,7 +54,6 @@
     "tests/**/__init__.py": true
   },
   "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": "file:///home/redeboer/dev/redeboer/PawianTools/.github/workflows/requirements.yml"
   }
