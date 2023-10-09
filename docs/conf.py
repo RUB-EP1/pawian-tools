@@ -148,7 +148,8 @@ nitpick_ignore = [
 # Intersphinx settings
 version_remapping: Dict[str, Dict[str, str]] = {
     "ipython": {
-        "8.12.2": "8.13.2",
+        "8.12.2": "8.12.1",
+        "8.12.3": "8.12.1",
     },
 }
 

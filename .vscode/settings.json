@@ -1,5 +1,6 @@
 {
   "[git-commit]": {
+    "editor.rulers": [72],
     "rewrap.wrappingColumn": 72
   },
   "[ipynb]": {
@@ -12,14 +13,14 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.wordWrap": "off"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.rulers": [88]
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -31,13 +32,13 @@
   "coverage-gutters.showLineCoverage": true,
   "cSpell.enabled": true,
   "editor.formatOnSave": true,
-  "editor.rulers": [88],
   "git.rebaseWhenSync": true,
   "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
   "gitlens.telemetry.enabled": false,
   "livePreview.defaultPreviewPath": "docs/_build/html",
-  "mypy-type-checker.args": ["--config-file", "pyproject.toml"],
+  "mypy-type-checker.args": ["--config-file=${workspaceFolder}/pyproject.toml"],
   "mypy-type-checker.importStrategy": "fromEnvironment",
+  "notebook.gotoSymbols.showAllSymbols": true,
   "python.analysis.autoImportCompletions": false,
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.typeCheckingMode": "strict",
@@ -54,7 +55,6 @@
     "tests/**/__init__.py": true
   },
   "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": "file:///home/redeboer/dev/redeboer/PawianTools/.github/workflows/requirements.yml"
   }
