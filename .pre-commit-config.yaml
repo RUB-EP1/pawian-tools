@@ -31,7 +31,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.1.0rc5
+    rev: 0.1.0rc6
     hooks:
       - id: check-dev-files
         args:
@@ -129,3 +129,10 @@ repos:
     rev: v0.8.1
     hooks:
       - id: taplo
+
+  - repo: https://github.com/pappasam/toml-sort
+    rev: v0.23.1
+    hooks:
+      - id: toml-sort
+        args:
+          - --in-place
