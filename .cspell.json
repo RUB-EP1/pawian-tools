@@ -119,5 +119,10 @@
     "venv"
   ],
   "version": "0.2",
-  "enableFiletypes": ["git-commit", "julia", "jupyter"]
+  "enableFiletypes": [
+    "git-commit",
+    "github-actions-workflow",
+    "julia",
+    "jupyter"
+  ]
 }

@@ -34,17 +34,15 @@ except PackageNotFoundError:
 # -- Generate API ------------------------------------------------------------
 shutil.rmtree("api", ignore_errors=True)
 subprocess.call(
-    " ".join(
-        [
-            "sphinx-apidoc",
-            "../src/",
-            "-o api/",
-            "--force",
-            "--no-toc",
-            "--templatedir _templates",
-            "--separate",
-        ]
-    ),
+    " ".join([
+        "sphinx-apidoc",
+        "../src/",
+        "-o api/",
+        "--force",
+        "--no-toc",
+        "--templatedir _templates",
+        "--separate",
+    ]),
     shell=True,  # noqa: S602
 )
 
@@ -90,12 +88,10 @@ autodoc_default_options = {
     "members": True,
     "undoc-members": True,
     "show-inheritance": True,
-    "special-members": ", ".join(
-        [
-            "__call__",
-            "__eq__",
-        ]
-    ),
+    "special-members": ", ".join([
+        "__call__",
+        "__eq__",
+    ]),
 }
 autodoc_member_order = "bysource"
 autodoc_typehints_format = "short"
@@ -252,17 +248,15 @@ thebe_config = {
 if nb_execution_mode != "off":
     print("Generating module dependency tree...")
     subprocess.call(
-        " ".join(
-            [
-                "HOME=.",  # in case of calling through tox
-                "pydeps",
-                f"../src/{PACKAGE}",
-                "-o module_structure.svg",
-                "--exclude *._*",  # hide private modules
-                "--max-bacon=1",  # hide external dependencies
-                "--noshow",
-            ]
-        ),
+        " ".join([
+            "HOME=.",  # in case of calling through tox
+            "pydeps",
+            f"../src/{PACKAGE}",
+            "-o module_structure.svg",
+            "--exclude *._*",  # hide private modules
+            "--max-bacon=1",  # hide external dependencies
+            "--noshow",
+        ]),
         shell=True,  # noqa: S602
     )
     if os.path.exists("module_structure.svg"):
