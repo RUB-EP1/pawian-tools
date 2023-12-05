@@ -32,7 +32,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.1.4
+    rev: 0.1.7
     hooks:
       - id: check-dev-files
         args:
@@ -53,7 +53,7 @@ repos:
           - jupyter
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v8.0.0
+    rev: v8.1.0
     hooks:
       - id: cspell
 
@@ -121,7 +121,7 @@ repos:
           - --py36-plus
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.6
+    rev: v0.1.7
     hooks:
       - id: ruff
         args:
