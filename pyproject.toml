@@ -107,6 +107,7 @@ filterwarnings = [
     "ignore:.*Consider switching from .* to .*:DeprecationWarning",
     "ignore:DataFrame.groupby with axis=1 is deprecated.*:FutureWarning",
     "ignore:Using the level keyword in DataFrame and Series aggregations is deprecated.*:FutureWarning",
+    "ignore:datetime.datetime.utcfromtimestamp\\(\\) is deprecated and scheduled for removal in a future version.*:DeprecationWarning",
     "ignore:the imp module is deprecated in favour of importlib.*:DeprecationWarning",
 ]
 markers = [
