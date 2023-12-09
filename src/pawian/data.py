@@ -22,7 +22,6 @@ The allows you to import the ASCII file to a nicely formatted
 `~pandas.DataFrame` accessors.
 """
 
-# cspell:ignore astype dropna
 from __future__ import annotations
 
 import sys
@@ -174,6 +173,7 @@ class PwaAccessor:
         if self.has_weights:
             new_dict.append(self._obj[_WEIGHT_LABEL])
         for par in self.particles:
+            # cspell:ignore astype dropna
             new_dict.append(
                 self._obj[par].apply(
                     lambda x: " ".join(x.dropna().astype(str)),
