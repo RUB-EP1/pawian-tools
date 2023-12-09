@@ -4,12 +4,13 @@ This file only contains a selection of the most common options. For a full list 
 documentation: https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
 
+from __future__ import annotations
+
 import os
 import re
 import shutil
 import subprocess
 import sys
-from typing import Dict
 
 if sys.version_info < (3, 8):
     from importlib_metadata import PackageNotFoundError
@@ -142,7 +143,7 @@ nitpick_ignore = [
 
 
 # Intersphinx settings
-version_remapping: Dict[str, Dict[str, str]] = {
+version_remapping: dict[str, dict[str, str]] = {
     "ipython": {
         "8.12.2": "8.12.1",
         "8.12.3": "8.12.1",

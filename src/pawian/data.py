@@ -1,5 +1,3 @@
-# cspell:ignore astype dropna
-
 """Data module of PawianTools.
 
 This module allows you to parse and analyze ASCII data files of momentum
@@ -24,16 +22,20 @@ The allows you to import the ASCII file to a nicely formatted
 `~pandas.DataFrame` accessors.
 """
 
+# cspell:ignore astype dropna
+from __future__ import annotations
 
 import sys
-from typing import Any, Iterable, List, Optional, Union
+from typing import TYPE_CHECKING, Any, Iterable
 
 import awkward as ak
 import numpy as np
 import pandas as pd
 import uproot
-from pandas.core.base import PandasObject
 from uproot.exceptions import KeyInFileError
+
+if TYPE_CHECKING:
+    from pandas.core.base import PandasObject
 
 if sys.version_info < (3, 8):
     from typing_extensions import Literal
@@ -106,7 +108,7 @@ class PwaAccessor:
         return self.weights
 
     @property
-    def particles(self) -> List[str]:
+    def particles(self) -> list[str]:
         """Get list of particles contained in the data frame."""
         if not self.has_particles:
             msg = "This dataframe is single-level and does not contain particles"
@@ -117,7 +119,7 @@ class PwaAccessor:
         return particles.to_list()
 
     @property
-    def momentum_labels(self) -> List[str]:
+    def momentum_labels(self) -> list[str]:
         """Get list of momentum labels contained in the data frame."""
         momentum_labels = self._obj.columns.droplevel(0).unique()
         if self.has_weights:
@@ -184,7 +186,7 @@ class PwaAccessor:
 
 
 def create_skeleton_frame(
-    particle_names: Optional[Iterable[str]] = None, number_of_rows: Optional[int] = None
+    particle_names: Iterable[str] | None = None, number_of_rows: int | None = None
 ) -> pd.DataFrame:
     """Create skeleton `~pandas.DataFrame`.
 
@@ -205,7 +207,7 @@ def create_skeleton_frame(
 
 def read_ascii(  # noqa: C901
     filename: str,
-    particles: Optional[Union[List[str], int]] = None,
+    particles: list[str] | int | None = None,
     **kwargs: Any,
 ) -> pd.DataFrame:
     """Import from a Pawian-like ASCII file.

@@ -26,8 +26,6 @@
     "docs/_templates/*",
     "docs/conf.py",
     "pyproject.toml",
-    "setup.cfg",
-    "setup.py",
     "tox.ini"
   ],
   "ignoreWords": [

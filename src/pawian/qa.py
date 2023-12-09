@@ -4,27 +4,29 @@ Usually, a :file:`pawianHists.root` file is produced if you run Pawian in QA mod
 module contains handlers for such files.
 """
 
+from __future__ import annotations
+
 import logging
 import re  # regex
 from math import ceil, sqrt
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Union
+from typing import TYPE_CHECKING, Any
 
 import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
 import uproot
-from matplotlib.axes import Axes
-from matplotlib.container import BarContainer
-from matplotlib.figure import Figure
 from uproot.behaviors.TH1 import TH1
-from uproot.behaviors.TH2 import TH2
-from uproot.behaviors.TH3 import TH3
 
 from pawian.data import read_pawian_hists
 from pawian.latex import convert
 
 if TYPE_CHECKING:
+    import numpy as np
+    import pandas as pd
+    from matplotlib.axes import Axes
+    from matplotlib.container import BarContainer
+    from matplotlib.figure import Figure
     from uproot.behaviors.TAxis import TAxis
+    from uproot.behaviors.TH2 import TH2
+    from uproot.behaviors.TH3 import TH3
     from uproot.reading import ReadOnlyDirectory
 
 
@@ -44,7 +46,7 @@ class PawianHists:
         self.__data = read_pawian_hists(filename, type_name="data")
         self.__fit = read_pawian_hists(filename, type_name="fitted")
 
-    def get_uproot_histogram(self, name: str) -> Optional[Union[TH1, TH2, TH3]]:
+    def get_uproot_histogram(self, name: str) -> TH1 | TH2 | TH3 | None:
         """Get a histogram from a :file:`pawianHists.root` file.
 
         Get an `uproot` histogram from the :file:`pawianHists.root` file.
@@ -57,7 +59,7 @@ class PawianHists:
             return obj
         return None
 
-    def get_histogram_content(self, name: str) -> Optional[Tuple[list, list]]:
+    def get_histogram_content(self, name: str) -> tuple[list, list] | None:
         """Get an array of lower edges and an array of values for the histogram.
 
         You can then for instance use `matplotlib.pyplot.hist` to plot it like
@@ -81,8 +83,8 @@ class PawianHists:
         return edges, values
 
     def draw_histogram(
-        self, name: str, plot_on: Optional[Axes] = None, **kwargs: Any
-    ) -> Tuple[np.ndarray, np.ndarray, BarContainer]:
+        self, name: str, plot_on: Axes | None = None, **kwargs: Any
+    ) -> tuple[np.ndarray, np.ndarray, BarContainer]:
         """Plot a histogram in a matplotlib figure.
 
         Args:
@@ -108,12 +110,12 @@ class PawianHists:
     def draw_combined_histogram(  # noqa: PLR0913
         self,
         name: str,
-        plot_on: Optional[Axes] = None,
+        plot_on: Axes | None = None,
         data: bool = True,
         fit: bool = True,
         mc: bool = True,
         **kwargs: Any,
-    ) -> Dict[str, Tuple[np.ndarray, np.ndarray, BarContainer]]:
+    ) -> dict[str, tuple[np.ndarray, np.ndarray, BarContainer]]:
         """Combine the three types of histograms in one plot.
 
         Args:
@@ -154,7 +156,7 @@ class PawianHists:
         return hists
 
     def draw_all_histograms(
-        self, plot_on: Optional[Figure] = None, legend: bool = True, **kwargs: Any
+        self, plot_on: Figure | None = None, legend: bool = True, **kwargs: Any
     ) -> None:
         """Draw a comparative overview of all histograms.
 
@@ -177,7 +179,7 @@ class PawianHists:
                 sub.legend()
 
     @property
-    def histogram_names(self) -> List[str]:
+    def histogram_names(self) -> list[str]:
         """Get a list of all histogram names in a :file:`pawianHists.root` file."""
         names = []
         for name in self.__file:
@@ -187,7 +189,7 @@ class PawianHists:
         return names
 
     @property
-    def unique_histogram_names(self) -> List[str]:
+    def unique_histogram_names(self) -> list[str]:
         """Get a list of unique histograms from a :file:`pawianHists.root` file.
 
         Get a list of histograms in the :file:`pawianHists.root` file of which the
@@ -204,7 +206,7 @@ class PawianHists:
         return names
 
     @property
-    def particles(self) -> List[str]:
+    def particles(self) -> list[str]:
         """Get particle names contained in the file."""
         return self.data.pwa.particles
 
