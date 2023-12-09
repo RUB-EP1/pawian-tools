@@ -56,7 +56,6 @@
     ".constraints/*.txt": true,
     "tests/**/__init__.py": true
   },
-  "telemetry.enableCrashReporter": false,
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": "file:///home/redeboer/dev/redeboer/PawianTools/.github/workflows/requirements.yml"
   }
