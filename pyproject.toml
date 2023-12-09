@@ -83,8 +83,12 @@ jupyter = [
     "python-lsp-server[rope]",
 ]
 lint = [
-    "mypy >=0.730",
+    "pawian-tools[mypy]",
     "ruff",
+]
+"mypy" = [
+    "mypy >=0.730",
+    "sphinx-api-relink",
 ]
 sty = [
     "pawian-tools[format]",
