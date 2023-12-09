@@ -192,7 +192,7 @@ task-tags = ["cspell"]
     "PLW0602",
     "PLW0603",
     "S101",
-    "T201",
+    "T20",
     "TCH00",
 ]
 "docs/*" = [
@@ -214,6 +214,7 @@ task-tags = ["cspell"]
     "PLR0913",
     "PLR2004",
     "S101",
+    "T20",
 ]
 
 [tool.ruff.pydocstyle]
