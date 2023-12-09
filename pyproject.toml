@@ -55,24 +55,18 @@ dev = [
     "pawian-tools[sty]",
     "pawian-tools[test]",
     "sphinx-autobuild",
-    "sphinx-autobuild",
     "tox >=1.9", # for skip_install, use_develop
-    "virtualenv!=20.16.*,!=20.17.*", # https://github.com/redeboer/PawianTools/actions/runs/4359491077/jobs/7621340858#step:3:76
-    'tox <4; python_version <"3.8.0"', # https://github.com/redeboer/PawianTools/actions/runs/3861498991/jobs/6582508970#step:3:91
-    'virtualenv <20.22.0; python_version <"3.8.0"', # importlib-metadata conflict
 ]
 doc = [
     "Sphinx >=3",
     "ipywidgets",
     "myst-nb",
-    "pydeps",
+    "sphinx-api-relink>=0.0.7",
     "sphinx-book-theme",
     "sphinx-codeautolink[ipython]",
     "sphinx-copybutton",
     "sphinx-thebe",
     "sphinx-togglebutton",
-    'Sphinx <4.4; python_version <"3.8.0"', # https://github.com/ComPWA/qrules/runs/4833302679
-    'importlib-metadata; python_version <"3.8.0"',
 ]
 format = [
     "black",
@@ -96,7 +90,7 @@ sty = [
     "pawian-tools[format]",
     "pawian-tools[lint]",
     "pawian-tools[test]", # for pytest type hints
-    "pre-commit >=2.9.2", # for black
+    "pre-commit",
 ]
 test = [
     "pytest",
