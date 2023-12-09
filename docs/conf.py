@@ -4,86 +4,43 @@ This file only contains a selection of the most common options. For a full list 
 documentation: https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
 
-import os
-import re
-import shutil
-import subprocess
-import sys
-from typing import Dict
+from __future__ import annotations
 
-if sys.version_info < (3, 8):
-    from importlib_metadata import PackageNotFoundError
-    from importlib_metadata import version as get_package_version
-else:
-    from importlib.metadata import PackageNotFoundError
-    from importlib.metadata import version as get_package_version
-
-# -- Project information -----------------------------------------------------
-project = "PawianTools"
-PACKAGE = "pawian"
-REPO_NAME = "PawianTools"
-copyright = "2020, RUB EP1"
-author = "Meike Küßner, Remco de Boer"
-
-try:
-    __VERSION = get_package_version(PACKAGE)
-    version = ".".join(__VERSION.split(".")[:3])
-except PackageNotFoundError:
-    pass
-
-# -- Generate API ------------------------------------------------------------
-shutil.rmtree("api", ignore_errors=True)
-subprocess.call(
-    " ".join([
-        "sphinx-apidoc",
-        "../src/",
-        "-o api/",
-        "--force",
-        "--no-toc",
-        "--templatedir _templates",
-        "--separate",
-    ]),
-    shell=True,  # noqa: S602
+from sphinx_api_relink.helpers import (
+    get_branch_name,
+    get_execution_mode,
+    get_package_version,
+    pin,
+    pin_minor,
+    set_intersphinx_version_remapping,
 )
 
-# -- General configuration ---------------------------------------------------
-master_doc = "index.md"
-source_suffix = {
-    ".ipynb": "myst-nb",
-    ".md": "myst-nb",
-    ".rst": "restructuredtext",
-}
+set_intersphinx_version_remapping({
+    "ipython": {
+        "8.12.2": "8.12.1",
+        "8.12.3": "8.12.1",
+    },
+})
 
-# The master toctree document.
-master_doc = "index"
-modindex_common_prefix = [
-    "boostcfg.",
-    f"{PACKAGE}.",
-]
+BRANCH = get_branch_name()
+ORGANIZATION = "redeboer"
+PACKAGE = "pawian"
+REPO_NAME = "PawianTools"
+REPO_TITLE = REPO_NAME
 
-extensions = [
-    "myst_nb",
-    "sphinx.ext.autodoc",
-    "sphinx.ext.autosectionlabel",
-    "sphinx.ext.doctest",
-    "sphinx.ext.githubpages",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.mathjax",
-    "sphinx.ext.napoleon",
-    "sphinx.ext.viewcode",
-    "sphinx_codeautolink",
-    "sphinx_copybutton",
-    "sphinx_thebe",
-    "sphinx_togglebutton",
-]
-exclude_patterns = [
-    "**.ipynb_checkpoints",
-    "*build",
-    "tests",
-]
-
-# General sphinx settings
 add_module_names = False
+api_github_repo = f"{ORGANIZATION}/{REPO_NAME}"
+api_target_substitutions: dict[str, str | tuple[str, str]] = {
+    "Axes": "matplotlib.axes.Axes",
+    "BarContainer": "matplotlib.container.BarContainer",
+    "Figure": "matplotlib.figure.Figure",
+    "TH1": "uproot.behaviors.TH1.TH1",
+    "TH2": "uproot.behaviors.TH2.TH2",
+    "TH3": "uproot.behaviors.TH3.TH3",
+    "np.ndarray": "numpy.ndarray",
+    "pd.DataFrame": "pandas.core.frame.DataFrame",
+}
+author = "Meike Küßner, Remco de Boer"
 autodoc_default_options = {
     "members": True,
     "undoc-members": True,
@@ -95,27 +52,77 @@ autodoc_default_options = {
 }
 autodoc_member_order = "bysource"
 autodoc_typehints_format = "short"
+autosectionlabel_prefix_document = True
 codeautolink_concat_default = True
 codeautolink_global_preface = """
 from IPython.display import display
-
 """
+copybutton_prompt_is_regexp = True
+copybutton_prompt_text = r">>> |\.\.\. "  # doctest
+copyright = "2020, RUB EP1"
+default_role = "py:obj"
+exclude_patterns = [
+    "**.ipynb_checkpoints",
+    "*build",
+    "tests",
+]
+extensions = [
+    "myst_nb",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.doctest",
+    "sphinx.ext.githubpages",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.napoleon",
+    "sphinx_api_relink",
+    "sphinx_codeautolink",
+    "sphinx_copybutton",
+    "sphinx_thebe",
+    "sphinx_togglebutton",
+]
+generate_apidoc_package_path = [
+    f"../src/{PACKAGE}",
+    "../src/boostcfg",
+]
 graphviz_output_format = "svg"
 html_copy_source = True  # needed for download notebook button
 html_last_updated_fmt = "%-d %B %Y"
+html_logo = (
+    "https://gitlab.ep1.rub.de/uploads/-/system/project/avatar/7/pawian-logo.jpg"
+)
 html_show_copyright = False
 html_show_sourcelink = False
 html_show_sphinx = False
 html_sourcelink_suffix = ""
 html_theme = "sphinx_book_theme"
 html_theme_options = {
-    "repository_url": f"https://github.com/redeboer/{REPO_NAME}",
-    "repository_branch": "main",
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": f"https://github.com/{ORGANIZATION}/{REPO_NAME}",
+            "icon": "fa-brands fa-github",
+        },
+        {
+            "name": "Launch on Binder",
+            "url": f"https://mybinder.org/v2/gh/{ORGANIZATION}/{REPO_NAME}/{BRANCH}?filepath=docs",
+            "icon": "https://mybinder.readthedocs.io/en/latest/_static/favicon.png",
+            "type": "url",
+        },
+        {
+            "name": "Launch on Colaboratory",
+            "url": f"https://colab.research.google.com/github/{ORGANIZATION}/{REPO_NAME}/blob/{BRANCH}",
+            "icon": "https://avatars.githubusercontent.com/u/33467679?s=100",
+            "type": "url",
+        },
+    ],
+    "logo": {"text": REPO_TITLE},
+    "repository_url": f"https://github.com/{ORGANIZATION}/{REPO_NAME}",
+    "repository_branch": BRANCH,
     "path_to_docs": "docs",
     "use_download_button": True,
     "use_edit_page_button": True,
     "use_issues_button": True,
-    "use_repository_button": True,
     "launch_buttons": {
         "binderhub_url": "https://mybinder.org",
         "colab_url": "https://colab.research.google.com",
@@ -127,108 +134,29 @@ html_theme_options = {
     "show_navbar_depth": 2,
     "show_toc_level": 2,
 }
-html_title = "PawianTools"
-pygments_style = "sphinx"
-todo_include_todos = False
-viewcode_follow_imported_members = True
-
-# Cross-referencing configuration
-default_role = "py:obj"
-primary_domain = "py"
-nitpicky = True  # warn if cross-references are missing
-nitpick_ignore = [
-    ("py:class", "pandas.core.base.PandasObject"),
-]
-
-
-# Intersphinx settings
-version_remapping: Dict[str, Dict[str, str]] = {
-    "ipython": {
-        "8.12.2": "8.12.1",
-        "8.12.3": "8.12.1",
-    },
-}
-
-
-def get_version(package_name: str) -> str:
-    python_version = f"{sys.version_info.major}.{sys.version_info.minor}"
-    constraints_path = f"../.constraints/py{python_version}.txt"
-    package_name = package_name.lower()
-    with open(constraints_path) as stream:
-        constraints = stream.read()
-    for line in constraints.split("\n"):
-        line = line.split("#")[0]  # remove comments
-        line = line.strip()
-        line = line.lower()
-        if not line.startswith(package_name):
-            continue
-        if not line:
-            continue
-        line_segments = tuple(line.split("=="))
-        if len(line_segments) != 2:  # noqa: PLR2004
-            continue
-        _, installed_version, *_ = line_segments
-        installed_version = installed_version.strip()
-        remapped_versions = version_remapping.get(package_name)
-        if remapped_versions is not None:
-            existing_version = remapped_versions.get(installed_version)
-            if existing_version is not None:
-                return existing_version
-        return installed_version
-    return "stable"
-
-
-def get_minor_version(package_name: str) -> str:
-    installed_version = get_version(package_name)
-    if installed_version == "stable":
-        return installed_version
-    matches = re.match(r"^([0-9]+\.[0-9]+).*$", installed_version)
-    if matches is None:
-        msg = f"Could not find documentation for {package_name} v{installed_version}"
-        raise ValueError(msg)
-    return matches[1]
-
-
+html_title = REPO_TITLE
 intersphinx_mapping = {
     "awkward": ("https://awkward-array.org/doc/stable", None),
-    "IPython": (f"https://ipython.readthedocs.io/en/{get_version('IPython')}", None),
+    "IPython": (f"https://ipython.readthedocs.io/en/{pin('IPython')}", None),
     "compwa-org": ("https://compwa-org.readthedocs.io", None),
-    "matplotlib": (f"https://matplotlib.org/{get_version('matplotlib')}", None),
-    "numpy": (f"https://numpy.org/doc/{get_minor_version('numpy')}", None),
+    "matplotlib": (f"https://matplotlib.org/{pin('matplotlib')}", None),
+    "numpy": (f"https://numpy.org/doc/{pin_minor('numpy')}", None),
     "pandas": (
-        f"https://pandas.pydata.org/pandas-docs/version/{get_minor_version('pandas')}",
+        f"https://pandas.pydata.org/pandas-docs/version/{pin_minor('pandas')}",
         None,
     ),
     "python": ("https://docs.python.org/3", None),
     "uproot": ("https://uproot.readthedocs.io/en/stable", None),
 }
-
-# Settings for autosectionlabel
-autosectionlabel_prefix_document = True
-
-# Settings for copybutton
-copybutton_prompt_is_regexp = True
-copybutton_prompt_text = r">>> |\.\.\. "  # doctest
-
-# Settings for linkcheck
 linkcheck_anchors = False
 linkcheck_ignore = [
     "https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware",
 ]
-
-
-# Settings for myst_nb
-def get_nb_execution_mode() -> str:
-    if "EXECUTE_NB" in os.environ:
-        print("\033[93;1mWill run Jupyter notebooks!\033[0m")
-        return "cache"
-    return "off"
-
-
-nb_execution_mode = get_nb_execution_mode()
-nb_execution_timeout = -1
-
-# Settings for myst-parser
+master_doc = "index"
+modindex_common_prefix = [
+    "boostcfg.",
+    f"{PACKAGE}.",
+]
 myst_enable_extensions = [
     "amsmath",
     "colon_fence",
@@ -236,29 +164,27 @@ myst_enable_extensions = [
     "smartquotes",
     "substitution",
 ]
+myst_heading_anchors = 2
 myst_update_mathjax = False
-
-# Settings for Thebe cell output
+nb_execution_mode = get_execution_mode()
+nb_execution_show_tb = True
+nb_execution_timeout = -1
+nb_output_stderr = "remove"
+nitpick_ignore = [
+    ("py:class", "PandasObject"),
+]
+nitpicky = True
+primary_domain = "py"
+project = REPO_TITLE
+pygments_style = "sphinx"
+release = get_package_version("pawian-tools")
+source_suffix = {
+    ".ipynb": "myst-nb",
+    ".md": "myst-nb",
+    ".rst": "restructuredtext",
+}
 thebe_config = {
     "repository_url": html_theme_options["repository_url"],
     "repository_branch": html_theme_options["repository_branch"],
 }
-
-# -- Visualize dependencies ---------------------------------------------------
-if nb_execution_mode != "off":
-    print("Generating module dependency tree...")
-    subprocess.call(
-        " ".join([
-            "HOME=.",  # in case of calling through tox
-            "pydeps",
-            f"../src/{PACKAGE}",
-            "-o module_structure.svg",
-            "--exclude *._*",  # hide private modules
-            "--max-bacon=1",  # hide external dependencies
-            "--noshow",
-        ]),
-        shell=True,  # noqa: S602
-    )
-    if os.path.exists("module_structure.svg"):
-        with open(f"api/{PACKAGE}.rst", "a") as stream:
-            stream.write("\n.. image:: /module_structure.svg")
+version = get_package_version("pawian-tools")

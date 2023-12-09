@@ -13,17 +13,6 @@ repos:
       - id: check-hooks-apply
       - id: check-useless-excludes
 
-  - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.1.9
-    hooks:
-      - id: check-dev-files
-        args:
-          - --no-prettierrc
-          - --pin-requirements=bimonthly
-          - --repo-name=PawianTools
-          - --repo-title=Pawian Tools
-      - id: format-setup-cfg
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -51,6 +40,16 @@ repos:
           - --line-length=85
         types_or:
           - jupyter
+
+  - repo: https://github.com/ComPWA/repo-maintenance
+    rev: 0.1.9
+    hooks:
+      - id: check-dev-files
+        args:
+          - --no-prettierrc
+          - --pin-requirements=bimonthly
+          - --repo-name=PawianTools
+          - --repo-title=Pawian Tools
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
     rev: v8.1.1

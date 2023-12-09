@@ -9,7 +9,9 @@ BoostConfigParser was especially designed for `Pawian
 <https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware>`__.
 """
 
-from typing import Any, Dict, Optional
+from __future__ import annotations
+
+from typing import Any
 
 from . import lineparser
 
@@ -17,9 +19,9 @@ from . import lineparser
 class BoostConfigParser:
     """Data structure that holds information of Boost config files."""
 
-    def __init__(self, filename: Optional[str] = None) -> None:
-        self.__values: Dict[str, Any] = {}
-        self.__config_file: Optional[str] = None
+    def __init__(self, filename: str | None = None) -> None:
+        self.__values: dict[str, Any] = {}
+        self.__config_file: str | None = None
         if isinstance(filename, str):
             self.read_config(filename=filename, reset=True)
 
@@ -58,5 +60,5 @@ class BoostConfigParser:
         return self.__values[key]
 
     @property
-    def config_file(self) -> Optional[str]:
+    def config_file(self) -> str | None:
         return self.__config_file

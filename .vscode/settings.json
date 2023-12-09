@@ -37,6 +37,7 @@
   "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
   "gitlens.telemetry.enabled": false,
   "livePreview.defaultPreviewPath": "docs/_build/html",
+  "multiDiffEditor.experimental.enabled": true,
   "mypy-type-checker.args": ["--config-file=${workspaceFolder}/pyproject.toml"],
   "mypy-type-checker.importStrategy": "fromEnvironment",
   "notebook.gotoSymbols.showAllSymbols": true,
@@ -55,7 +56,6 @@
     ".constraints/*.txt": true,
     "tests/**/__init__.py": true
   },
-  "telemetry.enableCrashReporter": false,
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": "file:///home/redeboer/dev/redeboer/PawianTools/.github/workflows/requirements.yml"
   }

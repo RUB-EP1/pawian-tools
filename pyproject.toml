@@ -1,9 +1,128 @@
 [build-system]
+build-backend = "setuptools.build_meta"
 requires = [
-    "setuptools>=36.2.1", # environment markers
+    "setuptools>=61.2",
     "setuptools_scm",
-    "wheel",
 ]
+
+[project]
+authors = [{name = "Common Partial Wave Analysis", email = "compwa-admin@ep1.rub.de"}]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering",
+    "Typing :: Typed",
+]
+dependencies = [
+    "awkward >=1",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "uproot >=4",
+]
+description = "Python helper tools for the Pawian framework"
+dynamic = ["version"]
+keywords = [
+    "HEP",
+    "PWA",
+    "amplitude analysis",
+    "partial wave analysis",
+    "particle physics",
+    "particles",
+    "physics",
+]
+license = {text = "GPLv3 or later"}
+name = "pawian-tools"
+requires-python = ">=3.7"
+
+[project.optional-dependencies]
+dev = [
+    "pawian-tools[doc]",
+    "pawian-tools[jupyter]",
+    "pawian-tools[sty]",
+    "pawian-tools[test]",
+    "sphinx-autobuild",
+    "tox >=1.9", # for skip_install, use_develop
+]
+doc = [
+    "Sphinx >=3",
+    "ipywidgets",
+    "myst-nb",
+    "sphinx-api-relink>=0.0.7",
+    "sphinx-book-theme",
+    "sphinx-codeautolink[ipython]",
+    "sphinx-copybutton",
+    "sphinx-thebe",
+    "sphinx-togglebutton",
+]
+format = [
+    "black",
+]
+jupyter = [
+    "isort",
+    "jupyterlab",
+    "jupyterlab-code-formatter",
+    "jupyterlab-git",
+    "jupyterlab-lsp",
+    "jupyterlab-myst",
+    "jupyterlab-myst",
+    "python-lsp-ruff",
+    "python-lsp-server[rope]",
+]
+lint = [
+    "pawian-tools[mypy]",
+    "ruff",
+]
+"mypy" = [
+    "mypy >=0.730",
+    "sphinx-api-relink",
+]
+sty = [
+    "pawian-tools[format]",
+    "pawian-tools[lint]",
+    "pawian-tools[test]", # for pytest type hints
+    "pre-commit",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-profiling",
+    "pytest-xdist",
+]
+
+[project.readme]
+content-type = "text/markdown"
+file = "README.md"
+
+[project.urls]
+Changelog = "https://github.com/redeboer/PawianTools/releases"
+Documentation = "http://redeboer.github.io/PawianTools"
+Source = "https://github.com/redeboer/PawianTools"
+Tracker = "https://github.com/redeboer/PawianTools/issues"
+
+[tool.setuptools]
+include-package-data = false
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+pawian = ["samples/*"]
+
+[tool.setuptools.packages.find]
+namespaces = false
+where = ["src"]
 
 [tool.setuptools_scm]
 write_to = "src/pawian/version.py"
@@ -28,14 +147,19 @@ target-version = [
     "py310",
     "py311",
     "py312",
-    "py36",
     "py37",
     "py38",
     "py39",
 ]
 
+[tool.coverage.report]
+exclude_also = [
+    "if TYPE_CHECKING:",
+]
+
 [tool.coverage.run]
 branch = true
+omit = ["version.py"]
 source = ["src"]
 
 [tool.mypy]
@@ -134,6 +258,7 @@ extend-select = [
     "D",
     "EM",
     "ERA",
+    "FA",
     "I",
     "ICN",
     "INP",

@@ -1,5 +1,7 @@
 """A collection of tools to parse lines in a Boost config file."""
 
+from __future__ import annotations
+
 __all__ = [
     "get_key_value_pair",
     "is_commented",
@@ -10,10 +12,9 @@ __all__ = [
 
 
 import re
-from typing import Tuple, Union  # regex
 
 
-def get_key_value_pair(line: str) -> Tuple[str, str]:
+def get_key_value_pair(line: str) -> tuple[str, str]:
     """Extract key and value from a line in a :code:`cfg` file.
 
     Extracts everything before an equal sign as the key, and everything after as the
@@ -46,7 +47,7 @@ def strip_comment(line: str) -> str:
     return matches[0]
 
 
-def string_to_value(string: str) -> Union[bool, float, int, str]:
+def string_to_value(string: str) -> bool | float | int | str:
     """Attempt to convert a string to a `float` or `int`."""
     try:
         return int(string)
