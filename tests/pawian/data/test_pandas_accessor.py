@@ -60,7 +60,7 @@ def test_raise_validate(columns, names):
     multi_index = pd.MultiIndex.from_tuples(columns, names=names)
     frame = pd.DataFrame(columns=multi_index)
     with pytest.raises(AttributeError):
-        print(frame.pwa)  # noqa: T201
+        print(frame.pwa)
 
 
 def test_properties_multicolumn():
