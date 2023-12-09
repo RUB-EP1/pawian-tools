@@ -152,6 +152,11 @@ target-version = [
     "py39",
 ]
 
+[tool.coverage.report]
+exclude_also = [
+    "if TYPE_CHECKING:",
+]
+
 [tool.coverage.run]
 branch = true
 omit = ["version.py"]
