@@ -97,6 +97,7 @@ sty = [
     "pre-commit",
 ]
 test = [
+    "nbmake",
     "pytest",
     "pytest-cov",
     "pytest-profiling",
