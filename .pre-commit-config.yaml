@@ -42,7 +42,7 @@ repos:
           - jupyter
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.1.13a0
+    rev: 0.1.13a6
     hooks:
       - id: check-dev-files
         args:
