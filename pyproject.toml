@@ -97,6 +97,7 @@ sty = [
     "pre-commit",
 ]
 test = [
+    "nbmake",
     "pytest",
     "pytest-cov",
     "pytest-profiling",
@@ -219,13 +220,14 @@ reportUnusedVariable = true
 typeCheckingMode = "strict"
 
 [tool.pytest.ini_options]
-addopts = '''
---color=yes
---doctest-continue-on-failure
---doctest-modules
---durations=3
---ignore=docs/conf.py
--m "not slow"'''
+addopts = [
+    "--color=yes",
+    "--doctest-continue-on-failure",
+    "--doctest-modules",
+    "--durations=3",
+    "--ignore=docs/conf.py",
+    "-m not slow",
+]
 filterwarnings = [
     "error",
     "ignore:.*Consider switching from .* to .*:DeprecationWarning",
@@ -329,6 +331,7 @@ task-tags = ["cspell"]
 ]
 "docs/conf.py" = [
     "A001",
+    "D100",
     "PLW2901",
 ]
 "setup.py" = ["D100"]
