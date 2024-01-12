@@ -226,7 +226,7 @@ addopts = [
     "--doctest-modules",
     "--durations=3",
     "--ignore=docs/conf.py",
-    '-m "not slow"',
+    "-m not slow",
 ]
 filterwarnings = [
     "error",
