@@ -6,8 +6,8 @@ __all__ = [
     "get_key_value_pair",
     "is_commented",
     "is_empty",
-    "strip_comment",
     "string_to_value",
+    "strip_comment",
 ]
 
 

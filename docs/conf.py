@@ -15,12 +15,14 @@ from sphinx_api_relink.helpers import (
     set_intersphinx_version_remapping,
 )
 
-set_intersphinx_version_remapping({
-    "ipython": {
-        "8.12.2": "8.12.1",
-        "8.12.3": "8.12.1",
-    },
-})
+set_intersphinx_version_remapping(
+    {
+        "ipython": {
+            "8.12.2": "8.12.1",
+            "8.12.3": "8.12.1",
+        },
+    }
+)
 
 BRANCH = get_branch_name()
 ORGANIZATION = "redeboer"
@@ -45,10 +47,12 @@ autodoc_default_options = {
     "members": True,
     "undoc-members": True,
     "show-inheritance": True,
-    "special-members": ", ".join([
-        "__call__",
-        "__eq__",
-    ]),
+    "special-members": ", ".join(
+        [
+            "__call__",
+            "__eq__",
+        ]
+    ),
 }
 autodoc_member_order = "bysource"
 autodoc_typehints_format = "short"
