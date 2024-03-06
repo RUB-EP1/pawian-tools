@@ -32,7 +32,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 23.12.1
+    rev: 24.2.0
     hooks:
       - id: black
       - id: black-jupyter
@@ -42,7 +42,7 @@ repos:
           - jupyter
 
   - repo: https://github.com/ComPWA/policy
-    rev: 0.2.0
+    rev: 0.2.6
     hooks:
       - id: check-dev-files
         args:
@@ -52,7 +52,7 @@ repos:
           - --repo-title=Pawian Tools
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v8.3.0
+    rev: v8.6.0
     hooks:
       - id: cspell
 
@@ -78,7 +78,7 @@ repos:
           - python
 
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.6.1
+    rev: 0.7.1
     hooks:
       - id: nbstripout
         args:
@@ -108,12 +108,12 @@ repos:
       - id: prettier
 
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.345
+    rev: v1.1.352
     hooks:
       - id: pyright
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.13
+    rev: v0.3.0
     hooks:
       - id: ruff
         args: [--fix]
