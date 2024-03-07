@@ -79,18 +79,9 @@ jupyter = [
     "python-lsp-ruff",
     "python-lsp-server[rope]",
 ]
-lint = [
-    "pawian-tools[mypy]",
-    "ruff",
-]
-"mypy" = [
-    "mypy >=0.730",
-    "sphinx-api-relink",
-]
 sty = [
-    "pawian-tools[format]",
-    "pawian-tools[lint]",
-    "pawian-tools[test]",
+    "mypy >=0.730",
+    "pawian-tools[types]",
     "pre-commit",
     "ruff",
 ]
@@ -100,6 +91,10 @@ test = [
     "pytest-cov",
     "pytest-profiling",
     "pytest-xdist",
+]
+"types" = [
+    "pytest",
+    "sphinx-api-relink",
 ]
 
 [project.readme]
@@ -175,10 +170,14 @@ exclude = [
     "**/__pycache__",
     "**/_build",
 ]
+reportArgumentType = false
+reportAttributeAccessIssue = false
 reportGeneralTypeIssues = false
+reportIndexIssue = false
 reportMissingParameterType = false
 reportMissingTypeArgument = false
 reportMissingTypeStubs = false
+reportReturnType = false
 reportUnknownArgumentType = false
 reportUnknownLambdaType = false
 reportUnknownMemberType = false
@@ -326,6 +325,7 @@ split-on-trailing-comma = false
     "PGH001",
     "PLC2701",
     "PLR0913",
+    "PLR0917",
     "PLR2004",
     "PLR6301",
     "S101",

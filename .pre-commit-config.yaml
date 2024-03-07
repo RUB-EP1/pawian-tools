@@ -81,6 +81,7 @@ repos:
       - id: toml-sort
         args:
           - --in-place
+
   - repo: https://github.com/ComPWA/policy
     rev: 0.3.0
     hooks:
