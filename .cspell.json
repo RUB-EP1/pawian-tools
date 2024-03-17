@@ -15,6 +15,8 @@
   "ignorePaths": [
     "**/*.rst_t",
     "**/.cspell.json",
+    "*.root",
+    "*.rst_t",
     ".constraints/*.txt",
     ".editorconfig",
     ".gitignore",
