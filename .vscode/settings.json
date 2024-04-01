@@ -1,13 +1,16 @@
 {
   "[git-commit]": {
-    "editor.rulers": [72],
+    "editor.rulers": [
+      72
+    ],
     "rewrap.wrappingColumn": 72
   },
   "[ipynb]": {
     "editor.formatOnSave": false
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -20,12 +23,16 @@
       "source.organizeImports": "explicit"
     },
     "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.rulers": [88]
+    "editor.rulers": [
+      88
+    ]
   },
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "coverage-gutters.coverageFileNames": ["coverage.xml"],
+  "coverage-gutters.coverageFileNames": [
+    "coverage.xml"
+  ],
   "coverage-gutters.coverageReportFileName": "**/htmlcov/index.html",
   "coverage-gutters.showGutterCoverage": false,
   "coverage-gutters.showLineCoverage": true,
@@ -33,11 +40,15 @@
   "diffEditor.experimental.showMoves": true,
   "editor.formatOnSave": true,
   "git.rebaseWhenSync": true,
-  "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
+  "github-actions.workflows.pinned.workflows": [
+    ".github/workflows/ci.yml"
+  ],
   "gitlens.telemetry.enabled": false,
   "livePreview.defaultPreviewPath": "docs/_build/html",
   "multiDiffEditor.experimental.enabled": true,
-  "mypy-type-checker.args": ["--config-file=${workspaceFolder}/pyproject.toml"],
+  "mypy-type-checker.args": [
+    "--config-file=${workspaceFolder}/pyproject.toml"
+  ],
   "mypy-type-checker.importStrategy": "fromEnvironment",
   "notebook.codeActionsOnSave": {
     "notebook.source.organizeImports": "explicit"
@@ -48,7 +59,10 @@
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
-  "python.testing.pytestArgs": ["--color=no", "--no-cov"],
+  "python.testing.pytestArgs": [
+    "--color=no",
+    "--no-cov"
+  ],
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": false,
   "redhat.telemetry.enabled": false,
