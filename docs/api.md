@@ -1,6 +1,6 @@
 # API
 
-PawianTools consists of the following packages:
+Pawian Tools consists of the following packages:
 
 ```{toctree}
 api/boostcfg

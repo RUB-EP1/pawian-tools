@@ -1,4 +1,4 @@
-"""Data module of PawianTools.
+"""Data module of Pawian Tools.
 
 This module allows you to parse and analyze ASCII data files of momentum
 tuples. The files have the following form:
