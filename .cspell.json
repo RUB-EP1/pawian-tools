@@ -114,6 +114,7 @@
     "numpy",
     "pawian",
     "pydocstyle",
+    "PyPA",
     "pypi",
     "pytest",
     "PYTHONHASHSEED",

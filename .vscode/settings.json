@@ -7,7 +7,8 @@
     "editor.formatOnSave": false
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -61,8 +62,5 @@
     ".constraints/*.txt": true,
     "tests/**/__init__.py": true
   },
-  "telemetry.telemetryLevel": "off",
-  "yaml.schemas": {
-    "https://json.schemastore.org/github-workflow.json": "file:///home/redeboer/dev/redeboer/PawianTools/.github/workflows/requirements.yml"
-  }
+  "telemetry.telemetryLevel": "off"
 }
