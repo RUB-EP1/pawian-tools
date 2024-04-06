@@ -23,9 +23,9 @@ set_intersphinx_version_remapping({
 })
 
 BRANCH = get_branch_name()
-ORGANIZATION = "redeboer"
+ORGANIZATION = "RUB-EP1"
 PACKAGE = "pawian"
-REPO_NAME = "PawianTools"
+REPO_NAME = "pawian-tools"
 REPO_TITLE = REPO_NAME
 
 add_module_names = False

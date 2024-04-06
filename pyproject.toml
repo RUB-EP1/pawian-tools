@@ -102,10 +102,10 @@ content-type = "text/markdown"
 file = "README.md"
 
 [project.urls]
-Changelog = "https://github.com/redeboer/PawianTools/releases"
-Documentation = "http://redeboer.github.io/PawianTools"
-Source = "https://github.com/redeboer/PawianTools"
-Tracker = "https://github.com/redeboer/PawianTools/issues"
+Changelog = "https://github.com/RUB-EP1/pawian-tools/releases"
+Documentation = "http://rub-ep1.github.io/pawian-tools"
+Source = "https://github.com/RUB-EP1/pawian-tools"
+Tracker = "https://github.com/RUB-EP1/pawian-tools/issues"
 
 [tool.setuptools]
 include-package-data = false

@@ -1,4 +1,4 @@
-"""The PawianTools package.
+"""The Pawian Tools package.
 
 A collection of Python tools that facilitate working with `Pawian
 <https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware>`__ output. Note that the

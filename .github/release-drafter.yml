@@ -34,4 +34,4 @@ sort-direction: ascending
 template: |
   $CHANGES
 
-  _The full changelog as commits can be found [here](https://github.com/ComPWA/PawianTools/compare/$PREVIOUS_TAG...$NEXT_PATCH_VERSION)._
+  _The full changelog as commits can be found [here](https://github.com/RUB-EP1/pawian-tools/compare/$PREVIOUS_TAG...$NEXT_PATCH_VERSION)._
