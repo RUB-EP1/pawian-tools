@@ -25,7 +25,7 @@ maxdepth: 2
 install
 usage
 api
-Help developing <https://compwa-org.readthedocs.io/develop.html>
+Help developing <https://compwa.github.io/develop>
 Pawian <https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware>
 ```
 

@@ -26,11 +26,11 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "cSpell.enabled": true,
   "coverage-gutters.coverageFileNames": ["coverage.xml"],
   "coverage-gutters.coverageReportFileName": "**/htmlcov/index.html",
   "coverage-gutters.showGutterCoverage": false,
   "coverage-gutters.showLineCoverage": true,
-  "cSpell.enabled": true,
   "diffEditor.experimental.showMoves": true,
   "editor.formatOnSave": true,
   "git.rebaseWhenSync": true,
@@ -47,8 +47,8 @@
   "notebook.gotoSymbols.showAllSymbols": true,
   "python.analysis.autoImportCompletions": false,
   "python.analysis.inlayHints.pytestParameters": true,
-  "python.analysis.typeCheckingMode": "strict",
   "python.languageServer": "Pylance",
+  "python.terminal.activateEnvironment": false,
   "python.testing.pytestArgs": ["--color=no", "--no-cov"],
   "python.testing.pytestEnabled": true,
   "python.testing.unittestEnabled": false,
@@ -58,8 +58,8 @@
   "ruff.importStrategy": "fromEnvironment",
   "ruff.organizeImports": true,
   "search.exclude": {
+    "**/uv.lock": true,
     "*/.pydocstyle": true,
-    ".constraints/*.txt": true,
     "tests/**/__init__.py": true
   },
   "telemetry.telemetryLevel": "off"

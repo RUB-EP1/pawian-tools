@@ -107,7 +107,7 @@ class PawianHists:
             plot_on = plt  # type: ignore[assignment]
         return plot_on.hist(edges, weights=values, bins=len(values), **kwargs)  # type: ignore[call-arg,return-value,union-attr]
 
-    def draw_combined_histogram(  # noqa: PLR0913
+    def draw_combined_histogram(
         self,
         name: str,
         plot_on: Axes | None = None,
@@ -140,8 +140,7 @@ class PawianHists:
         if fit:
             re_match_list.append("Fit")
         if mc:
-            re_match_list.append("MC")
-            re_match_list.append("Mc")
+            re_match_list.extend(("MC", "Mc"))
         re_match = "|".join(re_match_list)
         re_match = f"({re_match}){name}"
         # Makes selection of names plus corresponding labels

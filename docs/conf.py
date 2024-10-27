@@ -45,7 +45,7 @@ autodoc_default_options = {
     "members": True,
     "undoc-members": True,
     "show-inheritance": True,
-    "special-members": ", ".join([
+    "special-members": ", ".join([  # noqa: FLY002
         "__call__",
         "__eq__",
     ]),
@@ -138,7 +138,7 @@ html_title = REPO_TITLE
 intersphinx_mapping = {
     "awkward": ("https://awkward-array.org/doc/stable", None),
     "IPython": (f"https://ipython.readthedocs.io/en/{pin('IPython')}", None),
-    "compwa-org": ("https://compwa-org.readthedocs.io", None),
+    "compwa": ("https://compwa.github.io", None),
     "matplotlib": (f"https://matplotlib.org/{pin('matplotlib')}", None),
     "numpy": (f"https://numpy.org/doc/{pin_minor('numpy')}", None),
     "pandas": (

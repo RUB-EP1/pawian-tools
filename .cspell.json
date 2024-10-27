@@ -13,24 +13,20 @@
     "transisions"
   ],
   "ignorePaths": [
-    "**/*.rst_t",
     "**/.cspell.json",
     "*.root",
-    "*.rst_t",
-    ".constraints/*.txt",
     ".editorconfig",
+    ".envrc",
     ".gitignore",
-    ".gitpod.*",
     ".pre-commit-config.yaml",
     ".prettierignore",
     ".vscode/*",
     "codecov.yml",
-    "docs/_templates/*",
     "docs/conf.py",
-    "pyproject.toml",
-    "tox.ini"
+    "pyproject.toml"
   ],
   "ignoreWords": [
+    "FURB",
     "MAINT",
     "apidoc",
     "atol",
@@ -65,6 +61,7 @@
     "ipykernel",
     "ipynb",
     "isclose",
+    "isna",
     "isort",
     "kernelspec",
     "lineparser",
@@ -83,6 +80,7 @@
     "prereleased",
     "pygments",
     "pyplot",
+    "pyproject",
     "pyright",
     "realpath",
     "rtfd",

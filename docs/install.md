@@ -10,7 +10,7 @@ This installs the latest version that you can find on the
 [`main`](https://github.com/RUB-EP1/pawian-tools/tree/main) branch.
 
 However, we highly recommend using the more dynamic,
-{ref}`'editable installation' <compwa-org:develop:Editable installation>` instead. This
+{ref}`'editable installation' <compwa:develop:Editable installation>` instead. This
 goes as follows:
 
 1. Get the source code (see [the Pro Git Book](https://git-scm.com/book/en/v2)):
@@ -21,11 +21,11 @@ goes as follows:
    ```
 
 2. **[Recommended]** Create a virtual environment (see
-   {ref}`here <compwa-org:develop:Virtual environment>` or the tip below).
+   {ref}`here <compwa:develop:Virtual environment>` or the tip below).
 
 3. Install the project in
-   {ref}`'editable installation' <compwa-org:develop:Editable installation>` with
-   {ref}`additional dependencies <compwa-org:develop:Optional dependencies>` for the
+   {ref}`'editable installation' <compwa:develop:Editable installation>` with
+   {ref}`additional dependencies <compwa:develop:Optional dependencies>` for the
    developer:
 
    ```shell
@@ -33,7 +33,7 @@ goes as follows:
    ```
 
 That's all! Have a look at the {doc}`/usage` page to try out the package, and see
-{doc}`compwa-org:develop` for tips on how to work with this 'editable' developer setup!
+{doc}`compwa:develop` for tips on how to work with this 'editable' developer setup!
 
 :::{tip}
 
@@ -47,7 +47,7 @@ conda activate pawian-tools
 ```
 
 This way of installing is also safer, because it
-{ref}`pins all dependencies <compwa-org:develop:Pinning dependency versions>`. Note you
+{ref}`pins all dependencies <compwa:develop:Pinning dependency versions>`. Note you
 can also pin dependencies with `pip`, by running:
 
 ```shell

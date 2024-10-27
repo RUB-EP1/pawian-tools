@@ -25,7 +25,7 @@ The allows you to import the ASCII file to a nicely formatted
 from __future__ import annotations
 
 import sys
-from typing import TYPE_CHECKING, Any, Iterable
+from typing import TYPE_CHECKING, Any
 
 import awkward as ak
 import numpy as np
@@ -34,6 +34,8 @@ import uproot
 from uproot.exceptions import KeyInFileError
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable
+
     from pandas.core.base import PandasObject
 
 if sys.version_info < (3, 8):
@@ -174,7 +176,7 @@ class PwaAccessor:
             new_dict.append(self._obj[_WEIGHT_LABEL])
         for par in self.particles:
             # cspell:ignore astype dropna
-            new_dict.append(
+            new_dict.append(  # noqa: PERF401
                 self._obj[par].apply(
                     lambda x: " ".join(x.dropna().astype(str)),
                     axis=1,
@@ -242,7 +244,7 @@ def read_ascii(  # noqa: C901
 
     # Try to determine number of particles from file
     if has_weights:
-        file_n_particles = py_values.index[py_values.isnull()][1] - 1
+        file_n_particles = py_values.index[py_values.isna()][1] - 1
         if particles is None:
             particles = [str(i) for i in range(1, file_n_particles + 1)]
         if isinstance(particles, int):

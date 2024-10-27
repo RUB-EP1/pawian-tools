@@ -14,7 +14,7 @@ def test_append_value_from_line():
     cfg.append_value_from_line("false_bool = False")
     cfg.append_value_from_line("true_bool = true")
     assert cfg["key"] == "value"
-    assert cfg["float"] == 3.14
+    assert cfg["float"] == 3.14  # noqa: FURB152
     assert cfg["int"] == -11
     assert not cfg["false_bool"]
     assert cfg["true_bool"]
