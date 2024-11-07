@@ -20,6 +20,7 @@ repos:
           - --repo-name=pawian-tools
           - --repo-organization=RUB-EP1
           - --repo-title=Pawian Tools
+          - --update-lock-files=outsource
       - id: remove-empty-tags
 
   - repo: https://github.com/kynan/nbstripout
