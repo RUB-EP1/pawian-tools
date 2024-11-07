@@ -21,14 +21,14 @@ def test_read_with_weight():
 
     column_names = frame.columns.droplevel(1).unique().tolist()
     head = frame.head(1)
-    assert pytest.approx(head[column_names[-1]].values[0]) == 0.99407
-    assert pytest.approx(head[column_names[0]].values.tolist()[0]) == [
+    assert pytest.approx(head[column_names[-1]].to_numpy()[0]) == 0.99407
+    assert pytest.approx(head[column_names[0]].to_numpy()[0]) == [
         -0.00357645,
         0.0962561,
         0.0181079,
         0.170545,
     ]
-    assert pytest.approx(head[column_names[2]].values.tolist()[0]) == [
+    assert pytest.approx(head[column_names[2]].to_numpy()[0]) == [
         -0.174404,
         -0.719412,
         -0.233159,
@@ -36,13 +36,13 @@ def test_read_with_weight():
     ]
 
     tail = frame.tail(1)
-    assert pytest.approx(tail[column_names[0]].values.tolist()[0]) == [
+    assert pytest.approx(tail[column_names[0]].to_numpy()[0]) == [
         -0.0487412,
         -0.0343714,
         0.0171864,
         0.152749,
     ]
-    assert pytest.approx(tail[column_names[2]].values.tolist()[0]) == [
+    assert pytest.approx(tail[column_names[2]].to_numpy()[0]) == [
         0.376848,
         0.225407,
         -0.659593,
@@ -67,13 +67,13 @@ def test_read_no_weights(particles):
 
     column_names = frame.columns.droplevel(1).unique().tolist()
     head = frame.head(1)
-    assert pytest.approx(head[column_names[0]].values.tolist()[0]) == [
+    assert pytest.approx(head[column_names[0]].to_numpy()[0]) == [
         -0.279306,
         -0.175576,
         -0.122704,
         0.378648,
     ]
-    assert pytest.approx(head[column_names[2]].values.tolist()[0]) == [
+    assert pytest.approx(head[column_names[2]].to_numpy()[0]) == [
         0.0245524,
         -0.146873,
         0.193947,
@@ -81,13 +81,13 @@ def test_read_no_weights(particles):
     ]
 
     tail = frame.tail(1)
-    assert pytest.approx(tail[column_names[0]].values.tolist()[0]) == [
+    assert pytest.approx(tail[column_names[0]].to_numpy()[0]) == [
         -0.189277,
         -0.0520959,
         -0.0896247,
         0.257006,
     ]
-    assert pytest.approx(tail[column_names[2]].values.tolist()[0]) == [
+    assert pytest.approx(tail[column_names[2]].to_numpy()[0]) == [
         0.640318,
         -0.186286,
         -0.0528645,

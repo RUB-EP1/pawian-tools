@@ -18,8 +18,6 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python",
     "Topic :: Scientific/Engineering :: Physics",
@@ -27,11 +25,10 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "awkward >=1",
     "matplotlib",
     "numpy",
     "pandas",
-    "uproot >=4",
+    "uproot",
 ]
 description = "Python helper tools for the Pawian framework"
 dynamic = ["version"]
@@ -46,56 +43,7 @@ keywords = [
 ]
 license = {text = "GPLv3 or later"}
 name = "pawian-tools"
-requires-python = ">=3.7"
-
-[project.optional-dependencies]
-dev = [
-    "pawian-tools[doc]",
-    "pawian-tools[jupyter]",
-    "pawian-tools[sty]",
-    "pawian-tools[test]",
-    "sphinx-autobuild",
-    "tox >=1.9", # for skip_install, use_develop
-]
-doc = [
-    "Sphinx >=3",
-    "ipywidgets",
-    "myst-nb",
-    "sphinx-api-relink>=0.0.7",
-    "sphinx-book-theme",
-    "sphinx-codeautolink[ipython]",
-    "sphinx-copybutton",
-    "sphinx-thebe",
-    "sphinx-togglebutton",
-]
-jupyter = [
-    "black",
-    "isort",
-    "jupyterlab",
-    "jupyterlab-code-formatter",
-    "jupyterlab-git",
-    "jupyterlab-lsp",
-    "jupyterlab-myst",
-    "python-lsp-ruff",
-    "python-lsp-server[rope]",
-]
-sty = [
-    "mypy >=0.730",
-    "pawian-tools[types]",
-    "pre-commit",
-    "ruff",
-]
-test = [
-    "nbmake",
-    "pytest",
-    "pytest-cov",
-    "pytest-profiling",
-    "pytest-xdist",
-]
-"types" = [
-    "pytest",
-    "sphinx-api-relink",
-]
+requires-python = ">=3.9"
 
 [project.readme]
 content-type = "text/markdown"
@@ -107,18 +55,68 @@ Documentation = "http://rub-ep1.github.io/pawian-tools"
 Source = "https://github.com/RUB-EP1/pawian-tools"
 Tracker = "https://github.com/RUB-EP1/pawian-tools/issues"
 
+[dependency-groups]
+dev = [
+    "nbmake",
+    "ruff",
+    "sphinx-autobuild",
+    {include-group = "doc"},
+    {include-group = "jupyter"},
+    {include-group = "style"},
+    {include-group = "test"},
+]
+doc = [
+    "myst-nb",
+    "sphinx",
+    "sphinx-api-relink",
+    "sphinx-book-theme",
+    "sphinx-codeautolink[ipython]",
+    "sphinx-copybutton",
+    "sphinx-thebe",
+    "sphinx-togglebutton",
+]
+jupyter = [
+    "jupyterlab",
+    "jupyterlab-code-formatter",
+    "jupyterlab-git",
+    "jupyterlab-lsp",
+    "jupyterlab-myst",
+    "python-lsp-ruff",
+    "python-lsp-server[rope]",
+]
+style = [
+    "mypy",
+    {include-group = "types"},
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-profiling",
+    "pytest-xdist",
+]
+types = [
+    "pytest",
+    "sphinx-api-relink",
+]
+
 [tool.setuptools]
 include-package-data = false
 package-dir = {"" = "src"}
 
 [tool.setuptools.package-data]
-pawian = ["samples/*"]
+boostcfg = ["py.typed"]
+pawian = [
+    "py.typed",
+    "samples/*",
+]
 
 [tool.setuptools.packages.find]
 namespaces = false
 where = ["src"]
 
 [tool.setuptools_scm]
+local_scheme = "no-local-version"
+version_scheme = "only-version"
 write_to = "src/pawian/version.py"
 
 [tool.coverage.report]
@@ -167,6 +165,7 @@ exclude = [
     "**/.mypy_cache",
     "**/.pytest_cache",
     "**/.tox",
+    "**/.venv/",
     "**/__pycache__",
     "**/_build",
 ]
@@ -190,6 +189,8 @@ reportUnusedFunction = true
 reportUnusedImport = true
 reportUnusedVariable = true
 typeCheckingMode = "strict"
+venv = ".venv"
+venvPath = "."
 
 [tool.pytest.ini_options]
 addopts = [
@@ -229,46 +230,16 @@ src = [
     "src",
     "tests",
 ]
-target-version = "py37"
 
 [tool.ruff.format]
 docstring-code-format = true
 line-ending = "lf"
 
 [tool.ruff.lint]
-extend-select = [
-    "A",
-    "B",
-    "BLE",
-    "C4",
-    "C90",
-    "D",
-    "EM",
-    "ERA",
-    "FA",
-    "I",
-    "ICN",
-    "INP",
-    "ISC",
-    "N",
-    "NPY",
-    "PGH",
-    "PIE",
-    "PL",
-    "Q",
-    "RET",
-    "RSE",
-    "RUF",
-    "S",
-    "SIM",
-    "T20",
-    "TCH",
-    "TID",
-    "TRY",
-    "UP",
-    "YTT",
-]
 ignore = [
+    "ANN401",
+    "COM812",
+    "CPY001",
     "D101",
     "D102",
     "D103",
@@ -278,22 +249,39 @@ ignore = [
     "D213",
     "D407",
     "D416",
+    "DOC",
     "E501",
+    "FBT00",
+    "FURB101",
+    "FURB103",
+    "FURB140",
+    "G004",
     "ISC001",
     "PLW1514",
+    "PT001",
+    "PTH",
     "SIM108",
     "UP036",
 ]
+select = ["ALL"]
 task-tags = ["cspell"]
+
+[tool.ruff.lint.flake8-builtins]
+builtins-ignorelist = ["display"]
+
+[tool.ruff.lint.flake8-comprehensions]
+allow-dict-calls-with-keyword-arguments = true
 
 [tool.ruff.lint.isort]
 split-on-trailing-comma = false
 
 [tool.ruff.lint.per-file-ignores]
 "*.ipynb" = [
+    "ANN",
     "B018",
     "C90",
     "D",
+    "E303",
     "E402",
     "E703",
     "N806",
@@ -320,6 +308,7 @@ split-on-trailing-comma = false
 ]
 "setup.py" = ["D100"]
 "tests/*" = [
+    "ANN",
     "D",
     "INP001",
     "PGH001",
@@ -329,6 +318,7 @@ split-on-trailing-comma = false
     "PLR2004",
     "PLR6301",
     "S101",
+    "SLF001",
     "T20",
 ]
 
@@ -345,6 +335,109 @@ sort_first = [
     "tool.setuptools",
     "tool.setuptools_scm",
 ]
-sort_table_keys = true
 spaces_indent_inline_array = 4
 trailing_comma_inline_array = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+skip_install = True
+skip_missing_interpreters=true
+skipsdist = True
+envlist =
+    cov,
+    docnb-force,
+    linkcheck,
+    sty,
+
+[testenv]
+allowlist_externals =
+    pytest
+commands =
+    pytest {posargs:tests}
+description = Run all fast unit tests
+passenv = *
+
+[testenv:cov]
+allowlist_externals =
+    pytest
+commands =
+    pytest {posargs:tests} \
+        --cov-fail-under=85 \
+        --cov-report=html \
+        --cov-report=xml \
+        --cov=boostcfg \
+        --cov=pawian
+description = Compute the test coverage of all unit tests
+
+[testenv:doc]
+allowlist_externals =
+    sphinx-build
+commands =
+    sphinx-build \
+        --builder=html \
+        --fail-on-warning \
+        --keep-going \
+        --show-traceback \
+        docs/ docs/_build/html
+description = Build documentation and API through Sphinx
+passenv = *
+
+[testenv:docnb]
+base = doc
+description = {[testenv:doc]description} with cached notebook execution
+setenv =
+    EXECUTE_NB =
+
+[testenv:docnb-force]
+base = doc
+description = {[testenv:doc]description} with notebook execution (no cache)
+setenv =
+    FORCE_EXECUTE_NB = yes
+
+[testenv:doclive]
+allowlist_externals =
+    sphinx-autobuild
+commands =
+    sphinx-autobuild \
+        --ignore=docs/_build \
+        --ignore=docs/api \
+        --open-browser \
+        --port=0 \
+        --re-ignore docs/.*\\.inv \
+        --watch=docs \
+        --watch=src \
+        docs/ docs/_build/html
+description = Set up a server to preview changes to the HTML pages live
+passenv = *
+
+[testenv:docnblive]
+base = doclive
+description = {[testenv:doclive]description} with cached notebook execution
+setenv =
+    EXECUTE_NB = yes
+
+[testenv:linkcheck]
+allowlist_externals =
+    sphinx-build
+commands =
+    sphinx-build \
+        --builder=linkcheck \
+        --show-traceback \
+        docs/ docs/_build/linkcheck
+description = Check external links in the documentation (requires internet connection)
+
+[testenv:nb]
+allowlist_externals =
+    pytest
+commands =
+    pytest --nbmake {posargs:docs}
+description = Run all notebooks with pytest
+
+[testenv:sty]
+allowlist_externals =
+    pre-commit
+commands =
+    pre-commit run --all-files {posargs}
+description = Perform all linting, formatting, and spelling checks
+"""

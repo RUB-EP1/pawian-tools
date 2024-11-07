@@ -105,7 +105,7 @@ def test_draw_histogram():
     assert patch[-5].get_height() == values[-5]
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_draw_all_histograms():
     """Test :func:`pawian.qa.PawianHists.draw_all_histograms`"""
     hists = PawianHists(FILENAME_ROOT6)
@@ -114,7 +114,7 @@ def test_draw_all_histograms():
     assert n_plots == 19
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_draw_combined_histogram():
     """Test :func:`pawian.qa.PawianHists.draw_combined_histogram`"""
     hists = PawianHists(FILENAME_ROOT6)
