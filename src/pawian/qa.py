@@ -29,6 +29,9 @@ if TYPE_CHECKING:
     from uproot.behaviors.TH3 import TH3
     from uproot.reading import ReadOnlyDirectory
 
+_LOGGER = logging.getLogger(__name__)
+_LOGGER.info("Foobar")
+
 
 class PawianHists:
     """Data container for a :file:`pawianHists.root` file.
@@ -161,7 +164,7 @@ class PawianHists:
 
         .. seealso:: :func:`draw_combined_histogram`.
         """
-        logging.info(f"Drawing all histograms for file {self.__file.file_path}...")
+        _LOGGER.info(f"Drawing all histograms for file {self.__file.file_path}...")
         names = self.unique_histogram_names
         n_hists = len(names)
         n_x = ceil(sqrt(len(names)))

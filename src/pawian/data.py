@@ -24,8 +24,7 @@ The allows you to import the ASCII file to a nicely formatted
 
 from __future__ import annotations
 
-import sys
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Literal
 
 import awkward as ak
 import numpy as np
@@ -38,10 +37,6 @@ if TYPE_CHECKING:
 
     from pandas.core.base import PandasObject
 
-if sys.version_info < (3, 8):
-    from typing_extensions import Literal
-else:
-    from typing import Literal
 
 _ENERGY_LABEL = "E"
 _MOMENTUM_LABELS = ["p_x", "p_y", "p_z", _ENERGY_LABEL]
