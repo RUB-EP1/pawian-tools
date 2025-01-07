@@ -114,7 +114,6 @@
     "PyPA",
     "pypi",
     "pytest",
-    "PYTHONHASHSEED",
     "venv"
   ],
   "version": "0.2",
