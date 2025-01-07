@@ -34,6 +34,7 @@ from uproot.exceptions import KeyInFileError
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
+    from pathlib import Path
 
     from pandas.core.base import PandasObject
 
@@ -277,7 +278,7 @@ def read_ascii(  # noqa: C901
 
 
 def read_pawian_hists(
-    filename: str, type_name: Literal["data", "fitted"] = "data"
+    filename: Path | str, type_name: Literal["data", "fitted"] = "data"
 ) -> pd.DataFrame:
     """Read a :file:`pawianHists.root`.
 

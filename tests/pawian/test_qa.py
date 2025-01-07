@@ -1,5 +1,5 @@
 # pyright: reportAssertAlwaysTrue=false
-from os.path import dirname, realpath
+from pathlib import Path
 from statistics import mean
 
 import matplotlib.pyplot as plt
@@ -8,10 +8,10 @@ import pytest
 import pawian
 from pawian.qa import PawianHists
 
-PAWIAN_DIR = dirname(realpath(pawian.__file__))
-SAMPLE_DIR = f"{PAWIAN_DIR}/samples"
-FILENAME_ROOT5 = f"{SAMPLE_DIR}/pawianHists_ROOT5_SigmaKp.root"
-FILENAME_ROOT6 = f"{SAMPLE_DIR}/pawianHists_ROOT6_DDpi.root"
+PAWIAN_DIR = Path(pawian.__file__).parent
+SAMPLE_DIR = Path(f"{PAWIAN_DIR}/samples")
+FILENAME_ROOT5 = "pawianHists_ROOT5_SigmaKp.root"
+FILENAME_ROOT6 = "pawianHists_ROOT6_DDpi.root"
 
 
 def test_faulty_import():
@@ -35,7 +35,7 @@ def test_faulty_import():
     [
         # cspell:ignore Sigmaplus Sigmaplusantiproton
         (
-            FILENAME_ROOT5,
+            SAMPLE_DIR / FILENAME_ROOT5,
             ("DataSigmaplusK0", 14.0),
             ["Sigmaplus", "antiproton", "K0"],
             1001,
@@ -54,7 +54,7 @@ def test_faulty_import():
             ],
         ),
         (
-            FILENAME_ROOT6,
+            SAMPLE_DIR / FILENAME_ROOT6,
             ("DataD0Dm", 2.494117),
             ["pi+", "D0", "D-"],
             501,
@@ -93,7 +93,7 @@ def test_data_model(
 
 def test_draw_histogram():
     """Test whether embedded histograms can be drawn."""
-    hists = PawianHists(FILENAME_ROOT6)
+    hists = PawianHists(SAMPLE_DIR / FILENAME_ROOT6)
     with pytest.raises(KeyError):
         assert hists.draw_histogram("non-existent")
     values, edges, patch = hists.draw_histogram("FitThetaHeli_pip_FrompipD0Dm")
@@ -108,7 +108,7 @@ def test_draw_histogram():
 @pytest.mark.slow
 def test_draw_all_histograms():
     """Test :func:`pawian.qa.PawianHists.draw_all_histograms`"""
-    hists = PawianHists(FILENAME_ROOT6)
+    hists = PawianHists(SAMPLE_DIR / FILENAME_ROOT6)
     hists.draw_all_histograms()
     n_plots = len(plt.gcf().get_axes())
     assert n_plots == 19
@@ -147,8 +147,8 @@ def test_draw_combined_histogram():
         (FILENAME_ROOT6, 0.20740474665355302),
     ],
 )
-def test_lorentz_vectors(filename, energy):
+def test_lorentz_vectors(filename: str, energy: float):
     """Test whether vectors were loaded correctly as `~pandas.DataFrame`."""
-    pawian_hists = PawianHists(filename)
+    pawian_hists = PawianHists(SAMPLE_DIR / filename)
     particle = pawian_hists.particles[0]
     assert pawian_hists.data[particle].E.mean() == energy

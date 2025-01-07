@@ -19,6 +19,8 @@ from pawian.data import read_pawian_hists
 from pawian.latex import convert
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     import numpy as np
     import pandas as pd
     from matplotlib.axes import Axes
@@ -40,10 +42,10 @@ class PawianHists:
     Pawian.
     """
 
-    def __init__(self, filename: str) -> None:
+    def __init__(self, filename: Path | str) -> None:
         self.import_file(filename)
 
-    def import_file(self, filename: str) -> None:
+    def import_file(self, filename: Path | str) -> None:
         """Set data member by importing a :file:`pawianHists.root` file."""
         self.__file: ReadOnlyDirectory = uproot.open(filename)
         self.__data = read_pawian_hists(filename, type_name="data")
