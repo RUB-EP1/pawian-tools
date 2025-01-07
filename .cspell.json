@@ -1,4 +1,10 @@
 {
+  "enableFiletypes": [
+    "git-commit",
+    "github-actions-workflow",
+    "julia",
+    "jupyter"
+  ],
   "flagWords": [
     "analyse",
     "colour",
@@ -96,6 +102,8 @@
     "ylim"
   ],
   "language": "en-US",
+  "useGitignore": true,
+  "version": "0.2",
   "words": [
     "blatt",
     "boostcfg",
@@ -115,13 +123,5 @@
     "pypi",
     "pytest",
     "venv"
-  ],
-  "version": "0.2",
-  "enableFiletypes": [
-    "git-commit",
-    "github-actions-workflow",
-    "julia",
-    "jupyter"
-  ],
-  "useGitignore": true
+  ]
 }
