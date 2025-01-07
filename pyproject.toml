@@ -204,6 +204,7 @@ addopts = [
 filterwarnings = [
     "error",
     "ignore:.*Consider switching from .* to .*:DeprecationWarning",
+    "ignore:.*__array__ implementation doesn't accept a copy keyword*:DeprecationWarning",
     "ignore:DataFrame.groupby with axis=1 is deprecated.*:FutureWarning",
     "ignore:Using the level keyword in DataFrame and Series aggregations is deprecated.*:FutureWarning",
     "ignore:datetime.datetime.utcfromtimestamp\\(\\) is deprecated and scheduled for removal in a future version.*:DeprecationWarning",
