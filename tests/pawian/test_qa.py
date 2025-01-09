@@ -117,7 +117,7 @@ def test_draw_all_histograms():
 @pytest.mark.slow
 def test_draw_combined_histogram():
     """Test :func:`pawian.qa.PawianHists.draw_combined_histogram`"""
-    hists = PawianHists(FILENAME_ROOT6)
+    hists = PawianHists(SAMPLE_DIR / FILENAME_ROOT6)
     name = "pipDm"
     with pytest.raises(KeyError):
         hists.draw_combined_histogram("non-existent")
