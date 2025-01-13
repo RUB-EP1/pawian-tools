@@ -24,8 +24,7 @@ The allows you to import the ASCII file to a nicely formatted
 
 from __future__ import annotations
 
-import sys
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Literal
 
 import awkward as ak
 import numpy as np
@@ -35,13 +34,10 @@ from uproot.exceptions import KeyInFileError
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
+    from pathlib import Path
 
     from pandas.core.base import PandasObject
 
-if sys.version_info < (3, 8):
-    from typing_extensions import Literal
-else:
-    from typing import Literal
 
 _ENERGY_LABEL = "E"
 _MOMENTUM_LABELS = ["p_x", "p_y", "p_z", _ENERGY_LABEL]
@@ -282,7 +278,7 @@ def read_ascii(  # noqa: C901
 
 
 def read_pawian_hists(
-    filename: str, type_name: Literal["data", "fitted"] = "data"
+    filename: Path | str, type_name: Literal["data", "fitted"] = "data"
 ) -> pd.DataFrame:
     """Read a :file:`pawianHists.root`.
 

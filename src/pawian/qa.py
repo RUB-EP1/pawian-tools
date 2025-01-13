@@ -19,6 +19,8 @@ from pawian.data import read_pawian_hists
 from pawian.latex import convert
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     import numpy as np
     import pandas as pd
     from matplotlib.axes import Axes
@@ -29,6 +31,9 @@ if TYPE_CHECKING:
     from uproot.behaviors.TH3 import TH3
     from uproot.reading import ReadOnlyDirectory
 
+_LOGGER = logging.getLogger(__name__)
+_LOGGER.info("Foobar")
+
 
 class PawianHists:
     """Data container for a :file:`pawianHists.root` file.
@@ -37,10 +42,10 @@ class PawianHists:
     Pawian.
     """
 
-    def __init__(self, filename: str) -> None:
+    def __init__(self, filename: Path | str) -> None:
         self.import_file(filename)
 
-    def import_file(self, filename: str) -> None:
+    def import_file(self, filename: Path | str) -> None:
         """Set data member by importing a :file:`pawianHists.root` file."""
         self.__file: ReadOnlyDirectory = uproot.open(filename)
         self.__data = read_pawian_hists(filename, type_name="data")
@@ -161,7 +166,7 @@ class PawianHists:
 
         .. seealso:: :func:`draw_combined_histogram`.
         """
-        logging.info(f"Drawing all histograms for file {self.__file.file_path}...")
+        _LOGGER.info(f"Drawing all histograms for file {self.__file.file_path}...")
         names = self.unique_histogram_names
         n_hists = len(names)
         n_x = ceil(sqrt(len(names)))

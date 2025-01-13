@@ -34,11 +34,12 @@ api_target_substitutions: dict[str, str | tuple[str, str]] = {
     "Axes": "matplotlib.axes.Axes",
     "BarContainer": "matplotlib.container.BarContainer",
     "Figure": "matplotlib.figure.Figure",
+    "np.ndarray": "numpy.ndarray",
+    "Path": "pathlib.Path",
+    "pd.DataFrame": "pandas.core.frame.DataFrame",
     "TH1": "uproot.behaviors.TH1.TH1",
     "TH2": "uproot.behaviors.TH2.TH2",
     "TH3": "uproot.behaviors.TH3.TH3",
-    "np.ndarray": "numpy.ndarray",
-    "pd.DataFrame": "pandas.core.frame.DataFrame",
 }
 author = "Meike Küßner, Remco de Boer"
 autodoc_default_options = {

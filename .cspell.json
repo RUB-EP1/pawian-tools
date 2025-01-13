@@ -1,4 +1,10 @@
 {
+  "enableFiletypes": [
+    "git-commit",
+    "github-actions-workflow",
+    "julia",
+    "jupyter"
+  ],
   "flagWords": [
     "analyse",
     "colour",
@@ -20,6 +26,7 @@
     ".gitignore",
     ".pre-commit-config.yaml",
     ".prettierignore",
+    ".taplo.toml",
     ".vscode/*",
     "codecov.yml",
     "docs/conf.py",
@@ -96,6 +103,8 @@
     "ylim"
   ],
   "language": "en-US",
+  "useGitignore": true,
+  "version": "0.2",
   "words": [
     "blatt",
     "boostcfg",
@@ -114,14 +123,6 @@
     "PyPA",
     "pypi",
     "pytest",
-    "PYTHONHASHSEED",
     "venv"
-  ],
-  "version": "0.2",
-  "enableFiletypes": [
-    "git-commit",
-    "github-actions-workflow",
-    "julia",
-    "jupyter"
   ]
 }
