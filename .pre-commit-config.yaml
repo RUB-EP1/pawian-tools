@@ -17,6 +17,7 @@ repos:
     hooks:
       - id: check-dev-files
         args:
+          - --pytest-single-threaded
           - --repo-name=pawian-tools
           - --repo-organization=RUB-EP1
           - --repo-title=Pawian Tools
