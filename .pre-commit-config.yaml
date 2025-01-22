@@ -23,6 +23,7 @@ repos:
           - --repo-title=Pawian Tools
           - --update-lock-files=outsource
       - id: remove-empty-tags
+      - id: set-nb-display-name
 
   - repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
