@@ -36,7 +36,7 @@ jobs:
     uses: ComPWA/actions/.github/workflows/pytest.yml@v2.1
     with:
       coverage-target: pawian
-      macos-python-version: "3.9"
+      macos-python-version: "3.10"
       multithreaded: false
       specific-pip-packages: ${{ inputs.specific-pip-packages }}
     secrets:
