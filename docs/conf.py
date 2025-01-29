@@ -152,6 +152,7 @@ intersphinx_mapping = {
 linkcheck_anchors = False
 linkcheck_ignore = [
     "https://panda-wiki.gsi.de/bin/view/PWA/PawianPwaSoftware",
+    "https://www.gnu.org",
 ]
 master_doc = "index"
 modindex_common_prefix = [
