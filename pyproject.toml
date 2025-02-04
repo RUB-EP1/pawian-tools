@@ -385,6 +385,7 @@ commands = [
     ],
 ]
 description = "Build documentation and API through Sphinx"
+pass_env = ["*"]
 
 [tool.tox.env.doclive]
 allowlist_externals = ["sphinx-autobuild"]
@@ -425,6 +426,7 @@ commands = [
     ],
 ]
 description = "Set up a server to preview changes to the HTML pages live"
+pass_env = ["*"]
 
 [tool.tox.env.docnb]
 base = ["tool.tox.env.doc"]
@@ -459,12 +461,14 @@ allowlist_externals = ["pytest"]
 base = []
 commands = [["pytest", "--nbmake", "{posargs:docs}"]]
 description = "Run all notebooks with pytest"
+pass_env = ["*"]
 
 [tool.tox.env.sty]
 allowlist_externals = ["pre-commit"]
 base = []
 commands = [["pre-commit", "run", "--all-files", {replace = "posargs", extend = true}]]
 description = "Perform all linting, formatting, and spelling checks"
+pass_env = ["*"]
 
 [tool.tox.labels]
 doc = [
