@@ -36,7 +36,7 @@ api_target_substitutions: dict[str, str | tuple[str, str]] = {
     "Figure": "matplotlib.figure.Figure",
     "np.ndarray": "numpy.ndarray",
     "Path": "pathlib.Path",
-    "pd.DataFrame": "pandas.core.frame.DataFrame",
+    "pd.DataFrame": "pandas.DataFrame",
     "TH1": "uproot.behaviors.TH1.TH1",
     "TH2": "uproot.behaviors.TH2.TH2",
     "TH3": "uproot.behaviors.TH3.TH3",
