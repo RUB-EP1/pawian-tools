@@ -4,7 +4,7 @@
 
 ```
 
-[![GPLv3+ license](https://img.shields.io/badge/License-GPLv3+-blue.svg)](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
+[![MIT license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Test coverage](https://codecov.io/gh/RUB-EP1/pawian-tools/branch/main/graph/badge.svg)](https://codecov.io/gh/RUB-EP1/pawian-tools)
 
 This repository serves as a collection of Python tools to complement

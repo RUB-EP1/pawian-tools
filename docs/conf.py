@@ -41,7 +41,7 @@ api_target_substitutions: dict[str, str | tuple[str, str]] = {
     "TH2": "uproot.behaviors.TH2.TH2",
     "TH3": "uproot.behaviors.TH3.TH3",
 }
-author = "Meike Küßner, Remco de Boer"
+author = ""
 autodoc_default_options = {
     "members": True,
     "undoc-members": True,
