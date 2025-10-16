@@ -12,7 +12,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Education",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.10",
@@ -43,7 +43,7 @@ keywords = [
     "particles",
     "physics",
 ]
-license = {text = "GPLv3 or later"}
+license = {text = "MIT"}
 name = "pawian-tools"
 requires-python = ">=3.9"
 
